@@ -1,10 +1,13 @@
 # MEI Easy
 
 `CURSO`
+Análise e Desenvolvimento de Sistemas
 
 `DISCIPLINA`
+Trabalho Interdisciplinar Aplicação Móvel
 
 `SEMESTRE`
+4º Semestre
 
 O MEI Easy é uma ferramenta digital desenvolvida para auxiliar microempreendedores individuais na gestão e organização de seus negócios. A plataforma tem como objetivo facilitar o controle das atividades financeiras do empreendimento, permitindo o registro e acompanhamento de informações como faturamento, despesas e movimentações financeiras de forma simples e acessível.
 
