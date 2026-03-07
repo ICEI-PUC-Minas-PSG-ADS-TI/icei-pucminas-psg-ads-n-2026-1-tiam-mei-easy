@@ -1,4 +1,4 @@
-# TÍTULO DO PROJETO
+# MEI Easy
 
 `CURSO`
 
@@ -6,18 +6,23 @@
 
 `SEMESTRE`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O MEI Easy é uma ferramenta digital desenvolvida para auxiliar microempreendedores individuais na gestão e organização de seus negócios. A plataforma tem como objetivo facilitar o controle das atividades financeiras do empreendimento, permitindo o registro e acompanhamento de informações como faturamento, despesas e movimentações financeiras de forma simples e acessível.
+
+Por meio de uma interface intuitiva, o sistema busca oferecer ao usuário uma visão clara da situação financeira do seu negócio, contribuindo para uma administração mais organizada e para uma melhor tomada de decisões. Dessa forma, o MEI Easy se apresenta como uma solução prática para apoiar o MEI no gerenciamento de suas atividades diárias.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Daniel de Freitas Cunha
+* Danilo Henrique de Souza Riguette
+* Diego Leôncio Batista Rosa
+* Gabriel Ribeiro Augusto
+* Gustavo Milagres da Costa
+* Sara Marçal Rocha
+
 
 ## Orientador
 
-* Nome completo do professor 1
+* Pedro Felipe
 
 ## Instruções de utilização
 
