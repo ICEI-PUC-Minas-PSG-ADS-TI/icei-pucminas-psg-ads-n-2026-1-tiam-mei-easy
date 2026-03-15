@@ -56,11 +56,11 @@ Diante desse contexto, a aplicação busca oferecer uma solução simples e aces
 
 #### Persona 1 – MEI iniciante
 
-**Nome:** Carlos Silva
-**Idade:** 32 anos
-**Profissão:** Dono de um pequeno negócio de manutenção de celulares
+- **Nome:** Carlos Silva
+- **Idade:** 32 anos
+- **Profissão:** Dono de um pequeno negócio de manutenção de celulares
 **Perfil:** Carlos abriu recentemente seu MEI e trabalha sozinho. Ele utiliza o celular para atender clientes, divulgar serviços nas redes sociais e receber pagamentos via PIX. 
-**Dor:** Carlos possui dificuldade para organizar suas receitas e despesas. Muitas vezes registra valores em anotações simples ou tenta controlar as informações apenas de memória. Ele busca uma forma prática de acompanhar o faturamento e entender melhor como está a situação financeira do seu negócio.
+- **Dor:** Carlos possui dificuldade para organizar suas receitas e despesas. Muitas vezes registra valores em anotações simples ou tenta controlar as informações apenas de memória. Ele busca uma forma prática de acompanhar o faturamento e entender melhor como está a situação financeira do seu negócio.
 
 #### Persona 2 – MEI com negócio estabelecido
 
@@ -69,31 +69,39 @@ Diante desse contexto, a aplicação busca oferecer uma solução simples e aces
 - **Profissão:** Confeiteira e proprietária de um pequeno negócio de bolos e doces há 5 anos.
 - **Perfil:** Juliana trabalha principalmente por encomenda e recebe pedidos por aplicativos de mensagens e redes sociais.
 - **Dor:** Ela registra os pedidos em um caderno e anota seus gastos com ingredientes manualmente. Apesar de utilizar tecnologia no dia a dia, não possui experiência com sistemas de gestão. Gostaria de acompanhar melhor seus lucros e gastos mensais para planejar o crescimento do seu negócio a longo prazo.
-
+  
 #### Persona 3 – MEI que utiliza planilhas para controle financeiro
 
 - **Nome**: João Paulo
 - **Idade:** 36 anos
 - **Profissão:** Eletricista autônomo
-- **Perfil:** Rafael trabalha prestando serviços de manutenção elétrica em residências e pequenos comércios. Ele agenda atendimentos pelo celular e recebe pagamentos principalmente por transferência ou PIX.
-- **Dor:** Para acompanhar suas finanças, Rafael utiliza uma planilha simples no computador, onde registra os serviços realizados e os valores recebidos. No entanto, ele tem dificuldade em manter esse controle sempre atualizado e muitas vezes esquece de registrar despesas relacionadas ao trabalho, como compra de materiais ou deslocamento. Rafael gostaria de uma ferramenta mais prática para registrar essas informações no dia a dia e acompanhar melhor seus ganhos e gastos.
+- **Perfil:** João trabalha prestando serviços de manutenção elétrica em residências e pequenos comércios. Ele agenda atendimentos pelo celular e recebe pagamentos principalmente por transferência ou PIX.
+- **Dor:** Para acompanhar suas finanças, João utiliza uma planilha simples no computador, onde registra os serviços realizados e os valores recebidos. No entanto, ele tem dificuldade em manter esse controle sempre atualizado e muitas vezes esquece de registrar despesas relacionadas ao trabalho, como compra de materiais ou deslocamento. Rafael gostaria de uma ferramenta mais prática para registrar essas informações no dia a dia e acompanhar melhor seus ganhos e gastos.
 
-#### Stakeholders
+### Stakeholders
 
 Os stakeholders são os indivíduos ou grupos que podem ser impactados direta ou indiretamente pela aplicação.
 
 #### Stakeholders principais:
 
-Microempreendedores individuais (usuários diretos da aplicação)
-
-Pequenos prestadores de serviços e comerciantes formalizados como MEI
+- **Microempreendedores individuais (MEIs):**
+  São os principais usuários da aplicação. Incluem pequenos prestadores de serviços e comerciantes formalizados como MEI, que utilizam o sistema para registrar, organizar e acompanhar as informações financeiras de seus negócios, como receitas, despesas e movimentações do empreendimento.
 
 #### Stakeholders secundários:
 
-Contadores que auxiliam MEIs em obrigações fiscais
+- **Contadores:**
+  Profissionais que auxiliam os MEIs no cumprimento de obrigações fiscais e na organização das informações financeiras necessárias para declarações e relatórios.
 
-Parceiros ou familiares que ajudam na administração do negócio
+- **Parceiros ou familiares:**
+  Pessoas que eventualmente auxiliam o microempreendedor em atividades administrativas ou financeiras do negócio e podem ter contato com as informações organizadas pela aplicação.
 
-Instituições que apoiam pequenos empreendedores, como o SEBRAE
+- **Instituições que apoiam o empreendedor:**
+  Organizações que incentivam o desenvolvimento de pequenos negócios, como o Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (SEBRAE), que oferecem capacitação, orientação e suporte para microempreendedores.
 
-Esses grupos possuem interesse no acesso a informações organizadas sobre as finanças do negócio, o que pode contribuir para uma gestão mais eficiente e para o desenvolvimento das atividades empreendedoras.
+- **Clientes dos microempreendedores:**
+  Consumidores que contratam os serviços ou compram produtos dos MEIs. Uma melhor organização financeira do negócio pode contribuir para maior controle de pedidos, melhor planejamento e melhoria na qualidade do atendimento.
+
+- **Fornecedores:**
+Empresas ou profissionais responsáveis por fornecer insumos, produtos ou materiais para o funcionamento do negócio. Uma gestão financeira mais organizada pode facilitar o controle de pagamentos, compras e planejamento de estoque.
+
+Esses grupos possuem interesse direto ou indireto na organização das informações financeiras do negócio, contribuindo para uma gestão mais eficiente e para o desenvolvimento das atividades empreendedoras.
