@@ -132,6 +132,21 @@ A matriz deve contemplar todos os elementos relevantes que fazem parte do sistem
 > - [Verificação da rastreabilidade de requisitos usando a integração do IBM Rational RequisitePro e do IBM ClearQuest Test Manager](https://developer.ibm.com/br/tutorials/requirementstraceabilityverificationusingrrpandcctm/)
 > - [IBM Engineering Lifecycle Optimization – Publishing](https://www.ibm.com/br-pt/products/engineering-lifecycle-optimization/publishing/)
 
+## Matriz de Rastreabilidade
+
+A matriz de rastreabilidade permite visualizar o relacionamento entre os requisitos do sistema e outros artefatos do projeto, como histórias de usuário e casos de uso. Dessa forma, é possível garantir que todos os requisitos identificados estejam contemplados nas funcionalidades da aplicação.
+
+| Requisito | História de Usuário | Caso de Uso | Objetivo |
+|-----------|--------------------|-------------|----------|
+| RF-001 – Cadastrar receitas | HU-01 – Registrar receitas | UC-01 – Cadastrar receita | Permitir controle de entradas financeiras |
+| RF-002 – Cadastrar despesas | HU-02 – Registrar despesas | UC-02 – Cadastrar despesa | Permitir controle de gastos |
+| RF-003 – Editar registros financeiros | HU-03 – Editar registros | UC-03 – Editar registro financeiro | Corrigir informações cadastradas |
+| RF-004 – Excluir registros financeiros | HU-04 – Excluir registros | UC-04 – Excluir registro financeiro | Remover dados incorretos |
+| RF-006 – Visualizar resumo financeiro | HU-05 – Ver resumo financeiro | UC-05 – Visualizar resumo financeiro | Acompanhar situação do negócio |
+| RF-009 – Consultar histórico financeiro | HU-06 – Consultar histórico | UC-06 – Consultar histórico financeiro | Analisar movimentações passadas |
+| RF-010 – Gerar relatórios financeiros | HU-07 – Visualizar relatórios | UC-07 – Visualizar relatórios financeiros | Apoiar análise financeira do negócio |
+| RNF-001 – Interface simples e intuitiva | HU-08 – Usar sistema facilmente | Todos os casos de uso | Melhorar usabilidade do aplicativo |
+| RNF-002 – Sistema responsivo | HU-09 – Acessar pelo celular | Todos os casos de uso | Permitir uso em dispositivos móveis |
 
 # Gerenciamento de Projeto
 
