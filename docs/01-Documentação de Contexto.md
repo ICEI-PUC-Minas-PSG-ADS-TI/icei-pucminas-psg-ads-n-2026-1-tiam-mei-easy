@@ -18,25 +18,39 @@ Diante desse contexto, torna-se relevante o desenvolvimento de soluções que au
 
 ## Objetivos
 
-O objetivo geral deste trabalho é desenvolver um software que auxilie microempreendedores individuais na organização e no controle das informações financeiras de seus negócios, contribuindo para uma gestão mais clara e estruturada das atividades do empreendimento.
+### Objetivo geral 
+Desenvolver um software que auxilie microempreendedores individuais na organização e no controle das informações financeiras de seus negócios, contribuindo para uma gestão mais clara e estruturada das atividades do empreendimento.
 
-Como objetivos específicos, o projeto busca permitir o registro e acompanhamento de receitas e despesas, possibilitando ao empreendedor visualizar as movimentações financeiras do seu negócio. Além disso, pretende disponibilizar informações e relatórios que facilitem a análise do faturamento e dos gastos, ajudando o usuário a compreender melhor a situação financeira do empreendimento. Outro objetivo é proporcionar uma interface simples e intuitiva, tornando a ferramenta acessível para usuários que não possuem conhecimentos avançados em gestão ou tecnologia.
+### Objetivos específicos
+- Permitir o registro de receitas e despesas do negócio.
+- Possibilitar o acompanhamento das movimentações financeiras.
+- Disponibilizar relatórios que facilitem a análise do faturamento e dos gastos.
+- Auxiliar o empreendedor na visualização da situação financeira do negócio.
+- Oferecer uma interface simples e intuitiva, acessível a usuários com diferentes níveis de conhecimento em tecnologia e gestão.
 
 ## Justificativa
 
-Os microempreendedores individuais (MEIs) desempenham um papel importante na economia brasileira, porém muitos enfrentam dificuldades relacionadas à gestão financeira de seus negócios. Como grande parte desses empreendedores trabalha de forma autônoma e sem equipe de apoio, eles precisam conciliar atividades operacionais, atendimento ao cliente e administração do empreendimento ao mesmo tempo, o que pode dificultar a organização das finanças e o controle adequado das receitas e despesas.
+Os microempreendedores individuais possuem grande relevância na economia brasileira. Segundo dados do SEBRAE, Micro e pequenas empresas geram 27% do Produto Interno Bruto (PIB) do Brasil, demonstrando a importância desse segmento para a geração de renda e para o desenvolvimento econômico do país.
 
-Estudos e levantamentos indicam que uma parcela significativa dos MEIs possui pouca formação em gestão financeira e frequentemente realiza o controle do negócio de maneira informal. Pesquisas apontam que muitos empreendedores ainda registram seus gastos manualmente ou não possuem acompanhamento sistemático das movimentações financeiras, o que dificulta a análise do desempenho do negócio e o planejamento de suas atividades. Além disso, erros comuns, como misturar as finanças pessoais com as do empreendimento, ainda são frequentes entre os microempreendedores, prática que pode comprometer a saúde financeira do negócio e gerar dificuldades no pagamento de despesas e obrigações fiscais.
+Apesar dessa relevância, muitos MEIs enfrentam dificuldades relacionadas à gestão financeira de seus negócios, especialmente pela falta de formação em gestão e pela necessidade de administrar diversas atividades ao mesmo tempo. Como grande parte desses empreendedores trabalha de forma autônoma e sem equipe de apoio, eles precisam conciliar atividades operacionais, atendimento ao cliente e administração do empreendimento ao mesmo tempo, o que pode dificultar a organização das finanças e o controle adequado das receitas e despesas.
 
-Diante desse cenário, torna-se relevante desenvolver estudos e ferramentas que contribuam para facilitar a organização financeira do microempreendedor. A escolha deste tema busca aprofundar a investigação sobre as dificuldades enfrentadas pelos MEIs no controle financeiro de seus negócios e explorar formas de tornar a gestão mais simples e acessível para esse público. Assim, o projeto se justifica pela necessidade de apoiar o empreendedor na organização das informações financeiras, contribuindo para uma gestão mais estruturada e para a sustentabilidade de pequenos negócios.
+Como apontado em pesquisas do SEBRAE, uma parcela significativa dos MEIs nunca recebeu treinamento em finanças e frequentemente realiza o controle das movimentações do negócio de maneira informal, utilizando anotações manuais, planilhas simples ou contas pessoais para pagamentos da empresa.
+
+Diante desse cenário, torna-se relevante o desenvolvimento de estudos e ferramentas que auxiliem os microempreendedores na organização e no acompanhamento de suas informações financeiras. A escolha deste tema busca aprofundar a investigação sobre as dificuldades enfrentadas pelos MEIs no controle financeiro de seus negócios e explorar formas de tornar a gestão mais simples e acessível para esse público. 
+
+Assim, o projeto propõe o desenvolvimento de uma ferramenta voltada para microempreendedores individuais, com o objetivo de apoiar o registro e o acompanhamento das movimentações financeiras de forma clara e estruturada. A proposta tem como público-alvo MEIs que necessitam de soluções práticas para organizar as finanças de seus negócios, contribuindo para uma gestão mais eficiente e para a sustentabilidade de pequenos empreendimentos.
 
 ## Público-Alvo
 
-A aplicação é direcionada principalmente a microempreendedores individuais (MEIs) que necessitam organizar e acompanhar as informações financeiras de seus negócios. Em muitos casos, esses empreendedores são responsáveis por diversas atividades ao mesmo tempo, como atendimento ao cliente, vendas, prestação de serviços e administração do negócio. Dessa forma, normalmente possuem tempo limitado para tarefas administrativas e buscam soluções simples que facilitem o controle financeiro do empreendimento.
+O público-alvo da aplicação é composto por microempreendedores individuais (MEIs) que precisam organizar e acompanhar as informações financeiras de seus negócios.
 
-De modo geral, o público apresenta níveis variados de familiaridade com tecnologia. Alguns usuários já utilizam ferramentas digitais como aplicativos bancários, redes sociais para divulgação de seus serviços e sistemas simples de pagamento. No entanto, muitos ainda realizam o controle financeiro de maneira informal, utilizando anotações em papel, cadernos ou planilhas básicas. Por isso, espera-se que os usuários da aplicação tenham conhecimento básico de uso de smartphones ou computadores, mas não necessariamente experiência com sistemas de gestão ou ferramentas administrativas mais complexas.
+De modo geral, são profissionais que atuam de forma autônoma e acumulam diferentes funções, incluindo atividades operacionais, atendimento ao cliente e administração do negócio.
 
-Também é comum que o MEI trabalhe de forma individual ou com poucos colaboradores, o que reduz a existência de hierarquias formais dentro do negócio. Em alguns casos, familiares ou parceiros podem auxiliar em atividades administrativas ou financeiras, podendo também ter contato com as informações geradas pela ferramenta. Dessa forma, o sistema deve considerar usuários que possuem diferentes níveis de conhecimento em gestão financeira e tecnologia, priorizando simplicidade e clareza no acesso às informações.
+Esse público costuma possuir conhecimento básico no uso de ferramentas digitais, como aplicativos bancários, redes sociais e sistemas de pagamento. No entanto, muitos não utilizam sistemas específicos de gestão financeira.
+
+Também é comum que o MEI trabalhe de forma individual ou com poucos colaboradores, o que reduz a existência de hierarquias formais dentro do negócio. Em alguns casos, familiares ou parceiros podem auxiliar em atividades administrativas ou financeiras, podendo também ter contato com as informações geradas pela ferramenta. 
+
+Diante desse contexto, a aplicação busca oferecer uma solução simples e acessível, adequada a usuários com diferentes níveis de conhecimento em tecnologia e gestão financeira.
 
 ### Personas
 
