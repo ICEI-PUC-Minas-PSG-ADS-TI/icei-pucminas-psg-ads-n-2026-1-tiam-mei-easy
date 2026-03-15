@@ -1,12 +1,20 @@
 # Introdução
 
-O projeto MEI Easy é uma ferramenta com objetivo de auxiliar microempreendedores individuais na gestão de seus negócios. O sistema busca oferecer recursos que permitam organizar e acompanhar informações financeiras importantes, como faturamento, despesas e movimentações, contribuindo para uma administração mais clara e eficiente.
+O projeto MEI Easy consiste no desenvolvimento de uma ferramenta digital voltada para auxiliar microempreendedores individuais (MEIs) na gestão financeira de seus negócios. A aplicação tem como objetivo oferecer recursos simples e acessíveis para o registro, organização e acompanhamento de informações financeiras, como faturamento, despesas e movimentações do negócio.
+
+Muitos microempreendedores precisam administrar diversas atividades ao mesmo tempo, incluindo atendimento ao cliente, prestação de serviços, vendas e tarefas administrativas. Nesse contexto, a organização das finanças do empreendimento pode se tornar uma atividade complexa, especialmente quando não há o uso de ferramentas adequadas.
+
+Dessa forma, o sistema proposto busca facilitar o controle financeiro do microempreendedor, oferecendo uma solução que permita visualizar de forma clara as movimentações do negócio e apoiar a tomada de decisões relacionadas à gestão financeira.
 
 ## Problema
 
-Os microempreendedores individuais (MEIs) representam uma parcela significativa dos pequenos negócios no Brasil e, muitas vezes, são responsáveis por todas as atividades relacionadas ao funcionamento de seu empreendimento. Além da execução do serviço ou venda de produtos, esses profissionais precisam lidar com tarefas administrativas e financeiras, como controle de gastos, registro de receitas, acompanhamento do faturamento e organização de informações do negócio.
+Os microempreendedores individuais (MEIs) representam uma parcela significativa dos pequenos negócios no Brasil. De acordo com dados do Serviço Brasileiro de Apoio às Micro e Pequenas Empresas (SEBRAE), somente no primeiro trimestre de 2025 foram abertos mais de 1,4 milhão de pequenos negócios no país, sendo que aproximadamente 78% desses registros correspondem a microempreendedores individuais. Esse crescimento evidencia a importância desse modelo de empreendedorismo na economia brasileira.
 
-Entretanto, muitos desses empreendedores não possuem ferramentas adequadas ou conhecimento em gestão financeira, o que pode levar à falta de controle sobre as movimentações do negócio. Em muitos casos, o acompanhamento financeiro é realizado de forma informal, utilizando anotações em papel, planilhas simples ou até mesmo apenas pela memória. Esse cenário pode dificultar a visualização da situação financeira do empreendimento, prejudicar o planejamento e impactar a tomada de decisões importantes para a continuidade e crescimento do negócio.
+Apesar dessa expansão, muitos MEIs são responsáveis por diversas atividades relacionadas ao funcionamento de seu empreendimento. Além da execução do serviço ou venda de produtos, esses profissionais precisam lidar também com tarefas administrativas e financeiras, como controle de gastos, registro de receitas, acompanhamento do faturamento e organização das informações do negócio.
+
+Nesse contexto, a gestão financeira torna-se um desafio para muitos empreendedores. Sem ferramentas adequadas ou conhecimento em gestão financeira, é comum que enfrentem dificuldades para manter o controle das movimentações do negócio. Segundo pesquisa realizada pelo SEBRAE, 77% dos microempreendedores nunca realizaram treinamento em finanças, enquanto mais de 60% realizam pagamentos da empresa utilizando contas pessoais. Nesse cenário, o acompanhamento financeiro muitas vezes é realizado de forma informal, por meio de anotações em papel, planilhas simples ou até mesmo apenas pela memória. Essa situação pode dificultar a visualização da real condição financeira do negócio, prejudicar o planejamento e impactar a tomada de decisões importantes para a continuidade e crescimento da atividade.
+
+Diante desse contexto, torna-se relevante o desenvolvimento de soluções que auxiliem os microempreendedores na organização e no acompanhamento das informações financeiras de seus negócios de forma simples e acessível.
 
 ## Objetivos
 
