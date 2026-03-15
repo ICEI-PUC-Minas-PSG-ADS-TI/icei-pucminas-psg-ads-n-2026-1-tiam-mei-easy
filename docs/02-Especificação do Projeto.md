@@ -1,93 +1,110 @@
 # Especificações do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
+<span style="color:red">Pré-requisitos: <a href="01-Documentação de Contexto.md"> Documentação de Contexto</a></span>
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
-
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+Nesta seção são apresentadas as especificações da solução proposta para apoiar microempreendedores individuais na organização de suas finanças. Para isso, foram utilizadas técnicas de modelagem de personas, histórias de usuário, definição de requisitos funcionais e não funcionais e modelagem de casos de uso.
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+### Persona 1 – MEI iniciante
 
-Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
+**Carlos Silva**, homem de 32 anos, classe média baixa, brasileiro, mora em Belo Horizonte, MG. Possui ensino médio completo e trabalha como dono de um pequeno negócio de manutenção de celulares. Carlos abriu recentemente seu MEI e utiliza principalmente o celular para divulgar seus serviços nas redes sociais, atender clientes e receber pagamentos via PIX. Ele gosta de tecnologia e busca soluções práticas que facilitem sua rotina. É sensível a preços e prefere ferramentas simples e acessíveis. Carlos tem dificuldade para organizar as receitas e despesas do negócio, pois costuma registrar valores em anotações ou confiar na memória. Ele busca uma forma fácil de acompanhar o faturamento e entender melhor a situação financeira do seu empreendimento.
 
-> **Links Úteis**:
-> - [Rock Content](https://rockcontent.com/blog/personas/)
-> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
-> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
-> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
-> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
-> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
->
-Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
+### Persona 2 – MEI com negócio estabelecido
+
+**Juliana Ferreira**, mulher de 41 anos, classe média, brasileira, mora em Betim (MG). Possui ensino médio completo e trabalha como confeiteira, sendo proprietária de um pequeno negócio de bolos e doces há cerca de cinco anos. Juliana recebe pedidos principalmente por redes sociais e aplicativos de mensagens. Ela gosta de cozinhar, valoriza a qualidade dos produtos e busca sempre oferecer um bom atendimento aos clientes. Apesar de utilizar tecnologia no dia a dia, ainda prefere registrar pedidos e gastos em um caderno. Juliana tem dificuldade em acompanhar seus lucros e despesas mensais e gostaria de uma ferramenta simples que ajude a controlar melhor as finanças e planejar o crescimento do negócio.
+  
+### Persona 3 – MEI que utiliza planilhas para controle financeiro
+
+João Paulo, homem de 36 anos, classe média baixa, brasileiro, mora em Contagem (MG). Possui ensino técnico e trabalha como eletricista autônomo prestando serviços para residências e pequenos comércios. João agenda atendimentos pelo celular e recebe pagamentos principalmente por transferência ou PIX. Ele é organizado e tenta manter controle financeiro utilizando planilhas no computador. No entanto, sua rotina de trabalho é corrida e muitas vezes esquece de registrar despesas relacionadas aos serviços, como compra de materiais ou deslocamentos. João valoriza ferramentas práticas que facilitem o registro das informações no dia a dia e que permitam acompanhar melhor seus ganhos e gastos.
 
 ## Histórias de Usuários
 
-Com base na análise das personas forma identificadas as seguintes histórias de usuários:
+Com base na análise das personas, foram identificadas as seguintes histórias de usuário para orientar o desenvolvimento das funcionalidades do sistema.
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
+### 1. Cadastro e gestão de informações financeiras
 
-Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
+| EU COMO... | QUERO/PRECISO... | PARA... |
+|-------------|------------------|---------|
+| Microempreendedor (MEI) | Registrar minhas receitas | Acompanhar quanto estou faturando no meu negócio |
+| Microempreendedor (MEI) | Registrar minhas despesas | Controlar meus gastos e evitar prejuízos |
+| Microempreendedor (MEI) | Editar ou excluir registros financeiros | Corrigir informações cadastradas incorretamente |
+| Microempreendedor (MEI) | Categorizar receitas e despesas | Organizar melhor as movimentações financeiras |
 
-> **Links Úteis**:
-> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
-> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
-> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
-> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
-> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
+---
 
+### 2. Acompanhamento financeiro
+
+| EU COMO... | QUERO/PRECISO... | PARA... |
+|-------------|------------------|---------|
+| Microempreendedor (MEI) | Visualizar um resumo financeiro | Entender rapidamente a situação do meu negócio |
+| Microempreendedor (MEI) | Visualizar o total de receitas e despesas por período | Analisar o desempenho financeiro mensal |
+| Microempreendedor (MEI) | Identificar meu lucro ou prejuízo | Avaliar se meu negócio está sendo financeiramente viável |
+
+---
+
+### 3. Organização e planejamento do negócio
+
+| EU COMO... | QUERO/PRECISO... | PARA... |
+|-------------|------------------|---------|
+| Microempreendedor (MEI) | Consultar o histórico de movimentações | Acompanhar a evolução financeira do negócio |
+| Microempreendedor (MEI) | Registrar despesas relacionadas ao trabalho | Ter controle completo dos custos do serviço |
+| Microempreendedor (MEI) | Acessar o sistema pelo celular ou computador | Registrar informações de forma prática no dia a dia |
+
+---
+
+### 4. Apoio à gestão financeira
+
+| EU COMO... | QUERO/PRECISO... | PARA... |
+|-------------|------------------|---------|
+| Microempreendedor (MEI) | Visualizar relatórios simples das minhas finanças | Compreender melhor meus resultados financeiros |
+| Microempreendedor (MEI) | Organizar minhas informações financeiras em um único sistema | Evitar anotações dispersas em cadernos ou planilhas |
+---
 
 ## Requisitos
 
-As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto. Para determinar a prioridade de requisitos, aplicar uma técnica de priorização de requisitos e detalhar como a técnica foi aplicada.
+As tabelas a seguir apresentam os requisitos funcionais e não funcionais que definem o escopo da solução proposta. A priorização dos requisitos foi realizada com base na importância de cada funcionalidade para o funcionamento básico do sistema e para a experiência do usuário.
+
+---
 
 ### Requisitos Funcionais
 
-|ID    | Descrição do Requisito  | Prioridade | Responsável |
-|------|-----------------------------------------|----| ----|
-|RF-001| Permitir que o usuário cadastre tarefas | ALTA | Aluno X |
-|RF-002| Emitir um relatório de tarefas no mês   | MÉDIA | Aluno Y |
+| ID | Descrição do Requisito | Prioridade | Responsável |
+|----|------------------------|------------|-------------|
+| RF-001 | Permitir que o microempreendedor cadastre suas receitas | ALTA | Equipe |
+| RF-002 | Permitir que o microempreendedor cadastre suas despesas | ALTA | Equipe |
+| RF-003 | Permitir que o usuário edite registros de receitas ou despesas | ALTA | Equipe |
+| RF-004 | Permitir que o usuário exclua registros financeiros | ALTA | Equipe |
+| RF-005 | Permitir que o usuário categorize receitas e despesas | MÉDIA | Equipe |
+| RF-006 | Exibir um resumo financeiro com total de receitas e despesas | ALTA | Equipe |
+| RF-007 | Exibir o lucro ou prejuízo com base nas movimentações registradas | ALTA | Equipe |
+| RF-008 | Permitir visualizar movimentações financeiras por período | MÉDIA | Equipe |
+| RF-009 | Permitir consultar o histórico de movimentações financeiras | MÉDIA | Equipe |
+| RF-010 | Gerar relatórios simples das informações financeiras do negócio | BAIXA | Equipe |
 
-### Requisitos não Funcionais
+---
 
-|ID     | Descrição do Requisito  |Prioridade |
-|-------|-------------------------|----|
-|RNF-001| O sistema deve ser responsivo para rodar em um dispositivos móvel | MÉDIA | 
-|RNF-002| Deve processar requisições do usuário em no máximo 3s |  BAIXA | 
+### Requisitos Não Funcionais
 
-Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
-
-- [Requisitos Funcionais
- (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
- correspondem a uma funcionalidade que deve estar presente na
-  plataforma (ex: cadastro de usuário).
-- [Requisitos Não Funcionais
-  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
-  correspondem a uma característica técnica, seja de usabilidade,
-  desempenho, confiabilidade, segurança ou outro (ex: suporte a
-  dispositivos iOS e Android).
-Lembre-se que cada requisito deve corresponder à uma e somente uma
-característica alvo da sua solução. Além disso, certifique-se de que
-todos os aspectos capturados nas Histórias de Usuário foram cobertos.
+| ID | Descrição do Requisito | Prioridade |
+|----|------------------------|------------|
+| RNF-001 | O sistema deve possuir interface simples e intuitiva para usuários com pouca experiência em tecnologia | ALTA |
+| RNF-002 | O sistema deve ser responsivo, permitindo uso em dispositivos móveis e computadores | ALTA |
+| RNF-003 | O sistema deve processar requisições do usuário em até 10 segundos | MÉDIA |
+| RNF-004 | O sistema deve garantir segurança básica no armazenamento das informações do usuário | ALTA |
+| RNF-005 | O sistema deve manter os dados financeiros armazenados de forma persistente | ALTA |
+| RNF-006 | O sistema deve permitir acesso através de navegadores web modernos | MÉDIA |
+| RNF-007 | O sistema deve manter disponibilidade durante o uso normal da aplicação | MÉDIA |
 
 ## Restrições
 
 O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-|ID| Restrição                                             |
-|--|-------------------------------------------------------|
-|01| O projeto deverá ser entregue até o final do semestre |
-|02| Não pode ser desenvolvido um módulo de backend        |
-
-Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
-
-> **Links Úteis**:
-> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
-> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
+| ID | Restrição |
+|----|-----------|
+| 01 | O projeto deverá ser desenvolvido e entregue dentro do prazo definido para o 1º semestre letivo de 2026. |
+| 02 | A solução deverá ser desenvolvida como uma aplicação móvel. |
+| 03 | O desenvolvimento deve ser realizado por uma equipe de até 6 alunos, o que limita a quantidade de funcionalidades implementadas. |
 
 ## Diagrama de Casos de Uso
 
