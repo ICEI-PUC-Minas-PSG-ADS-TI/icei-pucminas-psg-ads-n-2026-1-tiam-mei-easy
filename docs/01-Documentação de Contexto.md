@@ -54,19 +54,29 @@ Diante desse contexto, a aplicação busca oferecer uma solução simples e aces
 
 ### Personas
 
-#### Persona 1 – Empreendedor iniciante
+#### Persona 1 – MEI iniciante
 
-Nome: Carlos Silva
-Idade: 32 anos
-Profissão: Dono de um pequeno negócio de manutenção de celulares
-Perfil: Carlos abriu recentemente seu MEI e trabalha sozinho. Ele utiliza o celular para atender clientes, divulgar serviços nas redes sociais e receber pagamentos via PIX. No entanto, possui dificuldade para organizar suas receitas e despesas, muitas vezes registrando valores em anotações simples ou lembrando apenas de cabeça. Busca uma forma prática de acompanhar o faturamento e entender melhor como está a situação financeira do seu negócio.
+**Nome:** Carlos Silva
+**Idade:** 32 anos
+**Profissão:** Dono de um pequeno negócio de manutenção de celulares
+**Perfil:** Carlos abriu recentemente seu MEI e trabalha sozinho. Ele utiliza o celular para atender clientes, divulgar serviços nas redes sociais e receber pagamentos via PIX. 
+**Dor:** Carlos possui dificuldade para organizar suas receitas e despesas. Muitas vezes registra valores em anotações simples ou tenta controlar as informações apenas de memória. Ele busca uma forma prática de acompanhar o faturamento e entender melhor como está a situação financeira do seu negócio.
 
-#### Persona 2 – Empreendedora autônoma
+#### Persona 2 – MEI com negócio estabelecido
 
-Nome: Juliana Ferreira
-Idade: 41 anos
-Profissão: Confeiteira e proprietária de um pequeno negócio de bolos e doces
-Perfil: Juliana trabalha principalmente por encomenda e recebe pedidos por aplicativos de mensagens e redes sociais. Ela registra os pedidos em um caderno e anota seus gastos com ingredientes manualmente. Apesar de utilizar tecnologia no dia a dia, não possui experiência com sistemas de gestão. Gostaria de acompanhar melhor seus lucros e gastos mensais para planejar o crescimento do seu negócio.
+- **Nome:** Juliana Ferreira
+- **Idade:** 41 anos
+- **Profissão:** Confeiteira e proprietária de um pequeno negócio de bolos e doces há 5 anos.
+- **Perfil:** Juliana trabalha principalmente por encomenda e recebe pedidos por aplicativos de mensagens e redes sociais.
+- **Dor:** Ela registra os pedidos em um caderno e anota seus gastos com ingredientes manualmente. Apesar de utilizar tecnologia no dia a dia, não possui experiência com sistemas de gestão. Gostaria de acompanhar melhor seus lucros e gastos mensais para planejar o crescimento do seu negócio a longo prazo.
+
+#### Persona 3 – MEI que utiliza planilhas para controle financeiro
+
+- **Nome**: João Paulo
+- **Idade:** 36 anos
+- **Profissão:** Eletricista autônomo
+- **Perfil:** Rafael trabalha prestando serviços de manutenção elétrica em residências e pequenos comércios. Ele agenda atendimentos pelo celular e recebe pagamentos principalmente por transferência ou PIX.
+- **Dor:** Para acompanhar suas finanças, Rafael utiliza uma planilha simples no computador, onde registra os serviços realizados e os valores recebidos. No entanto, ele tem dificuldade em manter esse controle sempre atualizado e muitas vezes esquece de registrar despesas relacionadas ao trabalho, como compra de materiais ou deslocamento. Rafael gostaria de uma ferramenta mais prática para registrar essas informações no dia a dia e acompanhar melhor seus ganhos e gastos.
 
 #### Stakeholders
 
