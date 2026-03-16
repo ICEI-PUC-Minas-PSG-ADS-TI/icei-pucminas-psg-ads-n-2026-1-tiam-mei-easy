@@ -108,7 +108,22 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Diagrama de Casos de Uso
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
+O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos.
+
+![Diagrama de casos de uso](img/02-diagrama-caso-de-uso.png)
+
+### Tabela de descrição dos atores e casos de uso
+
+| Elemento | Tipo | Descrição |
+|----------|------|-----------|
+| MEI | Ator | Microempreendedor individual, usuário do sistema que utiliza a aplicação para registrar e acompanhar as informações financeiras do negócio. |
+| UC-01 | Caso de uso | **Cadastrar receita** – Permite ao MEI registrar entradas financeiras (receitas) do negócio. |
+| UC-02 | Caso de uso | **Cadastrar despesa** – Permite ao MEI registrar saídas financeiras (despesas) do negócio. |
+| UC-03 | Caso de uso | **Editar registro financeiro** – Permite ao MEI corrigir dados de receitas ou despesas já cadastrados. |
+| UC-04 | Caso de uso | **Excluir registro financeiro** – Permite ao MEI remover registros de receitas ou despesas incorretos ou desnecessários. |
+| UC-05 | Caso de uso | **Visualizar resumo financeiro** – Permite ao MEI ver o total de receitas, despesas e o resultado (lucro ou prejuízo) do negócio. |
+| UC-06 | Caso de uso | **Consultar histórico financeiro** – Permite ao MEI acessar o histórico de movimentações financeiras registradas. |
+| UC-07 | Caso de uso | **Visualizar relatórios financeiros** – Permite ao MEI visualizar relatórios simples das informações financeiras do negócio. |
 
 As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Casos de Uso”.
 
@@ -152,26 +167,32 @@ A matriz de rastreabilidade permite visualizar o relacionamento entre os requisi
 
 De acordo com o PMBoK v6 as dez áreas que constituem os pilares para gerenciar projetos, e que caracterizam a multidisciplinaridade envolvida, são: Integração, Escopo, Cronograma (Tempo), Custos, Qualidade, Recursos, Comunicações, Riscos, Aquisições, Partes Interessadas. Para desenvolver projetos um profissional deve se preocupar em gerenciar todas essas dez áreas. Elas se complementam e se relacionam, de tal forma que não se deve apenas examinar uma área de forma estanque. É preciso considerar, por exemplo, que as áreas de Escopo, Cronograma e Custos estão muito relacionadas. Assim, se eu amplio o escopo de um projeto eu posso afetar seu cronograma e seus custos.
 
-<!--
 ## Gerenciamento de Tempo
 
-Com diagramas bem organizados que permitem gerenciar o tempo nos projetos, o gerente de projetos agenda e coordena tarefas dentro de um projeto para estimar o tempo necessário de conclusão.
+Com diagramas bem organizados que permitem gerenciar o tempo nos projetos, o gerente de projetos agenda e coordena tarefas dentro de um projeto para estimar o tempo necessário de conclusão. O gráfico de Gantt abaixo apresenta o cronograma das atividades do projeto no 1º semestre letivo de 2026.
 
-![Diagrama de rede simplificado notação francesa (método francês)](img/02-diagrama-rede-simplificado.png)
-
-O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utilizada para controlar e gerenciar o cronograma de atividades de um projeto. Com ele, é possível listar tudo que precisa ser feito para colocar o projeto em prática, dividir em atividades e estimar o tempo necessário para executá-las.
-
-![Gráfico de Gantt](img/02-grafico-gantt.png)
--->
+![Gerenciamento de tempo](img/02-gerenciamento-tempo.png)
 
 ## Gerenciamento de Equipe
 
-O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados. 
+O gerenciamento adequado de tarefas contribuirá para que o projeto alcance altos níveis de produtividade. Por isso, é fundamental que ocorra a gestão de tarefas e de pessoas, de modo que os times envolvidos no projeto possam ser facilmente gerenciados.
 
-![Simple Project Timeline](img/02-project-timeline.png)
+O diagrama abaixo representa a estrutura da equipe e o fluxo de comunicação no projeto.
+
+![Equipe](img/02-equipe.png)
 
 ## Gestão de Orçamento
 
 O processo de determinar o orçamento do projeto é uma tarefa que depende, além dos produtos (saídas) dos processos anteriores do gerenciamento de custos, também de produtos oferecidos por outros processos de gerenciamento, como o escopo e o tempo.
 
-![Orçamento](img/02-orcamento.png)
+O projeto é acadêmico e utiliza predominantemente ferramentas gratuitas. A tabela abaixo apresenta a estimativa de custos do projeto.
+
+| Item | Descrição | Custo estimado (R$) |
+|------|-----------|---------------------|
+| 01 | Ferramentas de desenvolvimento (VS Code, GitHub, Trello, Figma, Draw.io – versões gratuitas) | 0,00 |
+| 02 | Domínio e hospedagem (opcional; ex.: GitHub Pages, Vercel ou similar gratuito) | 0,00 |
+| 03 | Equipamentos e conectividade (já disponíveis pela equipe) | 0,00 |
+| 04 | Contingência / outros (eventuais custos de certificado, APIs pagas etc.) | 0,00 |
+| | **Total estimado** | **0,00** |
+
+*Observação: O orçamento considera que a equipe utiliza apenas recursos gratuitos e infraestrutura já disponível, adequado a um projeto de 1º semestre letivo.*
