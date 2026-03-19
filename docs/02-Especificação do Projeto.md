@@ -71,16 +71,32 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais que de
 
 | ID | Descrição do Requisito | Prioridade | Responsável |
 |----|------------------------|------------|-------------|
-| RF-001 | Permitir que o microempreendedor cadastre suas receitas | ALTA | Equipe |
-| RF-002 | Permitir que o microempreendedor cadastre suas despesas | ALTA | Equipe |
-| RF-003 | Permitir que o usuário edite registros de receitas ou despesas | ALTA | Equipe |
-| RF-004 | Permitir que o usuário exclua registros financeiros | ALTA | Equipe |
-| RF-005 | Permitir que o usuário categorize receitas e despesas | MÉDIA | Equipe |
-| RF-006 | Exibir um resumo financeiro com total de receitas e despesas | ALTA | Equipe |
-| RF-007 | Exibir o lucro ou prejuízo com base nas movimentações registradas | ALTA | Equipe |
-| RF-008 | Permitir visualizar movimentações financeiras por período | MÉDIA | Equipe |
-| RF-009 | Permitir consultar o histórico de movimentações financeiras | MÉDIA | Equipe |
-| RF-010 | Gerar relatórios simples das informações financeiras do negócio | BAIXA | Equipe |
+| RF-001 | Permitir que o usuário realize cadastro e login na aplicação | ALTA | Equipe |
+| RF-002 | Permitir o gerenciamento completo de movimentações financeiras (receitas e despesas), incluindo registro, edição, exclusão e consulta com filtro por período, tipo e categoria | ALTA | Daniel |
+| RF-003 | Permitir o gerenciamento completo de categorias de receitas e despesas, incluindo criação, edição, exclusão e listagem | MÉDIA | Danilo |
+| RF-004 | Permitir o gerenciamento do perfil do usuário, incluindo visualização e edição dos dados da conta | MÉDIA | Diego |
+| RF-005 | Permitir o gerenciamento completo de preferências da aplicação, incluindo seleção de tema (claro/escuro) e outras configurações de exibição | BAIXA | Diego |
+| RF-006 | Permitir o gerenciamento completo de metas financeiras, incluindo criação, edição, exclusão e acompanhamento do progresso por categoria ou período | MÉDIA | Gabriel |
+| RF-007 | Permitir o gerenciamento completo de clientes, incluindo cadastro, edição, exclusão e vinculação a receitas registradas | MÉDIA | Gabriel |
+| RF-008 | Exibir dashboard com resumo financeiro do período selecionado, apresentando total de receitas, despesas, resultado (lucro ou prejuízo) e gráfico comparativo por período | ALTA | Danilo |
+| RF-009 | Gerar relatório financeiro com movimentações do período, filtrável por tipo (receita/despesa) e categoria | MÉDIA | Gustavo |
+| RF-010 | Permitir o gerenciamento completo de recorrências, incluindo cadastro, edição, exclusão e listagem de despesas ou receitas fixas mensais | MÉDIA | Sara |
+| RF-011 | Exibir notificações e alertas ao usuário, como proximidade do limite de faturamento anual do MEI e metas próximas do limite definido | MÉDIA | Sara |
+| RF-012 | Permitir o gerenciamento completo de itens de estoque, incluindo cadastro, edição, exclusão, listagem e controle de quantidade | MÉDIA | Gustavo |
+| RF-013 | Permitir o gerenciamento completo de contas a pagar e receber, incluindo cadastro, edição, exclusão e acompanhamento do status de pagamento | MÉDIA | Daniel |
+
+---
+
+**Resumo da distribuição:**
+- **Equipe** — Login/Registro (RF-001)
+- **Daniel** — Movimentações (RF-002) + Contas a pagar/receber (RF-013)
+- **Danilo** — Categorias (RF-003) + Estoque (RF-012)
+- **Diego** — Perfil (RF-004) + Preferências (RF-005)
+- **Gabriel** — Metas (RF-006) + Clientes (RF-007)
+- **Gustavo** — Dashboard (RF-008) + Relatórios (RF-009)
+- **Sara** — Recorrências (RF-010) + Notificações (RF-011)
+
+Quer ajustar alguma descrição, prioridade ou redistribuir algum requisito entre os membros?
 
 ---
 
