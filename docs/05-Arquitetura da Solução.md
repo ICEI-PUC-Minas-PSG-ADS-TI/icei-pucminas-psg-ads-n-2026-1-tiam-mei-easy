@@ -1,10 +1,10 @@
 # Arquitetura da Solução
 
-<img href="docs/modelos/Arq Solucao.drawio.png">
+<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/modelos/Arq%20Solucao.drawio.png">
 
 ## Diagrama de Classes
 
-<img href="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/modelos/Classes.drawio.png">
+<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/modelos/Classes.drawio.png">
 
 ## Modelo ER
 
