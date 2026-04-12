@@ -4,56 +4,208 @@
 
 ## Diagrama de Classes
 
-<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/modelos/Classes.drawio.png">
+<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/modelos/Classes.drawio.png.png">
 
 ## Modelo ER
 
-O Modelo ER representa através de um diagrama como as entidades (coisas, objetos) se relacionam entre si na aplicação interativa.]
-
-As referências abaixo irão auxiliá-lo na geração do artefato “Modelo ER”.
-
-> - [Como fazer um diagrama entidade relacionamento | Lucidchart](https://www.lucidchart.com/pages/pt/como-fazer-um-diagrama-entidade-relacionamento)
+<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/modelos/ER.drawio.png">
 
 ## Esquema Relacional
 
-O Esquema Relacional corresponde à representação dos dados em tabelas juntamente com as restrições de integridade e chave primária.
- 
-As referências abaixo irão auxiliá-lo na geração do artefato “Esquema Relacional”.
-
-> - [Criando um modelo relacional - Documentação da IBM](https://www.ibm.com/docs/pt-br/cognos-analytics/10.2.2?topic=designer-creating-relational-model)
+O banco de dados do projeto será desenvolvido no Firebase.
 
 ## Modelo Físico
 
-Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do banco de dados. Este arquivo deverá ser incluído dentro da pasta src\bd.
+Coleção: usuarios
+| Chave    | Valor                              |
+|----------|------------------------------------|
+| id       | identificador único do usuário     |
+| nome     | nome completo                      |
+| email    | e-mail do usuário                  |
+| senha    | senha criptografada                |
+| telefone | número de contato                  |
+| cnpj     | documento do usuário               |
+
+<br>
+
+Coleção: categorias
+| Chave     | Valor                                              |
+|-----------|----------------------------------------------------|
+| id        | identificador da categoria                         |
+| descricao | nome da categoria (ex: Alimentação, Transporte)    |
+| tipo      | define se é receita ou despesa                     |
+| usuarioId | identifica o usuário dono da categoria             |
+
+<br>
+
+Coleção: movimentacoes
+| Chave     | Valor                                             |
+|-----------|---------------------------------------------------|
+| id        | identificador da movimentação                     |
+| descricao | descrição da transação                            |
+| valor     | valor monetário                                   |
+| data      | data da movimentação                              |
+| tipo      | receita ou despesa                                |
+| usuarioId | referência ao usuário                             |
+| categoria | objeto com id e descricao da categoria            |
+| cliente   | objeto com cpfCnpj e nome do cliente (opcional)   |
+
+<br>
+
+Coleção: clientes
+| Chave     | Valor                              |
+|-----------|------------------------------------|
+| cpfCnpj   | identificador do cliente           |
+| nome      | nome do cliente                    |
+| telefone  | contato                            |
+| email     | e-mail                             |
+| usuarioId | referência ao usuário              |
+
+<br>
+
+Coleção: contas
+| Chave      | Valor                                  |
+|------------|----------------------------------------|
+| id         | identificador da conta                 |
+| descricao  | descrição da conta                     |
+| valor      | valor monetário                        |
+| tipo       | pagar ou receber                       |
+| vencimento | data de vencimento                     |
+| status     | situação da conta (pendente, pago)     |
+| usuarioId  | referência ao usuário                  |
+
+<br>
+
+Coleção: metas
+| Chave      | Valor                          |
+|------------|--------------------------------|
+| id         | identificador da meta          |
+| valorMeta  | valor desejado                 |
+| valorAtual | valor já alcançado             |
+| dataInicio | início da meta                 |
+| dataFim    | término da meta                |
+| usuarioId  | referência ao usuário          |
+
+<br>
+
+Coleção: produtos
+| Chave      | Valor                          |
+|------------|--------------------------------|
+| id         | identificador do produto       |
+| nome       | nome do produto                |
+| quantidade | quantidade disponível          |
+| usuarioId  | referência ao usuário          |
+
+<br>
+
+Coleção: notificacoes
+| Chave     | Valor                                      |
+|-----------|--------------------------------------------|
+| id        | identificador da notificação               |
+| mensagem  | conteúdo da notificação                    |
+| data      | data de emissão                            |
+| lida      | indica se foi visualizada                  |
+| tipo      | tipo da notificação (alerta, aviso, etc.)  |
+| usuarioId | referência ao usuário                      |
+
+
+
 
 ## Tecnologias Utilizadas
 
-Descreva aqui qual(is) tecnologias você vai usar para resolver o seu problema, ou seja, implementar a sua solução. Liste todas as tecnologias envolvidas, linguagens a serem utilizadas, serviços web, frameworks, bibliotecas, IDEs de desenvolvimento, e ferramentas.
+| Finalidade | Tecnologia Utilizada |
+|----------|----------|
+| Frontend  | React Native (EXPO) | 
+| Backend  | Firebase  | 
+| Comunicação  | WhatsApp e Discord  | 
 
-Apresente também uma figura explicando como as tecnologias estão relacionadas ou como uma interação do usuário com o sistema vai ser conduzida, por onde ela passa até retornar uma resposta ao usuário.
 
 ## Hospedagem
 
-Explique como a hospedagem e o lançamento da plataforma foi feita.
+A previsão de hospedagem será na plataforma Firebase.
 
-> **Links Úteis**:
->
-> - [Website com GitHub Pages](https://pages.github.com/)
-> - [Programação colaborativa com Repl.it](https://repl.it/)
-> - [Getting Started with Heroku](https://devcenter.heroku.com/start)
-> - [Publicando Seu Site No Heroku](http://pythonclub.com.br/publicando-seu-hello-world-no-heroku.html)
 
 ## Qualidade de Software
 
-Conceituar qualidade de fato é uma tarefa complexa, mas ela pode ser vista como um método gerencial que através de procedimentos disseminados por toda a organização, busca garantir um produto final que satisfaça às expectativas dos stakeholders.
+A qualidade de software no sistema MEI Easy será fundamentada na norma ISO/IEC 25010, que define um conjunto de características e subcaracterísticas que orientam a avaliação da qualidade de produtos de software.
+Considerando que o MEI Easy é um sistema voltado para o gerenciamento financeiro de microempreendedores individuais, a equipe selecionou subcaracterísticas que priorizam facilidade de uso, confiabilidade dos dados, segurança e desempenho, aspectos essenciais para esse tipo de aplicação.
 
-No contexto de desenvolvimento de software, qualidade pode ser entendida como um conjunto de características a serem satisfeitas, de modo que o produto de software atenda às necessidades de seus usuários. Entretanto, tal nível de satisfação nem sempre é alcançado de forma espontânea, devendo ser continuamente construído. Assim, a qualidade do produto depende fortemente do seu respectivo processo de desenvolvimento.
+1. Adequação Funcional (Functional Suitability)
 
-A norma internacional ISO/IEC 25010, que é uma atualização da ISO/IEC 9126, define oito características e 30 subcaracterísticas de qualidade para produtos de software.
-Com base nessas características e nas respectivas sub-características, identifique as sub-características que sua equipe utilizará como base para nortear o desenvolvimento do projeto de software considerando-se alguns aspectos simples de qualidade. Justifique as subcaracterísticas escolhidas pelo time e elenque as métricas que permitirão a equipe avaliar os objetos de interesse.
+Refere-se à capacidade do sistema de fornecer funcionalidades que atendam às necessidades dos usuários de forma correta e completa.
 
-> **Links Úteis**:
->
-> - [ISO/IEC 25010:2011 - Systems and software engineering — Systems and software Quality Requirements and Evaluation (SQuaRE) — System and software quality models](https://www.iso.org/standard/35733.html/)
-> - [Análise sobre a ISO 9126 – NBR 13596](https://www.tiespecialistas.com.br/analise-sobre-iso-9126-nbr-13596/)
-> - [Qualidade de Software - Engenharia de Software 29](https://www.devmedia.com.br/qualidade-de-software-engenharia-de-software-29/18209/)
+Justificativa:
+O MEI Easy deve permitir que o usuário realize operações essenciais como cadastro de receitas, despesas, clientes, controle de estoque e visualização de relatórios financeiros. A correta implementação dessas funcionalidades é fundamental para o funcionamento do sistema.
+
+Métricas:
+
+Percentual de requisitos funcionais implementados
+Número de falhas em funcionalidades durante testes
+Taxa de sucesso na execução de operações (cadastro, edição e exclusão)
+2. Usabilidade (Usability)
+
+Refere-se à facilidade de uso do sistema, incluindo aprendizado, eficiência e satisfação do usuário.
+
+Justificativa:
+O público-alvo do MEI Easy são microempreendedores que, em muitos casos, não possuem conhecimento técnico. Portanto, a interface deve ser simples, intuitiva e de fácil navegação, permitindo que o usuário utilize o sistema sem dificuldades.
+
+Métricas:
+
+Tempo médio para realizar tarefas (ex: cadastrar uma despesa)
+Número de erros cometidos pelo usuário durante o uso
+Taxa de satisfação do usuário (feedback ou questionário)
+Número de cliques necessários para executar ações principais
+3. Confiabilidade (Reliability)
+
+Refere-se à capacidade do sistema de operar corretamente e de forma consistente ao longo do tempo.
+
+Justificativa:
+O MEI Easy manipula dados financeiros importantes, como receitas e despesas. Dessa forma, é essencial que o sistema seja confiável, evitando falhas, inconsistências ou perda de dados.
+
+Métricas:
+
+Número de falhas registradas por período
+Taxa de erros em operações críticas
+Tempo médio entre falhas (MTBF)
+Percentual de operações concluídas com sucesso
+4. Eficiência de Desempenho (Performance Efficiency)
+
+Refere-se ao tempo de resposta do sistema e ao uso adequado de recursos.
+
+Justificativa:
+Para garantir uma boa experiência ao usuário, o sistema deve apresentar respostas rápidas, especialmente no carregamento do dashboard e na consulta de dados financeiros.
+
+Métricas:
+
+Tempo médio de resposta das requisições
+Tempo de carregamento das telas principais
+Tempo de carregamento do dashboard
+Quantidade de requisições necessárias por operação
+
+5. Segurança (Security)
+
+Refere-se à proteção das informações e ao controle de acesso ao sistema.
+
+Justificativa:
+O MEI Easy armazena dados sensíveis, como informações financeiras e dados pessoais dos usuários. Portanto, é essencial garantir que apenas usuários autorizados tenham acesso aos dados, além de proteger essas informações contra acessos indevidos.
+
+Métricas:
+
+Uso de autenticação segura (ex: autenticação via Firebase)
+Número de tentativas de acesso não autorizado bloqueadas
+Existência de criptografia de dados sensíveis
+Controle de permissões de acesso
+
+6. Manutenibilidade (Maintainability)
+
+Refere-se à facilidade de manutenção, correção e evolução do sistema.
+
+Justificativa:
+O MEI Easy poderá evoluir com novas funcionalidades ao longo do tempo. Dessa forma, é importante que o código seja organizado, modular e de fácil entendimento, facilitando futuras manutenções.
+
+Métricas:
+
+Tempo médio para correção de erros
+Facilidade de implementação de novas funcionalidades
+Organização do código (separação por camadas)
+Reutilização de componentes
