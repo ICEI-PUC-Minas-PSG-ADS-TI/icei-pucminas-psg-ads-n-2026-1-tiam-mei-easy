@@ -1,11 +1,10 @@
 # Arquitetura da Solução
 
-<span style="color:red">Pré-requisitos: <a href="3-Projeto de Interface.md"> Projeto de Interface</a></span>
 <img href="docs/modelos/Arq Solucao.drawio.png">
 
 ## Diagrama de Classes
 
-<img href="docs/modelos/docs/modelos/Classes.drawio.png">
+<img href="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/modelos/Classes.drawio.png">
 
 ## Modelo ER
 
