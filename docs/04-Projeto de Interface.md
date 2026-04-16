@@ -14,13 +14,8 @@ A definição das interfaces foi baseada nos requisitos funcionais, não funcion
 
 O diagrama apresenta o estudo do fluxo de interação do usuário com o sistema interativo e  muitas vezes sem a necessidade do desenho do design das telas da interface. Isso permite que o design das interações seja bem planejado e gere impacto na qualidade no design do wireframe interativo que será desenvolvido logo em seguida.
 
-
-<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/img/MEI%20Easy%20Wireframes.jpg">
-
-
+<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/img/Vis%C3%A3o%20Geral%20Fluxo%20navega%C3%A7%C3%A3o%20MEI%20Easy.png">
 
 ## Wireframes
 
-<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/img/Vis%C3%A3o%20Geral%20Fluxo%20navega%C3%A7%C3%A3o%20MEI%20Easy.png">
-
-
+<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/img/MEI%20Easy%20Wireframes.jpg">
