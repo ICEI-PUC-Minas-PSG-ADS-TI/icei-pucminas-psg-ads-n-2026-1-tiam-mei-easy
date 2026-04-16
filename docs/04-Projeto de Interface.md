@@ -21,6 +21,6 @@ O diagrama apresenta o estudo do fluxo de interação do usuário com o sistema 
 
 ## Wireframes
 
-<img src="docs/img/MEI Easy Wireframes.jpg">
+<img src="https://github.com/ICEI-PUC-Minas-PSG-ADS-TI/icei-pucminas-psg-ads-n-2026-1-tiam-mei-easy/blob/main/docs/img/Vis%C3%A3o%20Geral%20Fluxo%20navega%C3%A7%C3%A3o%20MEI%20Easy.png">
 
 
