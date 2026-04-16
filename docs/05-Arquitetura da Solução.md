@@ -139,9 +139,10 @@ O MEI Easy deve permitir que o usuário realize operações essenciais como cada
 
 Métricas:
 
-Percentual de requisitos funcionais implementados
-Número de falhas em funcionalidades durante testes
-Taxa de sucesso na execução de operações (cadastro, edição e exclusão)
+Percentual de requisitos funcionais implementados <br>
+Número de falhas em funcionalidades durante testes <br>
+Taxa de sucesso na execução de operações (cadastro, edição e exclusão) <br>
+
 2. Usabilidade (Usability)
 
 Refere-se à facilidade de uso do sistema, incluindo aprendizado, eficiência e satisfação do usuário.
@@ -151,10 +152,11 @@ O público-alvo do MEI Easy são microempreendedores que, em muitos casos, não 
 
 Métricas:
 
-Tempo médio para realizar tarefas (ex: cadastrar uma despesa)
-Número de erros cometidos pelo usuário durante o uso
-Taxa de satisfação do usuário (feedback ou questionário)
-Número de cliques necessários para executar ações principais
+Tempo médio para realizar tarefas (ex: cadastrar uma despesa) <br>
+Número de erros cometidos pelo usuário durante o uso <br>
+Taxa de satisfação do usuário (feedback ou questionário) <br>
+Número de cliques necessários para executar ações principais <br>
+
 3. Confiabilidade (Reliability)
 
 Refere-se à capacidade do sistema de operar corretamente e de forma consistente ao longo do tempo.
@@ -164,10 +166,11 @@ O MEI Easy manipula dados financeiros importantes, como receitas e despesas. Des
 
 Métricas:
 
-Número de falhas registradas por período
-Taxa de erros em operações críticas
-Tempo médio entre falhas (MTBF)
-Percentual de operações concluídas com sucesso
+Número de falhas registradas por período <br>
+Taxa de erros em operações críticas <br>
+Tempo médio entre falhas (MTBF) <br>
+Percentual de operações concluídas com sucesso <br>
+
 4. Eficiência de Desempenho (Performance Efficiency)
 
 Refere-se ao tempo de resposta do sistema e ao uso adequado de recursos.
@@ -177,10 +180,10 @@ Para garantir uma boa experiência ao usuário, o sistema deve apresentar respos
 
 Métricas:
 
-Tempo médio de resposta das requisições
-Tempo de carregamento das telas principais
-Tempo de carregamento do dashboard
-Quantidade de requisições necessárias por operação
+Tempo médio de resposta das requisições <br>
+Tempo de carregamento das telas principais <br>
+Tempo de carregamento do dashboard <br>
+Quantidade de requisições necessárias por operação <br>
 
 5. Segurança (Security)
 
@@ -191,10 +194,10 @@ O MEI Easy armazena dados sensíveis, como informações financeiras e dados pes
 
 Métricas:
 
-Uso de autenticação segura (ex: autenticação via Firebase)
-Número de tentativas de acesso não autorizado bloqueadas
-Existência de criptografia de dados sensíveis
-Controle de permissões de acesso
+Uso de autenticação segura (ex: autenticação via Firebase) <br>
+Número de tentativas de acesso não autorizado bloqueadas <br>
+Existência de criptografia de dados sensíveis <br>
+Controle de permissões de acesso <br>
 
 6. Manutenibilidade (Maintainability)
 
@@ -205,7 +208,7 @@ O MEI Easy poderá evoluir com novas funcionalidades ao longo do tempo. Dessa fo
 
 Métricas:
 
-Tempo médio para correção de erros
-Facilidade de implementação de novas funcionalidades
-Organização do código (separação por camadas)
-Reutilização de componentes
+Tempo médio para correção de erros<br> 
+Facilidade de implementação de novas funcionalidades <br>
+Organização do código (separação por camadas) <br>
+Reutilização de componentes <br>
