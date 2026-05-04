@@ -1,25 +1,11 @@
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import {
-  getAuth,
-  initializeAuth,
-  getReactNativePersistence,
-} from 'firebase/auth';
-import { Platform } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { firebaseConfig, isFirebaseConfigValid } from './firebaseConfig';
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
-export { isFirebaseConfigValid };
+import { firebaseConfig } from "./firebaseConfig";
 
-const app = isFirebaseConfigValid()
-  ? getApps().length > 0
-    ? getApp()
-    : initializeApp(firebaseConfig)
-  : null;
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-function createAuth() {
-  if (!app) return null;
-  
-  return getAuth(app);
-}
-
-export const auth = app ? createAuth() : null;
+export const db = getFirestore(app);
+export const auth = getAuth(app);
+export default app;
