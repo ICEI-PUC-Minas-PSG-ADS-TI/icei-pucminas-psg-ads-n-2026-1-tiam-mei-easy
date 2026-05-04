@@ -112,12 +112,25 @@ export default function ListaMovimentacoesScreen({ navigation }) {
     );
   }
 
+  function voltar() {
+    if (navigation.canGoBack()) {
+      navigation.goBack();
+    } else {
+      navigation.navigate('Home');
+    }
+  }
+
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitulo}>MEI <Text style={styles.headerDestaque}>EASY</Text></Text>
-        <TouchableOpacity onPress={() => setMostrarFiltros(!mostrarFiltros)}>
+        <TouchableOpacity onPress={voltar} style={styles.btnVoltar} accessibilityRole="button" accessibilityLabel="Voltar">
+          <Text style={styles.btnVoltarTexto}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitulo} numberOfLines={1}>
+          MEI <Text style={styles.headerDestaque}>EASY</Text>
+        </Text>
+        <TouchableOpacity onPress={() => setMostrarFiltros(!mostrarFiltros)} style={styles.btnHeaderDir}>
           <Text style={styles.filtroIcone}>⚙️</Text>
         </TouchableOpacity>
       </View>
@@ -214,8 +227,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
     paddingHorizontal: 16, paddingTop: 50, paddingBottom: 12,
   },
-  headerTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold' },
+  btnVoltar: { width: 36, paddingVertical: 4 },
+  btnVoltarTexto: { color: BRANCO, fontSize: 22 },
+  headerTitulo: { flex: 1, color: BRANCO, fontSize: 16, fontWeight: 'bold', textAlign: 'center' },
   headerDestaque: { color: '#4fc3f7' },
+  btnHeaderDir: { width: 36, alignItems: 'flex-end' },
   filtroIcone: { fontSize: 22 },
   resumoRow: { flexDirection: 'row', paddingHorizontal: 16, gap: 12, marginBottom: 8 },
   resumoCard: {

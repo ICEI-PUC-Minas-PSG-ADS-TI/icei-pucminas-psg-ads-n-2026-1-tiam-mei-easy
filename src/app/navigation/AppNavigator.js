@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -9,9 +10,25 @@ import NovaMovimentacaoScreen from '../screens/movimentacoes/NovaMovimentacaoScr
 
 const Stack = createNativeStackNavigator();
 
+const linkingScreens = {
+  Home: '',
+  ListaMovimentacoes: 'movimentacoes',
+  NovaMovimentacao: 'movimentacoes/nova',
+};
+
 export default function AppNavigator() {
+  const linking = useMemo(() => {
+    if (Platform.OS !== 'web' || typeof window === 'undefined') {
+      return undefined;
+    }
+    return {
+      prefixes: [window.location.origin],
+      config: { screens: linkingScreens },
+    };
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomePage} />
         <Stack.Screen name="ListaMovimentacoes" component={ListaMovimentacoesScreen} />
