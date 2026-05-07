@@ -17,3 +17,5 @@ npm run web
 ### [0.1.0] - 29/04/2026
 #### Adicionado
 - Criação da estrutura básica do site e app no Firebase Console
+- 
+- mudei algo aqui
