@@ -8,7 +8,6 @@ import {
   deleteDoc,
   query,
   where,
-  orderBy,
 } from 'firebase/firestore';
 import { app } from '../config/firebase';
 
@@ -17,15 +16,16 @@ const db = getFirestore(app);
 // Busca todas as movimentações do usuário com filtros opcionais
 export async function getMovimentacoes(usuarioId, filtros = {}) {
   const ref = collection(db, 'movimentacoes');
-  const condicoes = [where('usuarioId', '==', usuarioId), orderBy('data', 'desc')];
+  const condicoes = [where('usuarioId', '==', usuarioId)];
 
   if (filtros.tipo) condicoes.push(where('tipo', '==', filtros.tipo));
-  if (filtros.categoria) condicoes.push(where('categoria.id', '==', filtros.categoria));
 
   const q = query(ref, ...condicoes);
   const snap = await getDocs(q);
 
   let docs = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+
+  docs.sort((a, b) => new Date(b.data) - new Date(a.data));
 
   if (filtros.dataInicio) {
     docs = docs.filter((m) => new Date(m.data) >= new Date(filtros.dataInicio));
@@ -42,7 +42,7 @@ export async function criarMovimentacao(dados) {
   const ref = collection(db, 'movimentacoes');
   const docRef = await addDoc(ref, {
     ...dados,
-    data: dados.data || new Date().toISOString(),
+    data: dados.data || new Date().toISOString().slice(0,10),
     criadoEm: new Date().toISOString(),
   });
   return docRef.id;

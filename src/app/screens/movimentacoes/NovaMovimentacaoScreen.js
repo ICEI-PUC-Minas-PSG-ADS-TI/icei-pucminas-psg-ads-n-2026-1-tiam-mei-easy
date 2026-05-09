@@ -7,13 +7,30 @@ import { criarMovimentacao, editarMovimentacao, getCategorias } from '../../serv
 // Usuário fixo por enquanto — trocar pelo auth real quando login estiver pronto
 const USUARIO_ID = 'usuario_teste';
 
+function formatarMoeda(valor) {
+  const num = valor.replace(/\D/g, '');
+  if (!num) return '';
+  const inteiro = parseInt(num, 10);
+  return (inteiro / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+}
+ 
+function extrairNumero(valorFormatado) {
+  const num = valorFormatado.replace(/\D/g, '');
+  if (!num) return 0;
+  return parseInt(num, 10) / 100;
+}
+ 
 export default function NovaMovimentacaoScreen({ navigation, route }) {
   const edicao = route?.params?.movimentacao || null;
-
+ 
   const [tipo, setTipo] = useState(edicao?.tipo || 'receita');
-  const [valor, setValor] = useState(edicao?.valor?.toString() || '');
+  const [valorTexto, setValorTexto] = useState(
+    edicao?.valor ? formatarMoeda(String(Math.round(edicao.valor * 100))) : ''
+  );
   const [descricao, setDescricao] = useState(edicao?.descricao || '');
-  const [data, setData] = useState(edicao?.data ? edicao.data.slice(0, 10) : new Date().toISOString().slice(0, 10));
+  const [data, setData] = useState(
+    edicao?.data ? edicao.data.slice(0, 10) : new Date().toISOString().slice(0, 10)
+  );
   const [categorias, setCategorias] = useState([]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState(edicao?.categoria || null);
   const [carregando, setCarregando] = useState(false);
@@ -31,8 +48,16 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
     }
   }
 
+    function handleValorChange(texto) 
+    {
+    const formatado = formatarMoeda(texto);
+    setValorTexto(formatado);
+    }
+
   async function salvar() {
-    if (!valor || isNaN(parseFloat(valor))) {
+    const valorNumerico = extrairNumero(valorTexto);
+
+    if (!valorNumerico || valorNumerico <= 0) {
       Alert.alert('Atenção', 'Informe um valor válido.');
       return;
     }
@@ -41,11 +66,12 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
       return;
     }
 
+
     setCarregando(true);
     try {
       const dados = {
         tipo,
-        valor: parseFloat(valor),
+        valor: valorNumerico,
         descricao,
         data,
         usuarioId: USUARIO_ID,
@@ -106,9 +132,9 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
           style={styles.input}
           placeholder="R$ 0,00"
           placeholderTextColor="#aac"
-          keyboardType="decimal-pad"
-          value={valor}
-          onChangeText={setValor}
+          keyboardType="numeric"
+          value={valorTexto}
+          onChangeText={handleValorChange}
         />
 
         {/* Categoria */}
