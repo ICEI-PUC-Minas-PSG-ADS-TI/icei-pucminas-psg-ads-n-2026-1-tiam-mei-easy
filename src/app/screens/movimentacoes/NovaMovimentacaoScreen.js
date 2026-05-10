@@ -3,7 +3,8 @@ import {
   View, Text, TextInput, TouchableOpacity,
   StyleSheet, ScrollView, Alert, Platform,
 } from 'react-native';
-import { criarMovimentacao, editarMovimentacao, getCategorias } from '../../services/movimentacoesService';
+import { criarMovimentacao, editarMovimentacao } from '../../services/movimentacoesService';
+import { getCategorias } from '../../services/categoriasService';
 // Usuário fixo por enquanto — trocar pelo auth real quando login estiver pronto
 const USUARIO_ID = 'usuario_teste';
 
