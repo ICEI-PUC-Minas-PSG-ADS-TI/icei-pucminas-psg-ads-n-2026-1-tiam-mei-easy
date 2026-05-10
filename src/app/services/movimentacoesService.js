@@ -59,13 +59,3 @@ export async function excluirMovimentacao(id) {
   const ref = doc(db, 'movimentacoes', id);
   await deleteDoc(ref);
 }
-
-// Busca categorias do usuário
-export async function getCategorias(usuarioId, tipo) {
-  const ref = collection(db, 'categorias');
-  const condicoes = [where('usuarioId', '==', usuarioId)];
-  if (tipo) condicoes.push(where('tipo', '==', tipo));
-  const q = query(ref, ...condicoes);
-  const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-}
