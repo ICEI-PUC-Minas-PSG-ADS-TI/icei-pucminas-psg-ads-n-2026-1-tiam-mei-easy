@@ -7,6 +7,7 @@ import ButtonNavigation from "../../components/buttonDefault.js";
 export default function HomeScreen({ navigation }) {
   const userName = "Gustavo";
 
+  
   return (
     <View style={styles.container}>
       <Header />
@@ -23,6 +24,11 @@ export default function HomeScreen({ navigation }) {
           <ButtonNavigation
             title="Categorias"
             onPress={() => navigation.navigate("ListaCategorias")}
+          />
+
+          <ButtonNavigation
+            title="Recorrências"
+            onPress={() => navigation.navigate("ListaRecorrencias")}
           />
 
           <ButtonNavigation

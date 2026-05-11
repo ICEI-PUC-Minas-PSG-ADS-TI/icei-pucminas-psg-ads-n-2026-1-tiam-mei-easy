@@ -10,6 +10,9 @@ import NovaMovimentacaoScreen from '../screens/movimentacoes/NovaMovimentacaoScr
 import ListaCategoriasScreen from '../screens/categorias/ListaCategoriasScreen';
 import FormularioCategoriaScreen from '../screens/categorias/FormularioCategoriaScreen';
 
+import ListaRecorrenciasScreen from '../screens/recorrencias/ListaRecorrenciasScreen';
+import FormularioRecorrenciaScreen from '../screens/recorrencias/FormularioRecorrenciaScreen';
+
 const Stack = createNativeStackNavigator();
 
 const linkingScreens = {
@@ -18,6 +21,8 @@ const linkingScreens = {
   NovaMovimentacao: 'movimentacoes/nova',
   ListaCategorias: 'categorias',
   FormularioCategoria: 'categorias/nova',
+  ListaRecorrencias: 'recorrencias',
+  FormularioRecorrencia: 'recorrencias/nova',
 };
 
 export default function AppNavigator() {
@@ -39,6 +44,8 @@ export default function AppNavigator() {
         <Stack.Screen name="NovaMovimentacao" component={NovaMovimentacaoScreen} />
         <Stack.Screen name="ListaCategorias" component={ListaCategoriasScreen} />
         <Stack.Screen name="FormularioCategoria" component={FormularioCategoriaScreen} />
+        <Stack.Screen name="ListaRecorrencias" component={ListaRecorrenciasScreen} />
+        <Stack.Screen name="FormularioRecorrencia" component={FormularioRecorrenciaScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
