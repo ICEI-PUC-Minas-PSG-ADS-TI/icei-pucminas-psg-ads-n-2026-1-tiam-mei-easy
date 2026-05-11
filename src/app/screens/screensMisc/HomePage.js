@@ -50,9 +50,15 @@ export default function HomeScreen({ navigation }) {
       </Text>
 
       <View style={styles.grid}>
+        
         <ButtonNavigation
           title="Clientes"
           onPress={() => navigation.navigate("Clientes")}
+        />
+
+        <ButtonNavigation
+          title="Categorias"
+          onPress={() => navigation.navigate("ListaCategorias")}
         />
 
         <ButtonNavigation
