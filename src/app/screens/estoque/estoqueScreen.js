@@ -141,7 +141,6 @@ export default function App() {
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         loadEstoque={loadEstoque}
-        loadEstoque={loadEstoque}
       />
 
     </View>
