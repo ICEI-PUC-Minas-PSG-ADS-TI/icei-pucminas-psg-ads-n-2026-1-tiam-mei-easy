@@ -21,6 +21,11 @@ export default function HomeScreen({ navigation }) {
           />
 
           <ButtonNavigation
+            title="Categorias"
+            onPress={() => navigation.navigate("ListaCategorias")}
+          />
+
+          <ButtonNavigation
             title="Movimentações"
              onPress={() => navigation.navigate("ListaMovimentacoes")}
           />

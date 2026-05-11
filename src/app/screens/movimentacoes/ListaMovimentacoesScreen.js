@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import {
   View, Text, FlatList, TouchableOpacity,
-  StyleSheet, Alert, TextInput, ActivityIndicator,
+  StyleSheet, Alert, TextInput, ActivityIndicator,Platform,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { getMovimentacoes, excluirMovimentacao } from '../../services/movimentacoesService';
@@ -39,7 +39,15 @@ export default function ListaMovimentacoesScreen({ navigation }) {
     }
   }
 
-  function confirmarExclusao(item) {
+function confirmarExclusao(item) {
+  if (Platform.OS === 'web') {
+    const confirmado = window.confirm(`Deseja excluir "${item.descricao || 'esta movimentação'}"?`);
+    if (confirmado) {
+      excluirMovimentacao(item.id)
+        .then(() => carregar())
+        .catch(() => alert('Não foi possível excluir.'));
+    }
+  } else {
     Alert.alert(
       'Excluir movimentação',
       `Deseja excluir "${item.descricao || 'esta movimentação'}"?`,
@@ -59,6 +67,7 @@ export default function ListaMovimentacoesScreen({ navigation }) {
       ]
     );
   }
+}
 
   function formatarValor(valor) {
     return `R$ ${parseFloat(valor).toFixed(2).replace('.', ',')}`;
