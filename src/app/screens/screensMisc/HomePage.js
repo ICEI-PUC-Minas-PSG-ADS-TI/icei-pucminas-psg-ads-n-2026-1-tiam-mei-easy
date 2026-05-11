@@ -1,45 +1,80 @@
+import { useTheme } from '../../context/ThemeContext';
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
 import Header from "../../components/header.js";
 import ButtonNavigation from "../../components/buttonDefault.js";
 
 export default function HomeScreen({ navigation }) {
   const userName = "Gustavo";
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: theme === "dark" ? "#121212" : "#FFF",
+      }}
+    >
       <Header />
 
-      <View style={styles.content}>
-        <Text style={styles.greeting}>Olá, {userName} 👋</Text>
+      <TouchableOpacity
+        onPress={toggleTheme}
+        style={{
+          alignSelf: "flex-end",
+          marginRight: 20,
+          marginTop: 10,
+          paddingVertical: 5,
+          paddingHorizontal: 12,
+          backgroundColor: theme === "dark" ? "#333" : "#E0E0E0",
+          borderRadius: 15,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 12,
+            color: theme === "dark" ? "#FFF" : "#000",
+          }}
+        >
+          {theme === "light" ? "🌙 Escuro" : "☀️ Claro"}
+        </Text>
+      </TouchableOpacity>
 
-        <View style={styles.grid}>
-          <ButtonNavigation
-            title="Clientes"
-            onPress={() => navigation.navigate("Clientes")}
-          />
+      <Text
+        style={[
+          styles.greeting,
+          { color: theme === "dark" ? "#FFF" : "#333" },
+        ]}
+      >
+        Olá, {userName} 👋
+      </Text>
 
-          <ButtonNavigation
-            title="Categorias"
-            onPress={() => navigation.navigate("ListaCategorias")}
-          />
+      <View style={styles.grid}>
+        
+        <ButtonNavigation
+          title="Clientes"
+          onPress={() => navigation.navigate("Clientes")}
+        />
 
-          <ButtonNavigation
-            title="Movimentações"
-             onPress={() => navigation.navigate("ListaMovimentacoes")}
-          />
+        <ButtonNavigation
+          title="Categorias"
+          onPress={() => navigation.navigate("ListaCategorias")}
+        />
 
-          <ButtonNavigation
-            title="Estoque"
-            onPress={() => navigation.navigate("Estoque")}
-          />
+        <ButtonNavigation
+          title="Movimentações"
+          onPress={() => navigation.navigate("ListaMovimentacoes")}
+        />
 
-          <ButtonNavigation
-            title="Relatórios"
-            onPress={() => navigation.navigate("Relatórios")}
-          />
-        </View>
+        <ButtonNavigation
+          title="Estoque"
+          onPress={() => navigation.navigate("Estoque")}
+        />
+
+        <ButtonNavigation
+          title="Relatórios"
+          onPress={() => navigation.navigate("Relatórios")}
+        />
       </View>
     </View>
   );
@@ -48,7 +83,6 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
   },
 
   content: {
@@ -66,6 +100,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    gap: 12, // se não funcionar no seu RN, te mostro alternativa
+    gap: 12,
   },
 });
