@@ -23,7 +23,7 @@ export default function EstoqueHeader() {
       </View>
 
       <View style={styles.quantidadeColumn}>
-        <Text style={styles.text}>QUANTIDADE</Text>
+        <Text style={styles.text}>QTDE.</Text>
       </View>
 
       <View style={styles.valorColumn}>
@@ -43,26 +43,30 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     paddingVertical: 14,
-    paddingHorizontal: 10,
+    paddingHorizontal: 22,
+
+    marginHorizontal: 12,
 
     borderBottomWidth: 1,
     borderBottomColor: '#FFFFFF',
   },
 
   iconColumn: {
-    width: 35,
+    width: 54,
   },
 
   itemColumn: {
     flex: 2,
+    justifyContent: 'center',
   },
 
   fabricanteColumn: {
     flex: 2,
+    justifyContent: 'center',
   },
 
   quantidadeColumn: {
-    flex: 1.2,
+    flex: 1,
     alignItems: 'center',
   },
 
@@ -74,7 +78,7 @@ const styles = StyleSheet.create({
   text: {
     color: '#FFFFFF',
     fontWeight: 'bold',
-    fontSize: 13,
+    fontSize: 12,
   },
 
 });

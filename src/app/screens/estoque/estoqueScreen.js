@@ -153,7 +153,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#377FC3',
+    backgroundColor: '#1a2a5e',
   },
 
   topContent: {
@@ -170,13 +170,13 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#fff',
   },
 
   addButton: {
-    backgroundColor: '#1E90FF',
+    backgroundColor: 'rgb(45, 91, 227)',
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 10,
@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
   searchLabel: {
     fontSize: 16,
     fontWeight: 'bold',
+    color: '#fff'
   },
 
   input: {
