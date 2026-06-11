@@ -6,9 +6,9 @@ import {
   TouchableOpacity,
   StyleSheet,
   ScrollView,
-  Alert,
 } from 'react-native';
 import { criarCategoria, atualizarCategoria } from '../../services/categoriasService';
+import { showAlert } from '../../utils/alert';
 
 const USUARIO_ID = 'usuario_teste';
 
@@ -23,7 +23,7 @@ export default function FormularioCategoriaScreen({ navigation, route }) {
   async function salvar() {
     const nome = (descricao || '').trim();
     if (!nome) {
-      Alert.alert('Atenção', 'Informe o nome da categoria.');
+      showAlert('Atenção', 'Informe o nome da categoria.');
       return;
     }
 
@@ -31,18 +31,18 @@ export default function FormularioCategoriaScreen({ navigation, route }) {
     try {
       if (edicao) {
         await atualizarCategoria(edicao.id, { tipo, descricao: nome });
-        Alert.alert('Sucesso', 'Categoria atualizada!');
+        showAlert('Sucesso', 'Categoria atualizada!');
       } else {
         await criarCategoria({
           usuarioId: USUARIO_ID,
           tipo,
           descricao: nome,
         });
-        Alert.alert('Sucesso', 'Categoria criada!');
+        showAlert('Sucesso', 'Categoria criada!');
       }
       navigation.goBack();
     } catch (e) {
-      Alert.alert('Erro', 'Não foi possível salvar. Tente novamente.');
+      showAlert('Erro', 'Não foi possível salvar. Tente novamente.');
     } finally {
       setCarregando(false);
     }

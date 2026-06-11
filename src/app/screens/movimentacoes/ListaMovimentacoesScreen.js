@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react';
 import {
   View, Text, FlatList, TouchableOpacity,
-  StyleSheet, Alert, TextInput, ActivityIndicator,Platform,
+  StyleSheet, TextInput, ActivityIndicator, Alert, Platform,
 } from 'react-native';
+import { showAlert } from '../../utils/alert';
 import { useFocusEffect } from '@react-navigation/native';
 import { getMovimentacoes, excluirMovimentacao } from '../../services/movimentacoesService';
 const USUARIO_ID = 'usuario_teste';
@@ -33,7 +34,7 @@ export default function ListaMovimentacoesScreen({ navigation }) {
       const lista = await getMovimentacoes(USUARIO_ID, filtros);
       setMovimentacoes(lista);
     } catch (e) {
-      Alert.alert('Erro', 'Não foi possível carregar as movimentações.');
+      showAlert('Erro', 'Não foi possível carregar as movimentações.');
     } finally {
       setCarregando(false);
     }
@@ -45,28 +46,29 @@ function confirmarExclusao(item) {
     if (confirmado) {
       excluirMovimentacao(item.id)
         .then(() => carregar())
-        .catch(() => alert('Não foi possível excluir.'));
+        .catch(() => showAlert('Erro', 'Não foi possível excluir.'));
     }
-  } else {
-    Alert.alert(
-      'Excluir movimentação',
-      `Deseja excluir "${item.descricao || 'esta movimentação'}"?`,
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Excluir', style: 'destructive',
-          onPress: async () => {
-            try {
-              await excluirMovimentacao(item.id);
-              carregar();
-            } catch {
-              Alert.alert('Erro', 'Não foi possível excluir.');
-            }
-          },
-        },
-      ]
-    );
+    return;
   }
+
+  Alert.alert(
+    'Excluir movimentação',
+    `Deseja excluir "${item.descricao || 'esta movimentação'}"?`,
+    [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Excluir', style: 'destructive',
+        onPress: async () => {
+          try {
+            await excluirMovimentacao(item.id);
+            carregar();
+          } catch {
+            showAlert('Erro', 'Não foi possível excluir.');
+          }
+        },
+      },
+    ]
+  );
 }
 
   function formatarValor(valor) {

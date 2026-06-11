@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity,
-  StyleSheet, ScrollView, Alert, Platform,
+  StyleSheet, ScrollView, Platform,
 } from 'react-native';
+import { showAlert } from '../../utils/alert';
 import { criarMovimentacao, editarMovimentacao } from '../../services/movimentacoesService';
 import { getCategorias } from '../../services/categoriasService';
 // Usuário fixo por enquanto — trocar pelo auth real quando login estiver pronto
@@ -59,11 +60,11 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
     const valorNumerico = extrairNumero(valorTexto);
 
     if (!valorNumerico || valorNumerico <= 0) {
-      Alert.alert('Atenção', 'Informe um valor válido.');
+      showAlert('Atenção', 'Informe um valor válido.');
       return;
     }
     if (!data) {
-      Alert.alert('Atenção', 'Informe a data.');
+      showAlert('Atenção', 'Informe a data.');
       return;
     }
 
@@ -81,14 +82,14 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
 
       if (edicao) {
         await editarMovimentacao(edicao.id, dados);
-        Alert.alert('Sucesso', 'Movimentação atualizada!');
+        showAlert('Sucesso', 'Movimentação atualizada!');
       } else {
         await criarMovimentacao(dados);
-        Alert.alert('Sucesso', 'Movimentação salva!');
+        showAlert('Sucesso', 'Movimentação salva!');
       }
       navigation.goBack();
     } catch (e) {
-      Alert.alert('Erro', 'Não foi possível salvar. Tente novamente.');
+      showAlert('Erro', 'Não foi possível salvar. Tente novamente.');
     } finally {
       setCarregando(false);
     }

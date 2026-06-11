@@ -5,9 +5,11 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   ActivityIndicator,
+  Alert,
+  Platform,
 } from 'react-native';
+import { showAlert } from '../../utils/alert';
 import { useFocusEffect } from '@react-navigation/native';
 import {
   getCategorias,
@@ -34,7 +36,7 @@ export default function ListaCategoriasScreen({ navigation }) {
       const lista = await getCategorias(USUARIO_ID, tipoAba);
       setCategorias(lista);
     } catch (e) {
-      Alert.alert('Erro', 'Não foi possível carregar as categorias.');
+      showAlert('Erro', 'Não foi possível carregar as categorias.');
     } finally {
       setCarregando(false);
     }
@@ -49,7 +51,28 @@ export default function ListaCategoriasScreen({ navigation }) {
   }
 
   async function confirmarExclusao(item) {
-    Alert.alert(
+    if (Platform.OS === 'web') {
+      const confirmado = window.confirm(`Deseja excluir "${item.descricao || 'esta categoria'}"?`);
+      if (!confirmado) return;
+
+      try {
+        const emUso = await categoriaEmUso(USUARIO_ID, item.id);
+        if (emUso) {
+          showAlert(
+            'Não é possível excluir',
+            'Existem movimentações vinculadas a esta categoria. Edite ou remova essas movimentações antes.'
+          );
+          return;
+        }
+        await excluirCategoria(item.id);
+        carregar();
+      } catch {
+        showAlert('Erro', 'Não foi possível excluir a categoria.');
+      }
+      return;
+    }
+
+    showAlert(
       'Excluir categoria',
       `Deseja excluir "${item.descricao || 'esta categoria'}"?`,
       [
@@ -61,7 +84,7 @@ export default function ListaCategoriasScreen({ navigation }) {
             try {
               const emUso = await categoriaEmUso(USUARIO_ID, item.id);
               if (emUso) {
-                Alert.alert(
+                showAlert(
                   'Não é possível excluir',
                   'Existem movimentações vinculadas a esta categoria. Edite ou remova essas movimentações antes.'
                 );
@@ -70,7 +93,7 @@ export default function ListaCategoriasScreen({ navigation }) {
               await excluirCategoria(item.id);
               carregar();
             } catch {
-              Alert.alert('Erro', 'Não foi possível excluir a categoria.');
+              showAlert('Erro', 'Não foi possível excluir a categoria.');
             }
           },
         },
