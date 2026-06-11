@@ -72,6 +72,11 @@ export default function HomeScreen({ navigation }) {
         />
 
         <ButtonNavigation
+          title="Contas a Pagar/Receber"
+          onPress={() => navigation.navigate("ListaContas")}
+        />
+
+        <ButtonNavigation
           title="Relatórios"
           onPress={() => navigation.navigate("Relatórios")}
         />

@@ -12,6 +12,8 @@ import EstoqueScreen from '../screens/estoque/estoqueScreen.js'
 import ListaClientesScreen from '../screens/clientes/ListaClientesScreen';
 import ListaCategoriasScreen from '../screens/categorias/ListaCategoriasScreen';
 import FormularioCategoriaScreen from '../screens/categorias/FormularioCategoriaScreen';
+import ListaContasScreen from '../screens/contas/ListaContasScreen';
+import FormularioContaScreen from '../screens/contas/FormularioContaScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +23,8 @@ const linkingScreens = {
   NovaMovimentacao: 'movimentacoes/nova',
   ListaCategorias: 'categorias',
   FormularioCategoria: 'categorias/nova',
+  ListaContas: 'contas',
+  FormularioConta: 'contas/nova',
 };
 
 export default function AppNavigator() {
@@ -51,6 +55,8 @@ export default function AppNavigator() {
         <Stack.Screen name="Clientes" component={ListaClientesScreen} />
         <Stack.Screen name="ListaCategorias" component={ListaCategoriasScreen} />
         <Stack.Screen name="FormularioCategoria" component={FormularioCategoriaScreen} />
+        <Stack.Screen name="ListaContas" component={ListaContasScreen} />
+        <Stack.Screen name="FormularioConta" component={FormularioContaScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
