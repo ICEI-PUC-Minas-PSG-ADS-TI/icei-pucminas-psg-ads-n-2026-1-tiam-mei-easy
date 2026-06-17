@@ -12,6 +12,7 @@ import EstoqueScreen from '../screens/estoque/estoqueScreen.js'
 import ListaClientesScreen from '../screens/clientes/ListaClientesScreen';
 import ListaCategoriasScreen from '../screens/categorias/ListaCategoriasScreen';
 import FormularioCategoriaScreen from '../screens/categorias/FormularioCategoriaScreen';
+import ListaMetasScreen from '../screens/metas/ListaMetasScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -51,6 +52,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Clientes" component={ListaClientesScreen} />
         <Stack.Screen name="ListaCategorias" component={ListaCategoriasScreen} />
         <Stack.Screen name="FormularioCategoria" component={FormularioCategoriaScreen} />
+        <Stack.Screen name="Metas" component={ListaMetasScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
