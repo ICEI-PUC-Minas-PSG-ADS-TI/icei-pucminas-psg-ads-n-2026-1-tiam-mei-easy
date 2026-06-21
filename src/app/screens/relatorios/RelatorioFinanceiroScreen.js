@@ -18,13 +18,14 @@ import {
   calcularResumo,
   formatarMoeda,
 } from '../../services/dashboardService';
+import { useAuth } from '../../context/AuthContext';
 
-const USUARIO_ID = 'usuario_teste';
 const AZUL_ESCURO = '#1a2a5e';
 const AZUL_MEDIO = '#2d5be3';
 const BRANCO = '#ffffff';
 
 export default function RelatorioFinanceiroScreen({ navigation }) {
+  const { userId } = useAuth();
   const [periodoId, setPeriodoId] = useState('mes_atual');
   const [filtroTipo, setFiltroTipo] = useState('');
   const [categoriaId, setCategoriaId] = useState('');
@@ -38,13 +39,13 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
     try {
       const { dataInicio, dataFim } = getIntervaloPeriodo(periodoId);
       const [lista, catsReceita, catsDespesa] = await Promise.all([
-        getMovimentacoes(USUARIO_ID, {
+        getMovimentacoes(userId, {
           tipo: filtroTipo || undefined,
           dataInicio: dataInicio.toISOString().slice(0, 10),
           dataFim: dataFim.toISOString().slice(0, 10),
         }),
-        getCategorias(USUARIO_ID, 'receita'),
-        getCategorias(USUARIO_ID, 'despesa'),
+        getCategorias(userId, 'receita'),
+        getCategorias(userId, 'despesa'),
       ]);
 
       const cats = [...catsReceita, ...catsDespesa];
@@ -61,7 +62,7 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
     } finally {
       setCarregando(false);
     }
-  }, [periodoId, filtroTipo, categoriaId]);
+  }, [periodoId, filtroTipo, categoriaId, userId]);
 
   useFocusEffect(
     useCallback(() => {

@@ -9,10 +9,10 @@ import {
   Alert,
 } from 'react-native';
 import { criarCategoria, atualizarCategoria } from '../../services/categoriasService';
-
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
 
 export default function FormularioCategoriaScreen({ navigation, route }) {
+  const { userId } = useAuth();
   const edicao = route?.params?.categoria || null;
   const tipoInicial = route?.params?.tipoInicial || 'receita';
 
@@ -34,7 +34,7 @@ export default function FormularioCategoriaScreen({ navigation, route }) {
         Alert.alert('Sucesso', 'Categoria atualizada!');
       } else {
         await criarCategoria({
-          usuarioId: USUARIO_ID,
+          usuarioId: userId,
           tipo,
           descricao: nome,
         });

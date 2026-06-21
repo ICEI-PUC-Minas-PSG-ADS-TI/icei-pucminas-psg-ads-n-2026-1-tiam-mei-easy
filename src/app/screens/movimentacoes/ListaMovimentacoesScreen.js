@@ -5,9 +5,10 @@ import {
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import { getMovimentacoes, excluirMovimentacao } from '../../services/movimentacoesService';
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ListaMovimentacoesScreen({ navigation }) {
+  const { userId } = useAuth();
   const [movimentacoes, setMovimentacoes] = useState([]);
   const [carregando, setCarregando] = useState(false);
   const [filtroTipo, setFiltroTipo] = useState(''); // '' | 'receita' | 'despesa'
@@ -19,7 +20,7 @@ export default function ListaMovimentacoesScreen({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       carregar();
-    }, [filtroTipo, filtroDataInicio, filtroDataFim])
+    }, [filtroTipo, filtroDataInicio, filtroDataFim, userId])
   );
 
   async function carregar() {
@@ -30,7 +31,7 @@ export default function ListaMovimentacoesScreen({ navigation }) {
         dataInicio: filtroDataInicio || undefined,
         dataFim: filtroDataFim || undefined,
       };
-      const lista = await getMovimentacoes(USUARIO_ID, filtros);
+      const lista = await getMovimentacoes(userId, filtros);
       setMovimentacoes(lista);
     } catch (e) {
       Alert.alert('Erro', 'Não foi possível carregar as movimentações.');

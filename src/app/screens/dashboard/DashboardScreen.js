@@ -18,8 +18,8 @@ import {
   agruparComparativo,
   formatarMoeda,
 } from '../../services/dashboardService';
+import { useAuth } from '../../context/AuthContext';
 
-const USUARIO_ID = 'usuario_teste';
 const AZUL_ESCURO = '#1a2a5e';
 const AZUL_MEDIO = '#2d5be3';
 const BRANCO = '#ffffff';
@@ -78,6 +78,7 @@ function GraficoComparativo({ dados }) {
 }
 
 export default function DashboardScreen({ navigation }) {
+  const { userId } = useAuth();
   const [periodoId, setPeriodoId] = useState('mes_atual');
   const [carregando, setCarregando] = useState(false);
   const [resumo, setResumo] = useState({ receitas: 0, despesas: 0, resultado: 0 });
@@ -88,7 +89,7 @@ export default function DashboardScreen({ navigation }) {
     setCarregando(true);
     try {
       const { dataInicio, dataFim } = getIntervaloPeriodo(periodoId);
-      const movimentacoes = await getMovimentacoes(USUARIO_ID, {
+      const movimentacoes = await getMovimentacoes(userId, {
         dataInicio: dataInicio.toISOString().slice(0, 10),
         dataFim: dataFim.toISOString().slice(0, 10),
       });
@@ -101,7 +102,7 @@ export default function DashboardScreen({ navigation }) {
     } finally {
       setCarregando(false);
     }
-  }, [periodoId]);
+  }, [periodoId, userId]);
 
   useFocusEffect(
     useCallback(() => {

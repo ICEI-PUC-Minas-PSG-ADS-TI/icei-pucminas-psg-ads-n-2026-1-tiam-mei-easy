@@ -9,23 +9,25 @@ import {
     ScrollView
 } from "react-native";
 
-import { auth, db } from "../../config/firebase";
+import { useAuth } from '../../context/AuthContext';
+import { db } from "../../config/firebase";
 import { updateProfile } from "firebase/auth";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 
-export default function PerfilContaScreen() {
+export default function PerfilContaScreen({ navigation }) {
+    const { user } = useAuth();
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [telefone, setTelefone] = useState("");
     const [carregando, setCarregando] = useState(true);
 
     useEffect(() => {
-        carregarPerfil();
-    }, []);
+        if (user) carregarPerfil();
+    }, [user]);
 
     async function carregarPerfil() {
         try {
-            const usuario = auth.currentUser;
+            const usuario = user;
 
             if (!usuario) {
                 Alert.alert("Erro", "Nenhum usuário autenticado.");
@@ -61,7 +63,7 @@ export default function PerfilContaScreen() {
 
     async function salvarPerfil() {
         try {
-            const usuario = auth.currentUser;
+            const usuario = user;
 
             if (!usuario) {
                 Alert.alert("Erro", "Nenhum usuário autenticado.");
@@ -97,6 +99,9 @@ export default function PerfilContaScreen() {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.voltar}>
+                <Text style={styles.voltarTexto}>← Voltar</Text>
+            </TouchableOpacity>
             <Text style={styles.titulo}>Meu Perfil</Text>
 
             <Text style={styles.label}>Nome</Text>
@@ -143,6 +148,8 @@ const styles = StyleSheet.create({
         marginBottom: 25,
         textAlign: "center"
     },
+    voltar: { marginBottom: 12 },
+    voltarTexto: { color: '#4fc3f7', fontSize: 16 },
     label: {
         fontSize: 16,
         fontWeight: "bold",

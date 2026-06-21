@@ -15,10 +15,10 @@ import {
   excluirConta,
   alternarStatusConta,
 } from '../../services/contasService';
-
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ListaContasScreen({ navigation }) {
+  const { userId } = useAuth();
   const [tipoAba, setTipoAba] = useState('pagar'); // 'pagar' | 'receber'
   const [filtroStatus, setFiltroStatus] = useState(''); // '' | 'pendente' | 'pago'
   const [contas, setContas] = useState([]);
@@ -37,7 +37,7 @@ export default function ListaContasScreen({ navigation }) {
         tipo: tipoAba,
         status: filtroStatus || undefined,
       };
-      const lista = await getContas(USUARIO_ID, filtros);
+      const lista = await getContas(userId, filtros);
       setContas(lista);
     } catch (e) {
       Alert.alert('Erro', 'Não foi possível carregar as contas.');

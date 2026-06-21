@@ -14,10 +14,10 @@ import {
   excluirCategoria,
   categoriaEmUso,
 } from '../../services/categoriasService';
-
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
 
 export default function ListaCategoriasScreen({ navigation }) {
+  const { userId } = useAuth();
   const [tipoAba, setTipoAba] = useState('receita');
   const [categorias, setCategorias] = useState([]);
   const [carregando, setCarregando] = useState(false);
@@ -31,7 +31,7 @@ export default function ListaCategoriasScreen({ navigation }) {
   async function carregar() {
     setCarregando(true);
     try {
-      const lista = await getCategorias(USUARIO_ID, tipoAba);
+      const lista = await getCategorias(userId, tipoAba);
       setCategorias(lista);
     } catch (e) {
       Alert.alert('Erro', 'Não foi possível carregar as categorias.');
@@ -59,7 +59,7 @@ export default function ListaCategoriasScreen({ navigation }) {
           style: 'destructive',
           onPress: async () => {
             try {
-              const emUso = await categoriaEmUso(USUARIO_ID, item.id);
+              const emUso = await categoriaEmUso(userId, item.id);
               if (emUso) {
                 Alert.alert(
                   'Não é possível excluir',

@@ -13,8 +13,7 @@ import {
   criarConta,
   atualizarConta,
 } from '../../services/contasService';
-
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
 
 // Formata número para moeda brasileira enquanto digita
 function formatarMoeda(valor) {
@@ -42,6 +41,7 @@ function mostrarAlerta(titulo, mensagem, aoFechar) {
 }
 
 export default function FormularioContaScreen({ navigation, route }) {
+  const { userId } = useAuth();
   const edicao = route?.params?.conta || null;
   const tipoInicial = route?.params?.tipoInicial || 'pagar';
 
@@ -88,7 +88,7 @@ export default function FormularioContaScreen({ navigation, route }) {
         valor: valorNumerico,
         vencimento,
         status,
-        usuarioId: USUARIO_ID,
+        usuarioId: userId,
       };
 
       const tipoLabel = tipo === 'pagar' ? 'a pagar' : 'a receber';

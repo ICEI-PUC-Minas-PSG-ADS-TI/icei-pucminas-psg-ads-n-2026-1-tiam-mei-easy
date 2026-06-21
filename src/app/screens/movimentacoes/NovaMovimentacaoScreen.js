@@ -5,8 +5,7 @@ import {
 } from 'react-native';
 import { criarMovimentacao, editarMovimentacao } from '../../services/movimentacoesService';
 import { getCategorias } from '../../services/categoriasService';
-// Usuário fixo por enquanto — trocar pelo auth real quando login estiver pronto
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
 
 function formatarMoeda(valor) {
   const num = valor.replace(/\D/g, '');
@@ -22,6 +21,7 @@ function extrairNumero(valorFormatado) {
 }
  
 export default function NovaMovimentacaoScreen({ navigation, route }) {
+  const { userId } = useAuth();
   const edicao = route?.params?.movimentacao || null;
  
   const [tipo, setTipo] = useState(edicao?.tipo || 'receita');
@@ -42,7 +42,7 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
 
   async function carregarCategorias() {
     try {
-      const lista = await getCategorias(USUARIO_ID, tipo);
+      const lista = await getCategorias(userId, tipo);
       setCategorias(lista);
     } catch (e) {
       setCategorias([]);
@@ -75,7 +75,7 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
         valor: valorNumerico,
         descricao,
         data,
-        usuarioId: USUARIO_ID,
+        usuarioId: userId,
         categoria: categoriaSelecionada || null,
       };
 
