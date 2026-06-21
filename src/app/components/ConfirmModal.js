@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native';
+import Colors from '../constants/colors';
 
 export default function ConfirmModal({
   visible,
@@ -116,7 +117,7 @@ const styles = StyleSheet.create({
   confirmButton: {
     flex: 1,
     height: 50,
-    backgroundColor: '#EB5757',
+    backgroundColor: Colors.despesa,
     borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',

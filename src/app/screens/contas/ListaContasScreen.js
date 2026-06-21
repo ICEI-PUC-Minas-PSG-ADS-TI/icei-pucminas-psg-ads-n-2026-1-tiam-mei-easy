@@ -7,7 +7,6 @@ import {
   StyleSheet,
   Alert,
   ActivityIndicator,
-  Platform,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 import {
@@ -17,6 +16,10 @@ import {
 } from '../../services/contasService';
 import { useAuth } from '../../context/AuthContext';
 import { formatarMoedaExibicao, formatarDataBR } from '../../utils/formatacao';
+import { showConfirm } from '../../utils/alerts';
+import ScreenHeader from '../../components/ScreenHeader';
+import { ChipGroup } from '../../components/FilterChip';
+import Colors from '../../constants/colors';
 
 export default function ListaContasScreen({ navigation }) {
   const { userId } = useAuth();
@@ -28,7 +31,7 @@ export default function ListaContasScreen({ navigation }) {
   useFocusEffect(
     useCallback(() => {
       carregar();
-    }, [tipoAba, filtroStatus])
+    }, [tipoAba, filtroStatus, userId])
   );
 
   async function carregar() {
@@ -44,14 +47,6 @@ export default function ListaContasScreen({ navigation }) {
       Alert.alert('Erro', 'Não foi possível carregar as contas.');
     } finally {
       setCarregando(false);
-    }
-  }
-
-  function voltar() {
-    if (navigation.canGoBack()) {
-      navigation.goBack();
-    } else {
-      navigation.navigate('Home');
     }
   }
 
@@ -72,36 +67,18 @@ export default function ListaContasScreen({ navigation }) {
     }
   }
 
-  function confirmarExclusao(item) {
-    if (Platform.OS === 'web') {
-      const confirmado = window.confirm(
-        `Deseja excluir "${item.descricao || 'esta conta'}"?`
-      );
-      if (confirmado) {
-        excluirConta(item.id)
-          .then(() => carregar())
-          .catch(() => alert('Não foi possível excluir.'));
-      }
-    } else {
-      Alert.alert(
-        'Excluir conta',
-        `Deseja excluir "${item.descricao || 'esta conta'}"?`,
-        [
-          { text: 'Cancelar', style: 'cancel' },
-          {
-            text: 'Excluir',
-            style: 'destructive',
-            onPress: async () => {
-              try {
-                await excluirConta(item.id);
-                carregar();
-              } catch {
-                Alert.alert('Erro', 'Não foi possível excluir.');
-              }
-            },
-          },
-        ]
-      );
+  async function confirmarExclusao(item) {
+    const confirmado = await showConfirm(
+      'Excluir conta',
+      `Deseja excluir "${item.descricao || 'esta conta'}"?`
+    );
+    if (!confirmado) return;
+
+    try {
+      await excluirConta(item.id);
+      carregar();
+    } catch {
+      Alert.alert('Erro', 'Não foi possível excluir.');
     }
   }
 
@@ -176,52 +153,31 @@ export default function ListaContasScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={voltar}
-          style={styles.btnVoltar}
-          accessibilityRole="button"
-          accessibilityLabel="Voltar"
-        >
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo} numberOfLines={1}>
-          MEI <Text style={styles.headerDestaque}>EASY</Text>
-        </Text>
-        <View style={styles.btnHeaderDir} />
-      </View>
+      <ScreenHeader />
 
       <Text style={styles.subtitulo}>Contas a Pagar e Receber</Text>
 
-      {/* Abas tipo */}
-      <View style={styles.abaRow}>
-        {['pagar', 'receber'].map((t) => (
-          <TouchableOpacity
-            key={t}
-            style={[styles.aba, tipoAba === t && styles.abaAtiva]}
-            onPress={() => setTipoAba(t)}
-          >
-            <Text style={[styles.abaTexto, tipoAba === t && styles.abaTextoAtivo]}>
-              {t === 'pagar' ? 'A Pagar' : 'A Receber'}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
+      <View style={styles.chipsArea}>
+        <ChipGroup
+        horizontal={false}
+        options={[
+          { label: 'A Pagar', value: 'pagar' },
+          { label: 'A Receber', value: 'receber' },
+        ]}
+        value={tipoAba}
+        onChange={setTipoAba}
+      />
 
-      {/* Filtro de status */}
-      <View style={styles.filtroStatusRow}>
-        {['', 'pendente', 'pago'].map((s) => (
-          <TouchableOpacity
-            key={s}
-            style={[styles.btnFiltroStatus, filtroStatus === s && styles.btnFiltroStatusAtivo]}
-            onPress={() => setFiltroStatus(s)}
-          >
-            <Text style={styles.btnFiltroStatusTexto}>
-              {s === '' ? 'Todos' : s === 'pendente' ? 'Pendentes' : 'Pagos'}
-            </Text>
-          </TouchableOpacity>
-        ))}
+      <ChipGroup
+        horizontal={false}
+        options={[
+          { label: 'Todos', value: '' },
+          { label: 'Pendentes', value: 'pendente' },
+          { label: 'Pagos', value: 'pago' },
+        ]}
+        value={filtroStatus}
+        onChange={setFiltroStatus}
+      />
       </View>
 
       {/* Resumo */}
@@ -236,7 +192,7 @@ export default function ListaContasScreen({ navigation }) {
         </View>
         <View style={styles.resumoCard}>
           <Text style={styles.resumoLabel}>Pago</Text>
-          <Text style={[styles.resumoValor, { color: '#4fc3f7' }]}>
+          <Text style={[styles.resumoValor, { color: Colors.accent }]}>
             {formatarValor(totalPago)}
           </Text>
         </View>
@@ -244,7 +200,7 @@ export default function ListaContasScreen({ navigation }) {
 
       {/* Lista */}
       {carregando ? (
-        <ActivityIndicator color="#4fc3f7" size="large" style={{ marginTop: 40 }} />
+        <ActivityIndicator color={Colors.accent} size="large" style={{ marginTop: 40 }} />
       ) : (
         <FlatList
           data={contas}
@@ -272,73 +228,16 @@ export default function ListaContasScreen({ navigation }) {
   );
 }
 
-const AZUL_ESCURO = '#1a2a5e';
-const AZUL_MEDIO = '#2d5be3';
-const BRANCO = '#ffffff';
-
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: AZUL_ESCURO },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingTop: 50,
-    paddingBottom: 12,
-  },
-  btnVoltar: { width: 36, paddingVertical: 4 },
-  btnVoltarTexto: { color: BRANCO, fontSize: 22 },
-  headerTitulo: {
-    flex: 1,
-    color: BRANCO,
-    fontSize: 16,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  headerDestaque: { color: '#4fc3f7' },
-  btnHeaderDir: { width: 36 },
+  container: { flex: 1, backgroundColor: Colors.primary },
   subtitulo: {
-    color: BRANCO,
+    color: Colors.white,
     fontSize: 18,
     fontWeight: 'bold',
     paddingHorizontal: 16,
     marginBottom: 12,
   },
-  abaRow: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    gap: 10,
-    marginBottom: 10,
-  },
-  aba: {
-    flex: 1,
-    backgroundColor: AZUL_MEDIO,
-    borderRadius: 10,
-    paddingVertical: 12,
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  abaAtiva: { borderColor: '#4fc3f7' },
-  abaTexto: { color: '#aac', fontSize: 14, fontWeight: '600' },
-  abaTextoAtivo: { color: BRANCO },
-  filtroStatusRow: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    gap: 8,
-    marginBottom: 12,
-  },
-  btnFiltroStatus: {
-    flex: 1,
-    backgroundColor: '#243570',
-    borderRadius: 8,
-    paddingVertical: 8,
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  btnFiltroStatusAtivo: { borderColor: '#4fc3f7' },
-  btnFiltroStatusTexto: { color: BRANCO, fontSize: 12, fontWeight: '600' },
+  chipsArea: { paddingHorizontal: 16, marginBottom: 12, gap: 8 },
   resumoRow: {
     flexDirection: 'row',
     paddingHorizontal: 16,
@@ -347,16 +246,16 @@ const styles = StyleSheet.create({
   },
   resumoCard: {
     flex: 1,
-    backgroundColor: AZUL_MEDIO,
+    backgroundColor: Colors.primaryMedium,
     borderRadius: 12,
     padding: 14,
     alignItems: 'center',
   },
-  resumoLabel: { color: '#cce', fontSize: 12, marginBottom: 4, textAlign: 'center' },
+  resumoLabel: { color: Colors.textSoft, fontSize: 12, marginBottom: 4, textAlign: 'center' },
   resumoValor: { fontSize: 16, fontWeight: 'bold' },
   lista: { padding: 16, paddingBottom: 100 },
   card: {
-    backgroundColor: '#243570',
+    backgroundColor: Colors.surface,
     borderRadius: 12,
     padding: 14,
     marginBottom: 10,
@@ -375,10 +274,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  iconeTexto: { color: BRANCO, fontSize: 16, fontWeight: 'bold' },
-  cardDescricao: { color: BRANCO, fontSize: 15, fontWeight: '600' },
-  cardVencimento: { color: '#aac', fontSize: 12, marginTop: 2 },
-  cardValor: { color: BRANCO, fontSize: 15, fontWeight: 'bold' },
+  iconeTexto: { color: Colors.white, fontSize: 16, fontWeight: 'bold' },
+  cardDescricao: { color: Colors.white, fontSize: 15, fontWeight: '600' },
+  cardVencimento: { color: Colors.textMuted, fontSize: 12, marginTop: 2 },
+  cardValor: { color: Colors.white, fontSize: 15, fontWeight: 'bold' },
   cardBaixo: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -389,13 +288,13 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 20,
   },
-  statusTexto: { color: BRANCO, fontSize: 12, fontWeight: 'bold' },
+  statusTexto: { color: Colors.white, fontSize: 12, fontWeight: 'bold' },
   acoesRow: { flexDirection: 'row', gap: 8 },
   btnEditar: { padding: 4 },
   btnExcluir: { padding: 4 },
   btnAcaoTexto: { fontSize: 16 },
   semDados: {
-    color: '#aac',
+    color: Colors.textMuted,
     textAlign: 'center',
     marginTop: 40,
     fontSize: 14,
@@ -406,10 +305,10 @@ const styles = StyleSheet.create({
     bottom: 24,
     left: 16,
     right: 16,
-    backgroundColor: AZUL_MEDIO,
+    backgroundColor: Colors.primaryMedium,
     borderRadius: 12,
     paddingVertical: 16,
     alignItems: 'center',
   },
-  btnNovaTexto: { color: BRANCO, fontSize: 16, fontWeight: 'bold' },
+  btnNovaTexto: { color: Colors.white, fontSize: 16, fontWeight: 'bold' },
 });

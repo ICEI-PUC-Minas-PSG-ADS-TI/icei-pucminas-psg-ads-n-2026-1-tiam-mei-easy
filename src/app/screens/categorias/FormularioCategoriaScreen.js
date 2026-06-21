@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { criarCategoria, atualizarCategoria } from '../../services/categoriasService';
 import { useAuth } from '../../context/AuthContext';
+import ScreenHeader from '../../components/ScreenHeader';
 
 export default function FormularioCategoriaScreen({ navigation, route }) {
   const { userId } = useAuth();
@@ -50,18 +51,7 @@ export default function FormularioCategoriaScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.btnVoltar}
-        >
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>
-          MEI <Text style={styles.headerDestaque}>EASY</Text>
-        </Text>
-        <View style={{ width: 36 }} />
-      </View>
+      <ScreenHeader />
 
       <ScrollView contentContainerStyle={styles.body}>
         <Text style={styles.titulo}>

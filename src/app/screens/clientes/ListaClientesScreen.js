@@ -23,6 +23,8 @@ import {
 
 import { db } from '../../config/firebase';
 import { useAuth } from '../../context/AuthContext';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
 const AZUL_ESCURO = '#1a2a5e';
 const AZUL_MEDIO = '#2d5be3';
@@ -168,24 +170,9 @@ export default function ListaClientesScreen({ navigation }) {
 
     <View style={styles.container}>
 
-      {/* HEADER */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.btnVoltar}
-        >
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
+      <ScreenHeader />
 
-        <Text style={styles.logo}>
-          MEI <Text style={styles.logoDestaque}>EASY</Text>
-        </Text>
-
-        <Text style={styles.subtitulo}>
-          Gerenciamento de Clientes
-        </Text>
-
-      </View>
+      <Text style={styles.subtitulo}>Gerenciamento de Clientes</Text>
 
       <ScrollView showsVerticalScrollIndicator={false}>
 
@@ -377,40 +364,13 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: AZUL_ESCURO,
+    backgroundColor: Colors.primary,
     paddingHorizontal: 20,
-    paddingTop: 50,
-  },
-
-  header: {
-    marginBottom: 25,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 12,
-  },
-
-  btnVoltar: {
-    paddingRight: 4,
-  },
-
-  btnVoltarTexto: {
-    color: BRANCO,
-    fontSize: 22,
-  },
-
-  logo: {
-    color: BRANCO,
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-
-  logoDestaque: {
-    color: AZUL_CLARO,
   },
 
   subtitulo: {
     color: '#cdd6ff',
-    marginTop: 6,
+    marginBottom: 20,
     fontSize: 15,
   },
 
