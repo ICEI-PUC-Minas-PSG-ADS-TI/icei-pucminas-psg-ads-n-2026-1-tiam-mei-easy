@@ -14,7 +14,8 @@ import { addEstoque } from '../../services/estoque/addEstoque.js';
 export default function EstoqueAddItemModal({
   visible,
   onClose,
-  loadEstoque
+  loadEstoque,
+  usuarioId,
 }) {
 
   const [nome, setNome] = useState('');
@@ -27,12 +28,12 @@ export default function EstoqueAddItemModal({
     console.log('clicou');
 
 
-    const response = await addEstoque({
-      nome,
-      fabricante,
-      quantidade,
-      valor,
-    });
+    if (!usuarioId) return;
+
+    const response = await addEstoque(
+      { nome, fabricante, quantidade, valor },
+      usuarioId
+    );
 
     console.log(response);
 

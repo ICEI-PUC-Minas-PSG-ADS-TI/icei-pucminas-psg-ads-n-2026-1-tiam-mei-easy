@@ -8,8 +8,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
+import { useAuth } from '../../context/AuthContext';
 
 const RELATORIOS = [
   {
@@ -39,6 +40,7 @@ const AZUL_MEDIO = '#2d5be3';
 const BRANCO = '#ffffff';
 
 export default function RelatoriosScreen({ navigation }) {
+  const { userId } = useAuth();
   const [totais, setTotais] = useState({
     totalClientes: 0,
     totalCategorias: 0,
@@ -49,29 +51,39 @@ export default function RelatoriosScreen({ navigation }) {
   const [carregando, setCarregando] = useState(false);
 
   const carregarTotais = useCallback(async () => {
+    if (!userId) return;
+
     setCarregando(true);
     try {
-      const [clientes, categorias, contas, estoque, movimentacoes] = await Promise.all([
-        getDocs(collection(db, 'clientes')),
-        getDocs(collection(db, 'categorias')),
-        getDocs(collection(db, 'contas')),
-        getDocs(collection(db, 'estoque')),
-        getDocs(collection(db, 'movimentacoes')),
-      ]);
+      const contar = async (colecao) => {
+        const snap = await getDocs(
+          query(collection(db, colecao), where('usuarioId', '==', userId))
+        );
+        return snap.size;
+      };
+
+      const [totalClientes, totalCategorias, totalContas, totalEstoque, totalMovimentacoes] =
+        await Promise.all([
+          contar('clientes'),
+          contar('categorias'),
+          contar('contas'),
+          contar('estoque'),
+          contar('movimentacoes'),
+        ]);
 
       setTotais({
-        totalClientes: clientes.size,
-        totalCategorias: categorias.size,
-        totalContas: contas.size,
-        totalEstoque: estoque.size,
-        totalMovimentacoes: movimentacoes.size,
+        totalClientes,
+        totalCategorias,
+        totalContas,
+        totalEstoque,
+        totalMovimentacoes,
       });
     } catch (error) {
       console.log('Erro ao carregar relatórios:', error);
     } finally {
       setCarregando(false);
     }
-  }, []);
+  }, [userId]);
 
   useFocusEffect(
     useCallback(() => {

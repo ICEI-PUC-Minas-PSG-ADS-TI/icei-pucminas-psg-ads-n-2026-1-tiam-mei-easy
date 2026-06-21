@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 import {
   View,
@@ -8,8 +8,10 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import { getEstoque } from '../../services/estoque/getEstoque';
+import { useAuth } from '../../context/AuthContext';
 
 import Header from '../../components/header.js';
 
@@ -20,38 +22,30 @@ import EstoqueAddItemModal from '../../components/estoqueComponents/estoqueAddIt
 import EstoqueViewItemModal from '../../components/estoqueComponents/estoqueViewItemModal.js';
 
 export default function App() {
-
+  const { userId } = useAuth();
   const [search, setSearch] = useState('');
-
   const [modalVisible, setModalVisible] = useState(false);
-
   const [viewModalVisible, setViewModalVisible] = useState(false);
-
   const [selectedItem, setSelectedItem] = useState(null);
-
   const [estoque, setEstoque] = useState([]);
 
-  useEffect(() => {
+  const loadEstoque = useCallback(async () => {
+    if (!userId) return;
 
-    loadEstoque();
-
-  }, []);
-
-  async function loadEstoque() {
-
-    const response = await getEstoque();
+    const response = await getEstoque(userId);
 
     if (response.success) {
-
       setEstoque(response.data);
-
     } else {
-
       console.log('Erro ao buscar estoque');
-
     }
+  }, [userId]);
 
-  }
+  useFocusEffect(
+    useCallback(() => {
+      loadEstoque();
+    }, [loadEstoque])
+  );
 
   const filteredData = estoque.filter((item) => {
 
@@ -141,6 +135,7 @@ export default function App() {
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         loadEstoque={loadEstoque}
+        usuarioId={userId}
       />
 
     </View>
