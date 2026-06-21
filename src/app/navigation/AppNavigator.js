@@ -14,17 +14,21 @@ import ListaCategoriasScreen from '../screens/categorias/ListaCategoriasScreen';
 import FormularioCategoriaScreen from '../screens/categorias/FormularioCategoriaScreen';
 import ListaContasScreen from '../screens/contas/ListaContasScreen';
 import FormularioContaScreen from '../screens/contas/FormularioContaScreen';
+import PerfilContaScreen from '../screens/contas/PerfilContaScreen';
+import RelatoriosScreen from "../screens/relatorios/RelatoriosScreen";
 
 const Stack = createNativeStackNavigator();
 
 const linkingScreens = {
-  Home: '',
-  ListaMovimentacoes: 'movimentacoes',
-  NovaMovimentacao: 'movimentacoes/nova',
-  ListaCategorias: 'categorias',
-  FormularioCategoria: 'categorias/nova',
-  ListaContas: 'contas',
-  FormularioConta: 'contas/nova',
+  Home: "",
+  ListaMovimentacoes: "movimentacoes",
+  NovaMovimentacao: "movimentacoes/nova",
+  ListaCategorias: "categorias",
+  FormularioCategoria: "categorias/nova",
+  ListaContas: "contas",
+  FormularioConta: "contas/nova",
+  PerfilConta: "perfil",
+  Relatorios: "relatorios"
 };
 
 export default function AppNavigator() {
@@ -57,6 +61,16 @@ export default function AppNavigator() {
         <Stack.Screen name="FormularioCategoria" component={FormularioCategoriaScreen} />
         <Stack.Screen name="ListaContas" component={ListaContasScreen} />
         <Stack.Screen name="FormularioConta" component={FormularioContaScreen} />
+       <Stack.Screen
+        name="PerfilConta"
+        component={PerfilContaScreen}
+        options={{ title: "Meu Perfil" }}
+        />
+
+      <Stack.Screen
+       name="Relatorios"
+      component={RelatoriosScreen}
+      />
       </Stack.Navigator>
     </NavigationContainer>
   );
