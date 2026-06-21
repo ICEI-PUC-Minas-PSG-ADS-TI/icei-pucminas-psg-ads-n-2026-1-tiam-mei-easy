@@ -14,6 +14,9 @@ import ListaCategoriasScreen from '../screens/categorias/ListaCategoriasScreen';
 import FormularioCategoriaScreen from '../screens/categorias/FormularioCategoriaScreen';
 import ListaContasScreen from '../screens/contas/ListaContasScreen';
 import FormularioContaScreen from '../screens/contas/FormularioContaScreen';
+import DashboardScreen from '../screens/dashboard/DashboardScreen';
+import RelatoriosScreen from '../screens/relatorios/RelatoriosScreen';
+import RelatorioFinanceiroScreen from '../screens/relatorios/RelatorioFinanceiroScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +28,9 @@ const linkingScreens = {
   FormularioCategoria: 'categorias/nova',
   ListaContas: 'contas',
   FormularioConta: 'contas/nova',
+  Dashboard: 'dashboard',
+  Relatórios: 'relatorios',
+  RelatorioFinanceiro: 'relatorios/financeiro',
 };
 
 export default function AppNavigator() {
@@ -57,6 +63,9 @@ export default function AppNavigator() {
         <Stack.Screen name="FormularioCategoria" component={FormularioCategoriaScreen} />
         <Stack.Screen name="ListaContas" component={ListaContasScreen} />
         <Stack.Screen name="FormularioConta" component={FormularioContaScreen} />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen name="Relatórios" component={RelatoriosScreen} />
+        <Stack.Screen name="RelatorioFinanceiro" component={RelatorioFinanceiroScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
