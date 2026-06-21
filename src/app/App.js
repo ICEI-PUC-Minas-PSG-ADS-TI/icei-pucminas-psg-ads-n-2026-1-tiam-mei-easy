@@ -1,11 +1,14 @@
 import React from 'react';
 import { ThemeProvider } from './context/ThemeContext';
-import AppNavigator from './navigation/AppNavigator'; // <--- ESTA LINHA ESTAVA FALTANDO!
+import { AuthProvider } from './context/AuthContext';
+import AppNavigator from './navigation/AppNavigator';
 
 export default function App() {
   return (
     <ThemeProvider>
-      <AppNavigator />
+      <AuthProvider>
+        <AppNavigator />
+      </AuthProvider>
     </ThemeProvider>
   );
 }
