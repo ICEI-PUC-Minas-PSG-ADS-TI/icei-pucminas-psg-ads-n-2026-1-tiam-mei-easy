@@ -13,7 +13,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { getEstoque } from '../../services/estoque/getEstoque';
 import { useAuth } from '../../context/AuthContext';
 
-import Header from '../../components/header.js';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
 import EstoqueHeader from '../../components/estoqueComponents/estoqueHeader.js';
 import TableRow from '../../components/estoqueComponents/estoqueItemRow.js';
@@ -62,7 +63,7 @@ export default function App() {
 
     <View style={styles.container}>
 
-      <Header />
+      <ScreenHeader />
 
       <View style={styles.topContent}>
 
@@ -148,12 +149,12 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: '#1a2a5e',
+    backgroundColor: Colors.primary,
   },
 
   topContent: {
     paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingTop: 8,
     paddingBottom: 15,
     gap: 18,
   },
@@ -167,18 +168,18 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#fff',
+    color: Colors.white,
   },
 
   addButton: {
-    backgroundColor: 'rgb(45, 91, 227)',
+    backgroundColor: Colors.primaryMedium,
     paddingHorizontal: 14,
     paddingVertical: 8,
     borderRadius: 10,
   },
 
   addButtonText: {
-    color: '#fff',
+    color: Colors.white,
     fontWeight: 'bold',
     fontSize: 13,
   },
@@ -192,7 +193,7 @@ const styles = StyleSheet.create({
   searchLabel: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#fff'
+    color: Colors.white,
   },
 
   input: {

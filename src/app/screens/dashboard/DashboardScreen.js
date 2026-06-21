@@ -20,6 +20,7 @@ import {
 } from '../../services/dashboardService';
 import { useAuth } from '../../context/AuthContext';
 import ScreenHeader from '../../components/ScreenHeader';
+import { ChipGroup } from '../../components/FilterChip';
 import Colors from '../../constants/colors';
 
 function GraficoComparativo({ dados }) {
@@ -118,22 +119,14 @@ export default function DashboardScreen({ navigation }) {
         <Text style={styles.tituloSecao}>Dashboard Financeiro</Text>
         <Text style={styles.subtitulo}>{intervaloLabel}</Text>
 
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.periodosScroll}>
-          {PERIODOS.map((p) => (
-            <TouchableOpacity
-              key={p.id}
-              style={[styles.btnPeriodo, periodoId === p.id && styles.btnPeriodoAtivo]}
-              onPress={() => setPeriodoId(p.id)}
-            >
-              <Text style={[styles.btnPeriodoTexto, periodoId === p.id && styles.btnPeriodoTextoAtivo]}>
-                {p.label}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+        <ChipGroup
+          options={PERIODOS.map((p) => ({ label: p.label, value: p.id }))}
+          value={periodoId}
+          onChange={setPeriodoId}
+        />
 
         {carregando ? (
-          <ActivityIndicator color="#4fc3f7" size="large" style={{ marginTop: 40 }} />
+          <ActivityIndicator color={Colors.accent} size="large" style={{ marginTop: 40 }} />
         ) : (
           <>
             <View style={styles.cardsRow}>
@@ -175,19 +168,6 @@ const styles = StyleSheet.create({
   conteudo: { padding: 16, paddingBottom: 32 },
   tituloSecao: { color: Colors.white, fontSize: 20, fontWeight: 'bold', marginBottom: 4 },
   subtitulo: { color: Colors.textMuted, fontSize: 13, marginBottom: 16 },
-  periodosScroll: { marginBottom: 20 },
-  btnPeriodo: {
-    backgroundColor: Colors.primaryMedium,
-    borderRadius: 20,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    marginRight: 8,
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  btnPeriodoAtivo: { borderColor: Colors.accent },
-  btnPeriodoTexto: { color: Colors.textSoft, fontSize: 13, fontWeight: '600' },
-  btnPeriodoTextoAtivo: { color: Colors.white },
   cardsRow: { flexDirection: 'row', gap: 12, marginBottom: 12 },
   cardResumo: {
     flex: 1,

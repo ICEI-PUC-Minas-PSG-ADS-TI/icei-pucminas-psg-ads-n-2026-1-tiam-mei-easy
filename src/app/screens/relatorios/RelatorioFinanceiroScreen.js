@@ -22,6 +22,7 @@ import { useAuth } from '../../context/AuthContext';
 import ScreenHeader from '../../components/ScreenHeader';
 import { formatarDataBR } from '../../utils/formatacao';
 import Colors from '../../constants/colors';
+import { ChipGroup, FilterChip } from '../../components/FilterChip';
 
 export default function RelatorioFinanceiroScreen({ navigation }) {
   const { userId } = useAuth();
@@ -96,51 +97,32 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
         <Text style={styles.titulo}>Relatório de Movimentações</Text>
         <Text style={styles.subtitulo}>{intervaloLabel}</Text>
 
-        <View style={styles.periodosRow}>
-          {PERIODOS.map((p) => (
-            <TouchableOpacity
-              key={p.id}
-              style={[styles.chip, periodoId === p.id && styles.chipAtivo]}
-              onPress={() => setPeriodoId(p.id)}
-            >
-              <Text style={[styles.chipTexto, periodoId === p.id && styles.chipTextoAtivo]}>
-                {p.label}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <ChipGroup
+          options={PERIODOS.map((p) => ({ label: p.label, value: p.id }))}
+          value={periodoId}
+          onChange={setPeriodoId}
+        />
 
-        <View style={styles.tipoRow}>
-          {['', 'receita', 'despesa'].map((t) => (
-            <TouchableOpacity
-              key={t || 'todos'}
-              style={[styles.chip, filtroTipo === t && styles.chipAtivo]}
-              onPress={() => setFiltroTipo(t)}
-            >
-              <Text style={[styles.chipTexto, filtroTipo === t && styles.chipTextoAtivo]}>
-                {t === '' ? 'Todos' : t === 'receita' ? 'Receitas' : 'Despesas'}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
+        <ChipGroup
+          horizontal={false}
+          options={[
+            { label: 'Todos', value: '' },
+            { label: 'Receitas', value: 'receita' },
+            { label: 'Despesas', value: 'despesa' },
+          ]}
+          value={filtroTipo}
+          onChange={setFiltroTipo}
+        />
 
         <View style={styles.categoriasRow}>
-          <TouchableOpacity
-            style={[styles.chip, !categoriaId && styles.chipAtivo]}
-            onPress={() => setCategoriaId('')}
-          >
-            <Text style={[styles.chipTexto, !categoriaId && styles.chipTextoAtivo]}>Todas</Text>
-          </TouchableOpacity>
+          <FilterChip label="Todas" selected={!categoriaId} onPress={() => setCategoriaId('')} />
           {categorias.map((c) => (
-            <TouchableOpacity
+            <FilterChip
               key={c.id}
-              style={[styles.chip, categoriaId === c.id && styles.chipAtivo]}
+              label={c.descricao}
+              selected={categoriaId === c.id}
               onPress={() => setCategoriaId(c.id)}
-            >
-              <Text style={[styles.chipTexto, categoriaId === c.id && styles.chipTextoAtivo]}>
-                {c.descricao}
-              </Text>
-            </TouchableOpacity>
+            />
           ))}
         </View>
       </View>
@@ -154,7 +136,7 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
       </View>
 
       {carregando ? (
-        <ActivityIndicator color="#4fc3f7" size="large" style={{ marginTop: 24 }} />
+        <ActivityIndicator color={Colors.accent} size="large" style={{ marginTop: 24 }} />
       ) : (
         <FlatList
           data={movimentacoes}
@@ -175,20 +157,7 @@ const styles = StyleSheet.create({
   filtrosBox: { paddingHorizontal: 16, paddingBottom: 8 },
   titulo: { color: Colors.white, fontSize: 18, fontWeight: 'bold', marginBottom: 4 },
   subtitulo: { color: Colors.textMuted, fontSize: 12, marginBottom: 12 },
-  periodosRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 8 },
-  tipoRow: { flexDirection: 'row', gap: 8, marginBottom: 8 },
   categoriasRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 8 },
-  chip: {
-    backgroundColor: Colors.primaryMedium,
-    borderRadius: 16,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  chipAtivo: { borderColor: Colors.accent },
-  chipTexto: { color: Colors.textSoft, fontSize: 12 },
-  chipTextoAtivo: { color: Colors.white, fontWeight: '600' },
   resumoRow: {
     backgroundColor: Colors.surface,
     marginHorizontal: 16,

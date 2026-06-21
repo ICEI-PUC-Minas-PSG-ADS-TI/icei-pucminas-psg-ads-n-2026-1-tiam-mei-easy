@@ -10,6 +10,8 @@ import {
   formatarMoedaInput,
   extrairNumeroMoeda,
 } from '../../utils/formatacao';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
 export default function NovaMovimentacaoScreen({ navigation, route }) {
   const { userId } = useAuth();
@@ -87,14 +89,7 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.btnVoltar}>
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>MEI <Text style={styles.headerDestaque}>EASY</Text></Text>
-        <View style={{ width: 36 }} />
-      </View>
+      <ScreenHeader />
 
       <ScrollView contentContainerStyle={styles.body}>
         <Text style={styles.titulo}>{edicao ? 'Editar Movimentação' : 'Nova Movimentação'}</Text>
