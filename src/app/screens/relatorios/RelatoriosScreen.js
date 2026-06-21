@@ -1,128 +1,168 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
+  TouchableOpacity,
   StyleSheet,
   ScrollView,
-  TouchableOpacity
-} from "react-native";
+  ActivityIndicator,
+} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../../config/firebase';
+import { useAuth } from '../../context/AuthContext';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
-import { db } from "../../config/firebase";
-import { collection, getDocs } from "firebase/firestore";
+const RELATORIOS = [
+  {
+    id: 'dashboard',
+    titulo: 'Resumo Financeiro',
+    descricao: 'Totais de receitas, despesas, lucro/prejuízo e gráfico comparativo.',
+    rota: 'Dashboard',
+  },
+  {
+    id: 'financeiro',
+    titulo: 'Relatório de Movimentações',
+    descricao: 'Lista detalhada filtrável por período, tipo e categoria.',
+    rota: 'RelatorioFinanceiro',
+  },
+];
+
+const TOTAIS = [
+  { id: 'clientes', label: 'Clientes cadastrados', campo: 'totalClientes' },
+  { id: 'categorias', label: 'Categorias cadastradas', campo: 'totalCategorias' },
+  { id: 'contas', label: 'Contas registradas', campo: 'totalContas' },
+  { id: 'estoque', label: 'Itens no estoque', campo: 'totalEstoque' },
+  { id: 'movimentacoes', label: 'Movimentações realizadas', campo: 'totalMovimentacoes' },
+];
 
 export default function RelatoriosScreen({ navigation }) {
-  const [totalClientes, setTotalClientes] = useState(0);
-  const [totalCategorias, setTotalCategorias] = useState(0);
-  const [totalContas, setTotalContas] = useState(0);
-  const [totalEstoque, setTotalEstoque] = useState(0);
-  const [totalMovimentacoes, setTotalMovimentacoes] = useState(0);
+  const { userId } = useAuth();
+  const [totais, setTotais] = useState({
+    totalClientes: 0,
+    totalCategorias: 0,
+    totalContas: 0,
+    totalEstoque: 0,
+    totalMovimentacoes: 0,
+  });
+  const [carregando, setCarregando] = useState(false);
 
-  useEffect(() => {
-    carregarRelatorios();
-  }, []);
+  const carregarTotais = useCallback(async () => {
+    if (!userId) return;
 
-  async function carregarRelatorios() {
+    setCarregando(true);
     try {
-      const clientes = await getDocs(collection(db, "clientes"));
-      const categorias = await getDocs(collection(db, "categorias"));
-      const contas = await getDocs(collection(db, "contas"));
-      const estoque = await getDocs(collection(db, "estoque"));
-      const movimentacoes = await getDocs(collection(db, "movimentacoes"));
+      const contar = async (colecao) => {
+        const snap = await getDocs(
+          query(collection(db, colecao), where('usuarioId', '==', userId))
+        );
+        return snap.size;
+      };
 
-      setTotalClientes(clientes.size);
-      setTotalCategorias(categorias.size);
-      setTotalContas(contas.size);
-      setTotalEstoque(estoque.size);
-      setTotalMovimentacoes(movimentacoes.size);
+      const [totalClientes, totalCategorias, totalContas, totalEstoque, totalMovimentacoes] =
+        await Promise.all([
+          contar('clientes'),
+          contar('categorias'),
+          contar('contas'),
+          contar('estoque'),
+          contar('movimentacoes'),
+        ]);
+
+      setTotais({
+        totalClientes,
+        totalCategorias,
+        totalContas,
+        totalEstoque,
+        totalMovimentacoes,
+      });
     } catch (error) {
-      console.log("Erro ao carregar relatórios:", error);
+      console.log('Erro ao carregar relatórios:', error);
+    } finally {
+      setCarregando(false);
     }
-  }
+  }, [userId]);
+
+  useFocusEffect(
+    useCallback(() => {
+      carregarTotais();
+    }, [carregarTotais])
+  );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.titulo}>Relatórios</Text>
+    <View style={styles.container}>
+      <ScreenHeader />
 
-      <View style={styles.card}>
-        <Text style={styles.numero}>{totalClientes}</Text>
-        <Text style={styles.texto}>Clientes cadastrados</Text>
-      </View>
+      <ScrollView contentContainerStyle={styles.conteudo}>
+        <Text style={styles.titulo}>Relatórios</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.numero}>{totalCategorias}</Text>
-        <Text style={styles.texto}>Categorias cadastradas</Text>
-      </View>
+        <Text style={styles.secaoTitulo}>Visão geral do negócio</Text>
+        {carregando ? (
+          <ActivityIndicator color={Colors.accent} size="large" style={styles.loader} />
+        ) : (
+          <View style={styles.totaisGrid}>
+            {TOTAIS.map((item) => (
+              <View key={item.id} style={styles.totalCard}>
+                <Text style={styles.totalNumero}>{totais[item.campo]}</Text>
+                <Text style={styles.totalLabel}>{item.label}</Text>
+              </View>
+            ))}
+          </View>
+        )}
 
-      <View style={styles.card}>
-        <Text style={styles.numero}>{totalContas}</Text>
-        <Text style={styles.texto}>Contas registradas</Text>
-      </View>
+        <Text style={[styles.secaoTitulo, styles.secaoTituloEspaco]}>
+          Relatórios detalhados
+        </Text>
+        <Text style={styles.subtitulo}>Escolha o relatório que deseja visualizar</Text>
 
-      <View style={styles.card}>
-        <Text style={styles.numero}>{totalEstoque}</Text>
-        <Text style={styles.texto}>Itens no estoque</Text>
-      </View>
-
-      <View style={styles.card}>
-        <Text style={styles.numero}>{totalMovimentacoes}</Text>
-        <Text style={styles.texto}>Movimentações realizadas</Text>
-      </View>
-
-      <TouchableOpacity
-        style={styles.botao}
-        onPress={() => navigation.navigate("Home")}
-      >
-        <Text style={styles.textoBotao}>Voltar</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        {RELATORIOS.map((rel) => (
+          <TouchableOpacity
+            key={rel.id}
+            style={styles.menuCard}
+            onPress={() => navigation.navigate(rel.rota)}
+          >
+            <Text style={styles.menuCardTitulo}>{rel.titulo}</Text>
+            <Text style={styles.menuCardDescricao}>{rel.descricao}</Text>
+            <Text style={styles.menuCardLink}>Abrir →</Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: "#fff",
+  container: { flex: 1, backgroundColor: Colors.primary },
+  conteudo: { padding: 16, paddingBottom: 32 },
+  titulo: { color: Colors.white, fontSize: 20, fontWeight: 'bold', marginBottom: 16 },
+  secaoTitulo: { color: Colors.white, fontSize: 16, fontWeight: 'bold', marginBottom: 12 },
+  secaoTituloEspaco: { marginTop: 8 },
+  subtitulo: { color: Colors.textMuted, fontSize: 13, marginBottom: 12 },
+  loader: { marginVertical: 24 },
+  totaisGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginBottom: 8,
   },
-
-  titulo: {
-    fontSize: 28,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 25,
-  },
-
-  card: {
-    backgroundColor: "#3f3db8",
-    padding: 20,
+  totalCard: {
+    width: '47%',
+    backgroundColor: Colors.primaryMedium,
     borderRadius: 12,
-    marginBottom: 15,
-    alignItems: "center",
+    padding: 16,
+    alignItems: 'center',
   },
-
-  numero: {
-    fontSize: 32,
-    fontWeight: "bold",
-    color: "#fff",
+  totalNumero: { color: Colors.white, fontSize: 28, fontWeight: 'bold' },
+  totalLabel: { color: Colors.textSoft, fontSize: 12, marginTop: 4, textAlign: 'center' },
+  menuCard: {
+    backgroundColor: Colors.surface,
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: Colors.primaryMedium,
   },
-
-  texto: {
-    fontSize: 16,
-    color: "#fff",
-    marginTop: 5,
-    textAlign: "center",
-  },
-
-  botao: {
-    backgroundColor: "#222",
-    padding: 14,
-    borderRadius: 8,
-    alignItems: "center",
-    marginTop: 15,
-  },
-
-  textoBotao: {
-    color: "#fff",
-    fontWeight: "bold",
-  },
+  menuCardTitulo: { color: Colors.white, fontSize: 16, fontWeight: 'bold', marginBottom: 6 },
+  menuCardDescricao: { color: Colors.textMuted, fontSize: 13, marginBottom: 10 },
+  menuCardLink: { color: Colors.accent, fontSize: 13, fontWeight: '600' },
 });

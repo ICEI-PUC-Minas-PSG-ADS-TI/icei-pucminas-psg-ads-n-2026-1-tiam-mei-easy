@@ -1,5 +1,4 @@
 import {
-  getFirestore,
   collection,
   addDoc,
   getDocs,
@@ -9,10 +8,8 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { app } from '../config/firebase';
+import { db } from '../config/firebase';
 import { getMovimentacoes } from './movimentacoesService';
-
-const db = getFirestore(app);
 
 export async function getCategorias(usuarioId, tipo) {
   const ref = collection(db, 'categorias');
