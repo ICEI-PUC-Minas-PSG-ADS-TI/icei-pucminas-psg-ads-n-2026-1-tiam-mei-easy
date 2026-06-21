@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
+import Colors from '../constants/colors';
 
 import LoginScreen from '../screens/auth/LoginScreen';
 import CadastroScreen from '../screens/auth/CadastroScreen';
@@ -36,6 +37,8 @@ const appLinkingScreens = {
   FormularioCategoria: 'categorias/nova',
   ListaContas: 'contas',
   FormularioConta: 'contas/nova',
+  Clientes: 'clientes',
+  Estoque: 'estoque',
   Dashboard: 'dashboard',
   Relatórios: 'relatorios',
   RelatorioFinanceiro: 'relatorios/financeiro',
@@ -49,7 +52,7 @@ function AuthStack() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: theme === 'dark' ? '#121212' : '#1a2a5e' },
+        contentStyle: { backgroundColor: theme === 'dark' ? '#121212' : Colors.primary },
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -100,8 +103,8 @@ export default function AppNavigator() {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#1a2a5e' }}>
-        <ActivityIndicator size="large" color="#4fc3f7" />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.primary }}>
+        <ActivityIndicator size="large" color={Colors.accent} />
       </View>
     );
   }

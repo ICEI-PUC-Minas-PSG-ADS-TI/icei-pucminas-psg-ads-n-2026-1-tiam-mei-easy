@@ -11,6 +11,8 @@ import { useFocusEffect } from '@react-navigation/native';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase';
 import { useAuth } from '../../context/AuthContext';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
 const RELATORIOS = [
   {
@@ -34,10 +36,6 @@ const TOTAIS = [
   { id: 'estoque', label: 'Itens no estoque', campo: 'totalEstoque' },
   { id: 'movimentacoes', label: 'Movimentações realizadas', campo: 'totalMovimentacoes' },
 ];
-
-const AZUL_ESCURO = '#1a2a5e';
-const AZUL_MEDIO = '#2d5be3';
-const BRANCO = '#ffffff';
 
 export default function RelatoriosScreen({ navigation }) {
   const { userId } = useAuth();
@@ -91,29 +89,16 @@ export default function RelatoriosScreen({ navigation }) {
     }, [carregarTotais])
   );
 
-  function voltar() {
-    if (navigation.canGoBack()) navigation.goBack();
-    else navigation.navigate('Home');
-  }
-
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={voltar} style={styles.btnVoltar}>
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>
-          MEI <Text style={styles.headerDestaque}>EASY</Text>
-        </Text>
-        <View style={styles.btnVoltar} />
-      </View>
+      <ScreenHeader />
 
       <ScrollView contentContainerStyle={styles.conteudo}>
         <Text style={styles.titulo}>Relatórios</Text>
 
         <Text style={styles.secaoTitulo}>Visão geral do negócio</Text>
         {carregando ? (
-          <ActivityIndicator color="#4fc3f7" size="large" style={styles.loader} />
+          <ActivityIndicator color={Colors.accent} size="large" style={styles.loader} />
         ) : (
           <View style={styles.totaisGrid}>
             {TOTAIS.map((item) => (
@@ -147,24 +132,12 @@ export default function RelatoriosScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: AZUL_ESCURO },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingTop: 50,
-    paddingBottom: 12,
-  },
-  btnVoltar: { width: 36 },
-  btnVoltarTexto: { color: BRANCO, fontSize: 22 },
-  headerTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold' },
-  headerDestaque: { color: '#4fc3f7' },
+  container: { flex: 1, backgroundColor: Colors.primary },
   conteudo: { padding: 16, paddingBottom: 32 },
-  titulo: { color: BRANCO, fontSize: 20, fontWeight: 'bold', marginBottom: 16 },
-  secaoTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold', marginBottom: 12 },
+  titulo: { color: Colors.white, fontSize: 20, fontWeight: 'bold', marginBottom: 16 },
+  secaoTitulo: { color: Colors.white, fontSize: 16, fontWeight: 'bold', marginBottom: 12 },
   secaoTituloEspaco: { marginTop: 8 },
-  subtitulo: { color: '#aac', fontSize: 13, marginBottom: 12 },
+  subtitulo: { color: Colors.textMuted, fontSize: 13, marginBottom: 12 },
   loader: { marginVertical: 24 },
   totaisGrid: {
     flexDirection: 'row',
@@ -174,22 +147,22 @@ const styles = StyleSheet.create({
   },
   totalCard: {
     width: '47%',
-    backgroundColor: AZUL_MEDIO,
+    backgroundColor: Colors.primaryMedium,
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
   },
-  totalNumero: { color: BRANCO, fontSize: 28, fontWeight: 'bold' },
-  totalLabel: { color: '#cce', fontSize: 12, marginTop: 4, textAlign: 'center' },
+  totalNumero: { color: Colors.white, fontSize: 28, fontWeight: 'bold' },
+  totalLabel: { color: Colors.textSoft, fontSize: 12, marginTop: 4, textAlign: 'center' },
   menuCard: {
-    backgroundColor: '#243570',
+    backgroundColor: Colors.surface,
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: AZUL_MEDIO,
+    borderColor: Colors.primaryMedium,
   },
-  menuCardTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold', marginBottom: 6 },
-  menuCardDescricao: { color: '#aac', fontSize: 13, marginBottom: 10 },
-  menuCardLink: { color: '#4fc3f7', fontSize: 13, fontWeight: '600' },
+  menuCardTitulo: { color: Colors.white, fontSize: 16, fontWeight: 'bold', marginBottom: 6 },
+  menuCardDescricao: { color: Colors.textMuted, fontSize: 13, marginBottom: 10 },
+  menuCardLink: { color: Colors.accent, fontSize: 13, fontWeight: '600' },
 });

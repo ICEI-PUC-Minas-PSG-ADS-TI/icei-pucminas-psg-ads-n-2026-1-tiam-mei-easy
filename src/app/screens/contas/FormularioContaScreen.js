@@ -14,21 +14,10 @@ import {
   atualizarConta,
 } from '../../services/contasService';
 import { useAuth } from '../../context/AuthContext';
-
-// Formata número para moeda brasileira enquanto digita
-function formatarMoeda(valor) {
-  const num = valor.replace(/\D/g, '');
-  if (!num) return '';
-  const inteiro = parseInt(num, 10);
-  return (inteiro / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
-
-// Extrai número puro do texto formatado
-function extrairNumero(valorFormatado) {
-  const num = valorFormatado.replace(/\D/g, '');
-  if (!num) return 0;
-  return parseInt(num, 10) / 100;
-}
+import {
+  formatarMoedaInput,
+  extrairNumeroMoeda,
+} from '../../utils/formatacao';
 
 // Mostra alerta tanto na web quanto no celular
 function mostrarAlerta(titulo, mensagem, aoFechar) {
@@ -48,7 +37,7 @@ export default function FormularioContaScreen({ navigation, route }) {
   const [tipo, setTipo] = useState(edicao?.tipo || tipoInicial);
   const [descricao, setDescricao] = useState(edicao?.descricao || '');
   const [valorTexto, setValorTexto] = useState(
-    edicao?.valor ? formatarMoeda(String(Math.round(edicao.valor * 100))) : ''
+    edicao?.valor ? formatarMoedaInput(String(Math.round(edicao.valor * 100))) : ''
   );
   const [vencimento, setVencimento] = useState(
     edicao?.vencimento ? edicao.vencimento.slice(0, 10) : new Date().toISOString().slice(0, 10)
@@ -57,7 +46,7 @@ export default function FormularioContaScreen({ navigation, route }) {
   const [carregando, setCarregando] = useState(false);
 
   function handleValorChange(texto) {
-    setValorTexto(formatarMoeda(texto));
+    setValorTexto(formatarMoedaInput(texto));
   }
 
   function voltar() {
@@ -65,7 +54,7 @@ export default function FormularioContaScreen({ navigation, route }) {
   }
 
   async function salvar() {
-    const valorNumerico = extrairNumero(valorTexto);
+    const valorNumerico = extrairNumeroMoeda(valorTexto);
 
     if (!descricao.trim()) {
       mostrarAlerta('Atenção', 'Informe a descrição da conta.');

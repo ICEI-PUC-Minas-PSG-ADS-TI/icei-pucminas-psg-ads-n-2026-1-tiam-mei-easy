@@ -1,5 +1,4 @@
 import {
-  getFirestore,
   collection,
   addDoc,
   getDocs,
@@ -9,9 +8,7 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { app } from '../config/firebase';
-
-const db = getFirestore(app);
+import { db } from '../config/firebase';
 
 // Busca contas do usuário, com filtros opcionais por tipo (pagar/receber) e status (pendente/pago)
 export async function getContas(usuarioId, filtros = {}) {

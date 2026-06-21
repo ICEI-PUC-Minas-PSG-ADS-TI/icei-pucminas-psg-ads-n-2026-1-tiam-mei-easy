@@ -7,9 +7,7 @@ import {
 } from "react-native";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
-
-const AZUL_ESCURO = "#1a2a5e";
-const BRANCO = "#ffffff";
+import Colors from "../constants/colors";
 
 export default function Header() {
   const navigation = useNavigation();
@@ -19,7 +17,6 @@ export default function Header() {
 
   return (
     <View style={styles.header}>
-      
       {isHomePage ? (
         <View style={styles.side} />
       ) : (
@@ -48,7 +45,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 50,
     paddingBottom: 12,
-    backgroundColor: AZUL_ESCURO,
+    backgroundColor: Colors.primary,
   },
 
   side: {
@@ -58,17 +55,17 @@ const styles = StyleSheet.create({
   },
 
   btnVoltarTexto: {
-    color: BRANCO,
+    color: Colors.white,
     fontSize: 22,
   },
 
   headerTitulo: {
-    color: BRANCO,
+    color: Colors.white,
     fontSize: 16,
     fontWeight: "bold",
   },
 
   headerDestaque: {
-    color: "#4fc3f7",
+    color: Colors.accent,
   },
 });

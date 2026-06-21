@@ -19,10 +19,9 @@ import {
   formatarMoeda,
 } from '../../services/dashboardService';
 import { useAuth } from '../../context/AuthContext';
-
-const AZUL_ESCURO = '#1a2a5e';
-const AZUL_MEDIO = '#2d5be3';
-const BRANCO = '#ffffff';
+import ScreenHeader from '../../components/ScreenHeader';
+import { formatarDataBR } from '../../utils/formatacao';
+import Colors from '../../constants/colors';
 
 export default function RelatorioFinanceiroScreen({ navigation }) {
   const { userId } = useAuth();
@@ -72,16 +71,6 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
 
   const resumo = calcularResumo(movimentacoes);
 
-  function voltar() {
-    if (navigation.canGoBack()) navigation.goBack();
-    else navigation.navigate('Relatórios');
-  }
-
-  function formatarData(data) {
-    if (!data) return '';
-    return new Date(data).toLocaleDateString('pt-BR');
-  }
-
   function renderItem({ item }) {
     const isReceita = item.tipo === 'receita';
     return (
@@ -89,10 +78,10 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
         <View style={styles.linhaEsquerda}>
           <Text style={styles.linhaDescricao}>{item.descricao || (isReceita ? 'Receita' : 'Despesa')}</Text>
           <Text style={styles.linhaMeta}>
-            {item.categoria?.descricao || 'Sem categoria'} · {formatarData(item.data)}
+            {item.categoria?.descricao || 'Sem categoria'} · {formatarDataBR(item.data)}
           </Text>
         </View>
-        <Text style={[styles.linhaValor, { color: isReceita ? '#4fc3f7' : '#ff6b6b' }]}>
+        <Text style={[styles.linhaValor, { color: isReceita ? Colors.receita : Colors.despesa }]}>
           {isReceita ? '+' : '-'}{formatarMoeda(item.valor)}
         </Text>
       </View>
@@ -101,15 +90,7 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={voltar} style={styles.btnVoltar}>
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>
-          MEI <Text style={styles.headerDestaque}>EASY</Text>
-        </Text>
-        <View style={styles.btnVoltar} />
-      </View>
+      <ScreenHeader onBack={() => navigation.navigate('Relatórios')} />
 
       <View style={styles.filtrosBox}>
         <Text style={styles.titulo}>Relatório de Movimentações</Text>
@@ -190,48 +171,36 @@ export default function RelatorioFinanceiroScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: AZUL_ESCURO },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingTop: 50,
-    paddingBottom: 12,
-  },
-  btnVoltar: { width: 36 },
-  btnVoltarTexto: { color: BRANCO, fontSize: 22 },
-  headerTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold' },
-  headerDestaque: { color: '#4fc3f7' },
+  container: { flex: 1, backgroundColor: Colors.primary },
   filtrosBox: { paddingHorizontal: 16, paddingBottom: 8 },
-  titulo: { color: BRANCO, fontSize: 18, fontWeight: 'bold', marginBottom: 4 },
-  subtitulo: { color: '#aac', fontSize: 12, marginBottom: 12 },
+  titulo: { color: Colors.white, fontSize: 18, fontWeight: 'bold', marginBottom: 4 },
+  subtitulo: { color: Colors.textMuted, fontSize: 12, marginBottom: 12 },
   periodosRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginBottom: 8 },
   tipoRow: { flexDirection: 'row', gap: 8, marginBottom: 8 },
   categoriasRow: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 8 },
   chip: {
-    backgroundColor: AZUL_MEDIO,
+    backgroundColor: Colors.primaryMedium,
     borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderWidth: 2,
     borderColor: 'transparent',
   },
-  chipAtivo: { borderColor: '#4fc3f7' },
-  chipTexto: { color: '#cce', fontSize: 12 },
-  chipTextoAtivo: { color: BRANCO, fontWeight: '600' },
+  chipAtivo: { borderColor: Colors.accent },
+  chipTexto: { color: Colors.textSoft, fontSize: 12 },
+  chipTextoAtivo: { color: Colors.white, fontWeight: '600' },
   resumoRow: {
-    backgroundColor: '#243570',
+    backgroundColor: Colors.surface,
     marginHorizontal: 16,
     borderRadius: 10,
     padding: 12,
     marginBottom: 8,
     gap: 4,
   },
-  resumoItem: { color: BRANCO, fontSize: 13, fontWeight: '600' },
+  resumoItem: { color: Colors.white, fontSize: 13, fontWeight: '600' },
   lista: { paddingHorizontal: 16, paddingBottom: 24 },
   linha: {
-    backgroundColor: '#243570',
+    backgroundColor: Colors.surface,
     borderRadius: 10,
     padding: 12,
     marginBottom: 8,
@@ -240,8 +209,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   linhaEsquerda: { flex: 1, marginRight: 8 },
-  linhaDescricao: { color: BRANCO, fontSize: 14, fontWeight: '600' },
-  linhaMeta: { color: '#aac', fontSize: 11, marginTop: 2 },
+  linhaDescricao: { color: Colors.white, fontSize: 14, fontWeight: '600' },
+  linhaMeta: { color: Colors.textMuted, fontSize: 11, marginTop: 2 },
   linhaValor: { fontSize: 14, fontWeight: 'bold' },
-  semDados: { color: '#aac', textAlign: 'center', marginTop: 32 },
+  semDados: { color: Colors.textMuted, textAlign: 'center', marginTop: 32 },
 });

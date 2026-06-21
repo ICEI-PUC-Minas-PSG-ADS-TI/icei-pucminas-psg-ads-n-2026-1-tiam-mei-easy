@@ -19,10 +19,8 @@ import {
   formatarMoeda,
 } from '../../services/dashboardService';
 import { useAuth } from '../../context/AuthContext';
-
-const AZUL_ESCURO = '#1a2a5e';
-const AZUL_MEDIO = '#2d5be3';
-const BRANCO = '#ffffff';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
 function GraficoComparativo({ dados }) {
   if (!dados.length) {
@@ -35,11 +33,11 @@ function GraficoComparativo({ dados }) {
     <View>
       <View style={styles.legendaRow}>
         <View style={styles.legendaItem}>
-          <View style={[styles.legendaCor, { backgroundColor: '#4fc3f7' }]} />
+          <View style={[styles.legendaCor, { backgroundColor: Colors.receita }]} />
           <Text style={styles.legendaTexto}>Receitas</Text>
         </View>
         <View style={styles.legendaItem}>
-          <View style={[styles.legendaCor, { backgroundColor: '#ff6b6b' }]} />
+          <View style={[styles.legendaCor, { backgroundColor: Colors.despesa }]} />
           <Text style={styles.legendaTexto}>Despesas</Text>
         </View>
       </View>
@@ -54,7 +52,7 @@ function GraficoComparativo({ dados }) {
                     styles.barra,
                     {
                       height: Math.max((item.receitas / maxValor) * 120, item.receitas > 0 ? 4 : 0),
-                      backgroundColor: '#4fc3f7',
+                      backgroundColor: Colors.receita,
                     },
                   ]}
                 />
@@ -63,7 +61,7 @@ function GraficoComparativo({ dados }) {
                     styles.barra,
                     {
                       height: Math.max((item.despesas / maxValor) * 120, item.despesas > 0 ? 4 : 0),
-                      backgroundColor: '#ff6b6b',
+                      backgroundColor: Colors.despesa,
                     },
                   ]}
                 />
@@ -112,22 +110,9 @@ export default function DashboardScreen({ navigation }) {
 
   const lucro = resumo.resultado >= 0;
 
-  function voltar() {
-    if (navigation.canGoBack()) navigation.goBack();
-    else navigation.navigate('Home');
-  }
-
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={voltar} style={styles.btnVoltar}>
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>
-          MEI <Text style={styles.headerDestaque}>EASY</Text>
-        </Text>
-        <View style={styles.btnVoltar} />
-      </View>
+      <ScreenHeader />
 
       <ScrollView contentContainerStyle={styles.conteudo}>
         <Text style={styles.tituloSecao}>Dashboard Financeiro</Text>
@@ -186,25 +171,13 @@ export default function DashboardScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: AZUL_ESCURO },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingTop: 50,
-    paddingBottom: 12,
-  },
-  btnVoltar: { width: 36 },
-  btnVoltarTexto: { color: BRANCO, fontSize: 22 },
-  headerTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold' },
-  headerDestaque: { color: '#4fc3f7' },
+  container: { flex: 1, backgroundColor: Colors.primary },
   conteudo: { padding: 16, paddingBottom: 32 },
-  tituloSecao: { color: BRANCO, fontSize: 20, fontWeight: 'bold', marginBottom: 4 },
-  subtitulo: { color: '#aac', fontSize: 13, marginBottom: 16 },
+  tituloSecao: { color: Colors.white, fontSize: 20, fontWeight: 'bold', marginBottom: 4 },
+  subtitulo: { color: Colors.textMuted, fontSize: 13, marginBottom: 16 },
   periodosScroll: { marginBottom: 20 },
   btnPeriodo: {
-    backgroundColor: AZUL_MEDIO,
+    backgroundColor: Colors.primaryMedium,
     borderRadius: 20,
     paddingHorizontal: 14,
     paddingVertical: 8,
@@ -212,21 +185,21 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: 'transparent',
   },
-  btnPeriodoAtivo: { borderColor: '#4fc3f7' },
-  btnPeriodoTexto: { color: '#cce', fontSize: 13, fontWeight: '600' },
-  btnPeriodoTextoAtivo: { color: BRANCO },
+  btnPeriodoAtivo: { borderColor: Colors.accent },
+  btnPeriodoTexto: { color: Colors.textSoft, fontSize: 13, fontWeight: '600' },
+  btnPeriodoTextoAtivo: { color: Colors.white },
   cardsRow: { flexDirection: 'row', gap: 12, marginBottom: 12 },
   cardResumo: {
     flex: 1,
-    backgroundColor: '#243570',
+    backgroundColor: Colors.surface,
     borderRadius: 12,
     padding: 16,
     alignItems: 'center',
   },
-  cardLabel: { color: '#aac', fontSize: 12, marginBottom: 6 },
+  cardLabel: { color: Colors.textMuted, fontSize: 12, marginBottom: 6 },
   cardValor: { fontSize: 18, fontWeight: 'bold' },
   cardResultado: {
-    backgroundColor: '#243570',
+    backgroundColor: Colors.surface,
     borderRadius: 12,
     padding: 20,
     alignItems: 'center',
@@ -234,21 +207,21 @@ const styles = StyleSheet.create({
     borderWidth: 2,
   },
   resultadoValor: { fontSize: 24, fontWeight: 'bold', marginTop: 4 },
-  resultadoStatus: { color: '#aac', fontSize: 13, marginTop: 4 },
+  resultadoStatus: { color: Colors.textMuted, fontSize: 13, marginTop: 4 },
   graficoBox: {
-    backgroundColor: '#243570',
+    backgroundColor: Colors.surface,
     borderRadius: 12,
     padding: 16,
   },
-  graficoTitulo: { color: BRANCO, fontWeight: 'bold', marginBottom: 16 },
+  graficoTitulo: { color: Colors.white, fontWeight: 'bold', marginBottom: 16 },
   legendaRow: { flexDirection: 'row', gap: 16, marginBottom: 12 },
   legendaItem: { flexDirection: 'row', alignItems: 'center', gap: 6 },
   legendaCor: { width: 12, height: 12, borderRadius: 2 },
-  legendaTexto: { color: '#aac', fontSize: 12 },
+  legendaTexto: { color: Colors.textMuted, fontSize: 12 },
   graficoRow: { flexDirection: 'row', alignItems: 'flex-end', paddingBottom: 4 },
   graficoColuna: { alignItems: 'center', marginRight: 16, minWidth: 48 },
   barrasWrapper: { flexDirection: 'row', alignItems: 'flex-end', gap: 4, height: 120 },
   barra: { width: 14, borderRadius: 4 },
-  graficoLabel: { color: '#aac', fontSize: 11, marginTop: 6 },
-  semDados: { color: '#aac', textAlign: 'center', paddingVertical: 24 },
+  graficoLabel: { color: Colors.textMuted, fontSize: 11, marginTop: 6 },
+  semDados: { color: Colors.textMuted, textAlign: 'center', paddingVertical: 24 },
 });

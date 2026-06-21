@@ -102,6 +102,6 @@ export function agruparComparativo(movimentacoes, dataInicio, dataFim) {
     }));
 }
 
-export function formatarMoeda(valor) {
-  return `R$ ${Math.abs(valor).toFixed(2).replace('.', ',')}`;
-}
+import { formatarMoedaExibicao } from '../utils/formatacao';
+
+export { formatarMoedaExibicao as formatarMoeda };

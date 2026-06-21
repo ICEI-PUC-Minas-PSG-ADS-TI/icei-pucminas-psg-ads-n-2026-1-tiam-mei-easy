@@ -16,6 +16,7 @@ import {
   alternarStatusConta,
 } from '../../services/contasService';
 import { useAuth } from '../../context/AuthContext';
+import { formatarMoedaExibicao, formatarDataBR } from '../../utils/formatacao';
 
 export default function ListaContasScreen({ navigation }) {
   const { userId } = useAuth();
@@ -55,13 +56,11 @@ export default function ListaContasScreen({ navigation }) {
   }
 
   function formatarValor(valor) {
-    return `R$ ${parseFloat(valor || 0).toFixed(2).replace('.', ',')}`;
+    return formatarMoedaExibicao(valor);
   }
 
   function formatarData(data) {
-    if (!data) return '';
-    const d = new Date(data + 'T00:00:00');
-    return d.toLocaleDateString('pt-BR');
+    return formatarDataBR(data);
   }
 
   async function alternarStatus(item) {

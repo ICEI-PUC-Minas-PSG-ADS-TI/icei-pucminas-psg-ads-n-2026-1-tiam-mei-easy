@@ -6,6 +6,7 @@ import {
 import { useFocusEffect } from '@react-navigation/native';
 import { getMovimentacoes, excluirMovimentacao } from '../../services/movimentacoesService';
 import { useAuth } from '../../context/AuthContext';
+import { formatarMoedaExibicao, formatarDataBR } from '../../utils/formatacao';
 
 export default function ListaMovimentacoesScreen({ navigation }) {
   const { userId } = useAuth();
@@ -71,13 +72,11 @@ function confirmarExclusao(item) {
 }
 
   function formatarValor(valor) {
-    return `R$ ${parseFloat(valor).toFixed(2).replace('.', ',')}`;
+    return formatarMoedaExibicao(valor);
   }
 
   function formatarData(data) {
-    if (!data) return '';
-    const d = new Date(data);
-    return d.toLocaleDateString('pt-BR');
+    return formatarDataBR(data);
   }
 
   const totalReceitas = movimentacoes

@@ -1,5 +1,4 @@
 import {
-  getFirestore,
   collection,
   addDoc,
   getDocs,
@@ -9,9 +8,7 @@ import {
   query,
   where,
 } from 'firebase/firestore';
-import { app } from '../config/firebase';
-
-const db = getFirestore(app);
+import { db } from '../config/firebase';
 
 // Busca todas as movimentações do usuário com filtros opcionais
 export async function getMovimentacoes(usuarioId, filtros = {}) {
