@@ -17,6 +17,7 @@ import FormularioContaScreen from '../screens/contas/FormularioContaScreen';
 import DashboardScreen from '../screens/dashboard/DashboardScreen';
 import RelatoriosScreen from '../screens/relatorios/RelatoriosScreen';
 import RelatorioFinanceiroScreen from '../screens/relatorios/RelatorioFinanceiroScreen';
+import PerfilContaScreen from '../screens/contas/PerfilContaScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -66,6 +67,11 @@ export default function AppNavigator() {
         <Stack.Screen name="Dashboard" component={DashboardScreen} />
         <Stack.Screen name="Relatórios" component={RelatoriosScreen} />
         <Stack.Screen name="RelatorioFinanceiro" component={RelatorioFinanceiroScreen} />
+        <Stack.Screen
+          name="PerfilConta"
+          component={PerfilContaScreen}
+          options={{ title: "Meu Perfil" }}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,15 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../../config/firebase';
 
 const RELATORIOS = [
   {
@@ -16,11 +26,59 @@ const RELATORIOS = [
   },
 ];
 
+const TOTAIS = [
+  { id: 'clientes', label: 'Clientes cadastrados', campo: 'totalClientes' },
+  { id: 'categorias', label: 'Categorias cadastradas', campo: 'totalCategorias' },
+  { id: 'contas', label: 'Contas registradas', campo: 'totalContas' },
+  { id: 'estoque', label: 'Itens no estoque', campo: 'totalEstoque' },
+  { id: 'movimentacoes', label: 'Movimentações realizadas', campo: 'totalMovimentacoes' },
+];
+
 const AZUL_ESCURO = '#1a2a5e';
 const AZUL_MEDIO = '#2d5be3';
 const BRANCO = '#ffffff';
 
 export default function RelatoriosScreen({ navigation }) {
+  const [totais, setTotais] = useState({
+    totalClientes: 0,
+    totalCategorias: 0,
+    totalContas: 0,
+    totalEstoque: 0,
+    totalMovimentacoes: 0,
+  });
+  const [carregando, setCarregando] = useState(false);
+
+  const carregarTotais = useCallback(async () => {
+    setCarregando(true);
+    try {
+      const [clientes, categorias, contas, estoque, movimentacoes] = await Promise.all([
+        getDocs(collection(db, 'clientes')),
+        getDocs(collection(db, 'categorias')),
+        getDocs(collection(db, 'contas')),
+        getDocs(collection(db, 'estoque')),
+        getDocs(collection(db, 'movimentacoes')),
+      ]);
+
+      setTotais({
+        totalClientes: clientes.size,
+        totalCategorias: categorias.size,
+        totalContas: contas.size,
+        totalEstoque: estoque.size,
+        totalMovimentacoes: movimentacoes.size,
+      });
+    } catch (error) {
+      console.log('Erro ao carregar relatórios:', error);
+    } finally {
+      setCarregando(false);
+    }
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      carregarTotais();
+    }, [carregarTotais])
+  );
+
   function voltar() {
     if (navigation.canGoBack()) navigation.goBack();
     else navigation.navigate('Home');
@@ -40,17 +98,35 @@ export default function RelatoriosScreen({ navigation }) {
 
       <ScrollView contentContainerStyle={styles.conteudo}>
         <Text style={styles.titulo}>Relatórios</Text>
+
+        <Text style={styles.secaoTitulo}>Visão geral do negócio</Text>
+        {carregando ? (
+          <ActivityIndicator color="#4fc3f7" size="large" style={styles.loader} />
+        ) : (
+          <View style={styles.totaisGrid}>
+            {TOTAIS.map((item) => (
+              <View key={item.id} style={styles.totalCard}>
+                <Text style={styles.totalNumero}>{totais[item.campo]}</Text>
+                <Text style={styles.totalLabel}>{item.label}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
+        <Text style={[styles.secaoTitulo, styles.secaoTituloEspaco]}>
+          Relatórios detalhados
+        </Text>
         <Text style={styles.subtitulo}>Escolha o relatório que deseja visualizar</Text>
 
         {RELATORIOS.map((rel) => (
           <TouchableOpacity
             key={rel.id}
-            style={styles.card}
+            style={styles.menuCard}
             onPress={() => navigation.navigate(rel.rota)}
           >
-            <Text style={styles.cardTitulo}>{rel.titulo}</Text>
-            <Text style={styles.cardDescricao}>{rel.descricao}</Text>
-            <Text style={styles.cardLink}>Abrir →</Text>
+            <Text style={styles.menuCardTitulo}>{rel.titulo}</Text>
+            <Text style={styles.menuCardDescricao}>{rel.descricao}</Text>
+            <Text style={styles.menuCardLink}>Abrir →</Text>
           </TouchableOpacity>
         ))}
       </ScrollView>
@@ -73,9 +149,27 @@ const styles = StyleSheet.create({
   headerTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold' },
   headerDestaque: { color: '#4fc3f7' },
   conteudo: { padding: 16, paddingBottom: 32 },
-  titulo: { color: BRANCO, fontSize: 20, fontWeight: 'bold', marginBottom: 4 },
-  subtitulo: { color: '#aac', fontSize: 13, marginBottom: 20 },
-  card: {
+  titulo: { color: BRANCO, fontSize: 20, fontWeight: 'bold', marginBottom: 16 },
+  secaoTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold', marginBottom: 12 },
+  secaoTituloEspaco: { marginTop: 8 },
+  subtitulo: { color: '#aac', fontSize: 13, marginBottom: 12 },
+  loader: { marginVertical: 24 },
+  totaisGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 10,
+    marginBottom: 8,
+  },
+  totalCard: {
+    width: '47%',
+    backgroundColor: AZUL_MEDIO,
+    borderRadius: 12,
+    padding: 16,
+    alignItems: 'center',
+  },
+  totalNumero: { color: BRANCO, fontSize: 28, fontWeight: 'bold' },
+  totalLabel: { color: '#cce', fontSize: 12, marginTop: 4, textAlign: 'center' },
+  menuCard: {
     backgroundColor: '#243570',
     borderRadius: 12,
     padding: 16,
@@ -83,7 +177,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: AZUL_MEDIO,
   },
-  cardTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold', marginBottom: 6 },
-  cardDescricao: { color: '#aac', fontSize: 13, marginBottom: 10 },
-  cardLink: { color: '#4fc3f7', fontSize: 13, fontWeight: '600' },
+  menuCardTitulo: { color: BRANCO, fontSize: 16, fontWeight: 'bold', marginBottom: 6 },
+  menuCardDescricao: { color: '#aac', fontSize: 13, marginBottom: 10 },
+  menuCardLink: { color: '#4fc3f7', fontSize: 13, fontWeight: '600' },
 });
