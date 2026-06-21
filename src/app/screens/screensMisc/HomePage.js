@@ -19,6 +19,15 @@ export default function HomeScreen({ navigation }) {
       <Header />
 
       <TouchableOpacity
+  onPress={() => navigation.navigate("PerfilConta")}
+  style={styles.botaoPerfil}
+>
+  <Text style={styles.textoBotao}>
+    Meu Perfil
+  </Text>
+</TouchableOpacity>
+
+      <TouchableOpacity
         onPress={toggleTheme}
         style={{
           alignSelf: "flex-end",
@@ -78,7 +87,7 @@ export default function HomeScreen({ navigation }) {
 
         <ButtonNavigation
           title="Relatórios"
-          onPress={() => navigation.navigate("Relatórios")}
+          onPress={() => navigation.navigate("Relatorios")}
         />
       </View>
     </View>
@@ -107,4 +116,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 12,
   },
+  botaoPerfil: {
+  backgroundColor: "#222",
+  padding: 12,
+  borderRadius: 8,
+  marginHorizontal: 20,
+  marginTop: 10,
+  alignItems: "center",
+},
+
+textoBotao: {
+  color: "#fff",
+  fontWeight: "bold",
+},
 });
+
