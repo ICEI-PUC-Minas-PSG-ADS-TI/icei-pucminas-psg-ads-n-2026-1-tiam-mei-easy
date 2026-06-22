@@ -5,28 +5,21 @@ import {
 } from 'react-native';
 import { criarMovimentacao, editarMovimentacao } from '../../services/movimentacoesService';
 import { getCategorias } from '../../services/categoriasService';
-// Usuário fixo por enquanto — trocar pelo auth real quando login estiver pronto
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
+import {
+  formatarMoedaInput,
+  extrairNumeroMoeda,
+} from '../../utils/formatacao';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
-function formatarMoeda(valor) {
-  const num = valor.replace(/\D/g, '');
-  if (!num) return '';
-  const inteiro = parseInt(num, 10);
-  return (inteiro / 100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-}
- 
-function extrairNumero(valorFormatado) {
-  const num = valorFormatado.replace(/\D/g, '');
-  if (!num) return 0;
-  return parseInt(num, 10) / 100;
-}
- 
 export default function NovaMovimentacaoScreen({ navigation, route }) {
+  const { userId } = useAuth();
   const edicao = route?.params?.movimentacao || null;
  
   const [tipo, setTipo] = useState(edicao?.tipo || 'receita');
   const [valorTexto, setValorTexto] = useState(
-    edicao?.valor ? formatarMoeda(String(Math.round(edicao.valor * 100))) : ''
+    edicao?.valor ? formatarMoedaInput(String(Math.round(edicao.valor * 100))) : ''
   );
   const [descricao, setDescricao] = useState(edicao?.descricao || '');
   const [data, setData] = useState(
@@ -42,7 +35,7 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
 
   async function carregarCategorias() {
     try {
-      const lista = await getCategorias(USUARIO_ID, tipo);
+      const lista = await getCategorias(userId, tipo);
       setCategorias(lista);
     } catch (e) {
       setCategorias([]);
@@ -51,12 +44,12 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
 
     function handleValorChange(texto) 
     {
-    const formatado = formatarMoeda(texto);
+    const formatado = formatarMoedaInput(texto);
     setValorTexto(formatado);
     }
 
   async function salvar() {
-    const valorNumerico = extrairNumero(valorTexto);
+    const valorNumerico = extrairNumeroMoeda(valorTexto);
 
     if (!valorNumerico || valorNumerico <= 0) {
       Alert.alert('Atenção', 'Informe um valor válido.');
@@ -75,7 +68,7 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
         valor: valorNumerico,
         descricao,
         data,
-        usuarioId: USUARIO_ID,
+        usuarioId: userId,
         categoria: categoriaSelecionada || null,
       };
 
@@ -96,14 +89,7 @@ export default function NovaMovimentacaoScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.btnVoltar}>
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>MEI <Text style={styles.headerDestaque}>EASY</Text></Text>
-        <View style={{ width: 36 }} />
-      </View>
+      <ScreenHeader />
 
       <ScrollView contentContainerStyle={styles.body}>
         <Text style={styles.titulo}>{edicao ? 'Editar Movimentação' : 'Nova Movimentação'}</Text>

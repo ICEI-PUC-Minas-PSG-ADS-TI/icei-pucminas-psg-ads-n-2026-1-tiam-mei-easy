@@ -1,67 +1,71 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 
-export default function Header({ onPressNotification }) {
+import { useNavigation, useRoute } from "@react-navigation/native";
+import Colors from "../constants/colors";
+
+export default function Header() {
   const navigation = useNavigation();
   const route = useRoute();
 
   const isHomePage = route.name === "Home";
 
   return (
-    <View style={styles.container}>
-      
+    <View style={styles.header}>
       {isHomePage ? (
         <View style={styles.side} />
       ) : (
         <TouchableOpacity
-          style={styles.side}
           onPress={() => navigation.goBack()}
+          style={styles.side}
         >
-          <Ionicons name="arrow-back" size={26} color="#000" />
+          <Text style={styles.btnVoltarTexto}>←</Text>
         </TouchableOpacity>
       )}
 
-      <Text style={styles.logo}>
-        MEI <Text style={styles.highlight}>EASY</Text>
+      <Text style={styles.headerTitulo}>
+        MEI <Text style={styles.headerDestaque}>EASY</Text>
       </Text>
 
-      <TouchableOpacity style={styles.side} onPress={onPressNotification}>
-        <Ionicons name="notifications-outline" size={26} color="#000" />
-      </TouchableOpacity>
-
+      <View style={styles.side} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: 70,
-    backgroundColor: "#fff",
+  header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 15,
-
-    elevation: 3,
-    shadowColor: "#000",
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-  },
-
-  logo: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-
-  highlight: {
-    color: "#2ecc71",
+    paddingHorizontal: 16,
+    paddingTop: 50,
+    paddingBottom: 12,
+    backgroundColor: Colors.primary,
   },
 
   side: {
-    width: 40,
+    width: 36,
     alignItems: "center",
     justifyContent: "center",
+  },
+
+  btnVoltarTexto: {
+    color: Colors.white,
+    fontSize: 22,
+  },
+
+  headerTitulo: {
+    color: Colors.white,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+
+  headerDestaque: {
+    color: Colors.accent,
   },
 });

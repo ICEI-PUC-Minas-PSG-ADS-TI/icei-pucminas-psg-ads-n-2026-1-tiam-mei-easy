@@ -1,43 +1,28 @@
 import {
   collection,
   getDocs,
+  query,
+  where,
 } from 'firebase/firestore';
 
 import { db } from '../../config/firebase.js';
 
-export async function getEstoque() {
-
+export async function getEstoque(usuarioId) {
   try {
-
-    const querySnapshot = await getDocs(
-      collection(db, 'estoque')
+    const q = query(
+      collection(db, 'estoque'),
+      where('usuarioId', '==', usuarioId)
     );
+    const querySnapshot = await getDocs(q);
 
-    const estoque = [];
+    const estoque = querySnapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    }));
 
-    querySnapshot.forEach((doc) => {
-
-      estoque.push({
-        id: doc.id,
-        ...doc.data(),
-      });
-
-    });
-
-    return {
-      success: true,
-      data: estoque,
-    };
-
+    return { success: true, data: estoque };
   } catch (error) {
-
     console.log(error);
-
-    return {
-      success: false,
-      error,
-    };
-
+    return { success: false, error };
   }
-
 }

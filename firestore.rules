@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isDocOwner() {
+      return isAuthenticated() && resource.data.usuarioId == request.auth.uid;
+    }
+
+    function isCreateOwner() {
+      return isAuthenticated() && request.resource.data.usuarioId == request.auth.uid;
+    }
+
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+    }
+
+    match /movimentacoes/{docId} {
+      allow read, update, delete: if isDocOwner();
+      allow create: if isCreateOwner();
+    }
+
+    match /categorias/{docId} {
+      allow read, update, delete: if isDocOwner();
+      allow create: if isCreateOwner();
+    }
+
+    match /contas/{docId} {
+      allow read, update, delete: if isDocOwner();
+      allow create: if isCreateOwner();
+    }
+
+    match /clientes/{docId} {
+      allow read, update, delete: if isDocOwner();
+      allow create: if isCreateOwner();
+    }
+
+    match /estoque/{docId} {
+      allow read, update, delete: if isDocOwner();
+      allow create: if isCreateOwner();
+    }
+  }
+}

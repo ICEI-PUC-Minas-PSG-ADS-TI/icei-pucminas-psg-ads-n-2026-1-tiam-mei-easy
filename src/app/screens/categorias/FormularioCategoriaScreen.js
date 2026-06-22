@@ -9,10 +9,11 @@ import {
   Alert,
 } from 'react-native';
 import { criarCategoria, atualizarCategoria } from '../../services/categoriasService';
-
-const USUARIO_ID = 'usuario_teste';
+import { useAuth } from '../../context/AuthContext';
+import ScreenHeader from '../../components/ScreenHeader';
 
 export default function FormularioCategoriaScreen({ navigation, route }) {
+  const { userId } = useAuth();
   const edicao = route?.params?.categoria || null;
   const tipoInicial = route?.params?.tipoInicial || 'receita';
 
@@ -34,7 +35,7 @@ export default function FormularioCategoriaScreen({ navigation, route }) {
         Alert.alert('Sucesso', 'Categoria atualizada!');
       } else {
         await criarCategoria({
-          usuarioId: USUARIO_ID,
+          usuarioId: userId,
           tipo,
           descricao: nome,
         });
@@ -50,18 +51,7 @@ export default function FormularioCategoriaScreen({ navigation, route }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.btnVoltar}
-        >
-          <Text style={styles.btnVoltarTexto}>←</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitulo}>
-          MEI <Text style={styles.headerDestaque}>EASY</Text>
-        </Text>
-        <View style={{ width: 36 }} />
-      </View>
+      <ScreenHeader />
 
       <ScrollView contentContainerStyle={styles.body}>
         <Text style={styles.titulo}>
