@@ -21,6 +21,9 @@ import DashboardScreen from '../screens/dashboard/DashboardScreen';
 import RelatoriosScreen from '../screens/relatorios/RelatoriosScreen';
 import RelatorioFinanceiroScreen from '../screens/relatorios/RelatorioFinanceiroScreen';
 import PerfilContaScreen from '../screens/contas/PerfilContaScreen';
+import ServicosHomeScreen from '../screens/servicos/servicosHub.js';
+import FormularioServicoScreen from '../screens/servicos/formularioServicosScreen.js';
+import ListaServicosScreen from '../screens/servicos/listaServicosScreen.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -43,6 +46,9 @@ const appLinkingScreens = {
   Relatórios: 'relatorios',
   RelatorioFinanceiro: 'relatorios/financeiro',
   PerfilConta: 'perfil',
+  ServicosHub: 'servicos',
+  FormularioServicoScreen: 'servicos/nova',
+  ListaServicos: 'servicos/lista',
 };
 
 function AuthStack() {
@@ -84,6 +90,10 @@ function AppStack() {
       <Stack.Screen name="Relatórios" component={RelatoriosScreen} />
       <Stack.Screen name="RelatorioFinanceiro" component={RelatorioFinanceiroScreen} />
       <Stack.Screen name="PerfilConta" component={PerfilContaScreen} />
+      <Stack.Screen name="ServicosHub" component={ServicosHomeScreen} />
+      <Stack.Screen name="FormularioServico" component={FormularioServicoScreen}/>
+      <Stack.Screen name="ListaServicos" component={ListaServicosScreen}/>
+
     </Stack.Navigator>
   );
 }

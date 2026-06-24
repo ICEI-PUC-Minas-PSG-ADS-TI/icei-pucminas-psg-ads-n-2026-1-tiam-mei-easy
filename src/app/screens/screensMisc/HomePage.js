@@ -72,7 +72,7 @@ export default function HomeScreen({ navigation }) {
       </Text>
 
       <View style={styles.grid}>
-        
+
         <ButtonNavigation
           title="Clientes"
           onPress={() => navigation.navigate("Clientes")}
@@ -102,6 +102,13 @@ export default function HomeScreen({ navigation }) {
           title="Relatórios"
           onPress={() => navigation.navigate("Relatórios")}
         />
+
+        <ButtonNavigation
+          title="Serviços"
+          onPress={() => navigation.navigate("ServicosHub")}
+        />
+
+
       </View>
     </View>
   );
@@ -130,25 +137,25 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   botaoPerfil: {
-  backgroundColor: "#222",
-  padding: 12,
-  borderRadius: 8,
-  marginHorizontal: 20,
-  marginTop: 10,
-  alignItems: "center",
-},
-botaoSair: {
-  backgroundColor: "#c0392b",
-  padding: 10,
-  borderRadius: 8,
-  marginHorizontal: 20,
-  marginTop: 8,
-  alignItems: "center",
-},
+    backgroundColor: "#222",
+    padding: 12,
+    borderRadius: 8,
+    marginHorizontal: 20,
+    marginTop: 10,
+    alignItems: "center",
+  },
+  botaoSair: {
+    backgroundColor: "#c0392b",
+    padding: 10,
+    borderRadius: 8,
+    marginHorizontal: 20,
+    marginTop: 8,
+    alignItems: "center",
+  },
 
-textoBotao: {
-  color: "#fff",
-  fontWeight: "bold",
-},
+  textoBotao: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
 });
 
