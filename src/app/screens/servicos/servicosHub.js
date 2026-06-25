@@ -3,36 +3,29 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import ScreenHeader from '../../components/ScreenHeader';
 import Colors from '../../constants/colors';
 
-export default function ServicosHub() {
+export default function ServicosHub({ navigation }) {
   return (
     <View style={styles.container}>
       <ScreenHeader />
 
       <Text style={styles.subtitulo}>Serviços</Text>
 
-      <TouchableOpacity
-        style={styles.card}
-        onPress={() => alert('Ordens de Serviço em desenvolvimento')}
-      >
+       <TouchableOpacity style={[styles.card, styles.cardDisabled]} disabled>
         <View style={styles.cardLeft}>
           <View style={[styles.icone, { backgroundColor: '#4fc3f7' }]}>
             <Text style={styles.iconeTexto}>📄</Text>
           </View>
 
           <View>
-            <Text style={styles.cardTitulo}>
-              Ordens de Serviço
-            </Text>
-            <Text style={styles.cardSub}>
-              Em desenvolvimento
-            </Text>
+            <Text style={styles.cardTitulo}>Ordens de Serviço</Text>
+            <Text style={styles.cardSub}>Em desenvolvimento</Text>
           </View>
         </View>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.card}
-        onPress={() => alert('Módulo de Serviços em desenvolvimento')}
+        onPress={() => navigation.navigate('ListaServicos')}
       >
         <View style={styles.cardLeft}>
           <View style={[styles.icone, { backgroundColor: '#27ae60' }]}>
@@ -40,19 +33,15 @@ export default function ServicosHub() {
           </View>
 
           <View>
-            <Text style={styles.cardTitulo}>
-              Serviços
-            </Text>
-            <Text style={styles.cardSub}>
-              Cadastro de serviços e preços
-            </Text>
+            <Text style={styles.cardTitulo}>Serviços</Text>
+            <Text style={styles.cardSub}>Cadastro de serviços e preços</Text>
           </View>
         </View>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.card}
-        onPress={() => alert('Orçamentos em desenvolvimento')}
+        style={[styles.card, styles.cardDisabled]}
+        disabled
       >
         <View style={styles.cardLeft}>
           <View style={[styles.icone, { backgroundColor: '#e67e22' }]}>
@@ -60,15 +49,12 @@ export default function ServicosHub() {
           </View>
 
           <View>
-            <Text style={styles.cardTitulo}>
-              Orçamentos
-            </Text>
-            <Text style={styles.cardSub}>
-              Em desenvolvimento
-            </Text>
+            <Text style={styles.cardTitulo}>Orçamentos</Text>
+            <Text style={styles.cardSub}>Em desenvolvimento</Text>
           </View>
         </View>
       </TouchableOpacity>
+
     </View>
   );
 }
@@ -93,6 +79,10 @@ const styles = StyleSheet.create({
     padding: 14,
     marginHorizontal: 16,
     marginBottom: 12,
+  },
+
+  cardDisabled: {
+    opacity: 0.5,
   },
 
   cardLeft: {

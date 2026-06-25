@@ -47,5 +47,10 @@ service cloud.firestore {
       allow read, update, delete: if isDocOwner();
       allow create: if isCreateOwner();
     }
+
+    match /recorrencias/{docId} {
+      allow read, update, delete: if isDocOwner();
+      allow create: if isCreateOwner();
+    }
   }
 }
