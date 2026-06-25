@@ -9,17 +9,17 @@ import {
   Alert,
 } from 'react-native';
 
+import { useAuth } from '../../context/AuthContext';
 import {
   criarRecorrencia,
   atualizarRecorrencia,
 } from '../../services/recorrenciasService';
 
-const USUARIO_ID = 'usuario_teste';
-
 export default function FormularioRecorrenciaScreen({
   navigation,
   route,
 }) {
+  const { userId } = useAuth();
   const edicao = route?.params?.recorrencia || null;
 
   const [descricao, setDescricao] = useState(
@@ -54,7 +54,7 @@ export default function FormularioRecorrenciaScreen({
 
     try {
       const dados = {
-        usuarioId: USUARIO_ID,
+        usuarioId: userId,
         descricao,
         valor,
         tipo,

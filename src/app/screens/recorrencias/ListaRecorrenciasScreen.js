@@ -9,17 +9,17 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
+import { useAuth } from '../../context/AuthContext';
 
 import {
   getRecorrencias,
   excluirRecorrencia,
 } from '../../services/recorrenciasService';
 
-const USUARIO_ID = 'usuario_teste';
-
 export default function ListaRecorrenciasScreen({ navigation }) {
   const [recorrencias, setRecorrencias] = useState([]);
   const [carregando, setCarregando] = useState(false);
+  const { userId } = useAuth();
 
   useFocusEffect(
     useCallback(() => {
@@ -31,7 +31,7 @@ export default function ListaRecorrenciasScreen({ navigation }) {
     setCarregando(true);
 
     try {
-      const lista = await getRecorrencias(USUARIO_ID);
+      const lista = await getRecorrencias(userId);
       setRecorrencias(lista);
     } catch (e) {
       Alert.alert('Erro', 'Não foi possível carregar as recorrências.');
