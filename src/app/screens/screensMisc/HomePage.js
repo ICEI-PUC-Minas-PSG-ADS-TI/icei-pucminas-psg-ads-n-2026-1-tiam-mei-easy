@@ -78,6 +78,11 @@ export default function HomeScreen({ navigation }) {
         />
 
         <ButtonNavigation
+          title="Metas"
+          onPress={() => navigation.navigate("Metas")}
+        />
+        
+        <ButtonNavigation
           title="Categorias"
           onPress={() => navigation.navigate("ListaCategorias")}
         />

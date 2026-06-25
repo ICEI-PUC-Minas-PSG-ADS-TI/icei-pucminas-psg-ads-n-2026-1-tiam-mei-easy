@@ -15,6 +15,7 @@ import EstoqueScreen from '../screens/estoque/estoqueScreen.js';
 import ListaClientesScreen from '../screens/clientes/ListaClientesScreen';
 import ListaCategoriasScreen from '../screens/categorias/ListaCategoriasScreen';
 import FormularioCategoriaScreen from '../screens/categorias/FormularioCategoriaScreen';
+import ListaMetasScreen from '../screens/metas/ListaMetasScreen';
 import ListaContasScreen from '../screens/contas/ListaContasScreen';
 import FormularioContaScreen from '../screens/contas/FormularioContaScreen';
 import DashboardScreen from '../screens/dashboard/DashboardScreen';
@@ -44,6 +45,7 @@ const appLinkingScreens = {
   FormularioConta: 'contas/nova',
   Clientes: 'clientes',
   Estoque: 'estoque',
+  Metas: 'metas',
   Dashboard: 'dashboard',
   Relatórios: 'relatorios',
   RelatorioFinanceiro: 'relatorios/financeiro',
@@ -57,7 +59,9 @@ function AuthStack() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: theme === 'dark' ? '#121212' : Colors.primary },
+        contentStyle: {
+          backgroundColor: theme === 'dark' ? '#121212' : Colors.primary,
+        },
       }}
     >
       <Stack.Screen name="Login" component={LoginScreen} />
@@ -73,7 +77,9 @@ function AppStack() {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        contentStyle: { backgroundColor: theme === 'dark' ? '#121212' : '#FFFFFF' },
+        contentStyle: {
+          backgroundColor: theme === 'dark' ? '#121212' : '#FFFFFF',
+        },
       }}
     >
       <Stack.Screen name="Home" component={HomePage} />
@@ -83,6 +89,7 @@ function AppStack() {
       <Stack.Screen name="Clientes" component={ListaClientesScreen} />
       <Stack.Screen name="ListaCategorias" component={ListaCategoriasScreen} />
       <Stack.Screen name="FormularioCategoria" component={FormularioCategoriaScreen} />
+      <Stack.Screen name="Metas" component={ListaMetasScreen} />
       <Stack.Screen name="ListaContas" component={ListaContasScreen} />
       <Stack.Screen name="FormularioConta" component={FormularioContaScreen} />
       <Stack.Screen name="Dashboard" component={DashboardScreen} />
@@ -102,15 +109,25 @@ export default function AppNavigator() {
     if (Platform.OS !== 'web' || typeof window === 'undefined') {
       return undefined;
     }
+
     return {
       prefixes: [window.location.origin],
-      config: { screens: user ? appLinkingScreens : authLinkingScreens },
+      config: {
+        screens: user ? appLinkingScreens : authLinkingScreens,
+      },
     };
   }, [user]);
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: Colors.primary }}>
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: Colors.primary,
+        }}
+      >
         <ActivityIndicator size="large" color={Colors.accent} />
       </View>
     );
