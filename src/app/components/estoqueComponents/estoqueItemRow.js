@@ -68,7 +68,7 @@ export default function TableRow({
       <View style={styles.valorColumn}>
 
         <Text style={styles.text}>
-          {valor}
+          R$ {valor} 
         </Text>
 
       </View>
@@ -86,17 +86,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
 
     paddingVertical: 14,
-    paddingHorizontal: 10,
+    paddingHorizontal: 12,
 
-    backgroundColor: 'transparent',
+    backgroundColor: '#243570',
 
-    borderBottomWidth: 1,
-    borderBottomColor: '#FFFFFF',
+    borderRadius: 12,
+    marginHorizontal: 12,
+    marginBottom: 10,
   },
 
   iconColumn: {
-    width: 35,
+    width: 42,
+    height: 42,
+
+    borderRadius: 21,
+
+    backgroundColor: '#2d5be3',
+
     alignItems: 'center',
+    justifyContent: 'center',
+
+    marginRight: 12,
   },
 
   itemColumn: {
@@ -110,7 +120,7 @@ const styles = StyleSheet.create({
   },
 
   quantidadeColumn: {
-    flex: 1.2,
+    flex: 1,
     alignItems: 'center',
   },
 
@@ -120,8 +130,9 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 12,
+    fontSize: 14,
     color: '#FFFFFF',
+    fontWeight: '600',
   },
 
 });

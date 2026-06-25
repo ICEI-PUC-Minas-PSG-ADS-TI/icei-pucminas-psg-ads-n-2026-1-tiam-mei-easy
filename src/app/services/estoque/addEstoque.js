@@ -6,43 +6,20 @@ import {
 
 import { db } from '../../config/firebase.js';
 
-export async function addEstoque(data) {
-
+export async function addEstoque(data, usuarioId) {
   try {
+    const docRef = await addDoc(collection(db, 'estoque'), {
+      nome: data.nome,
+      fabricante: data.fabricante,
+      quantidade: Number(data.quantidade),
+      valor: data.valor,
+      usuarioId,
+      createdAt: serverTimestamp(),
+    });
 
-    const docRef = await addDoc(
-      collection(db, 'estoque'),
-      {
-        nome: data.nome,
-        fabricante: data.fabricante,
-        quantidade: Number(data.quantidade),
-        valor: data.valor,
-
-        /*
-          futuramente:
-          userId: auth.currentUser.uid
-        */
-
-        createdAt: serverTimestamp(),
-      }
-    );
-
-    return {
-      success: true,
-      id: docRef.id,
-    };
-
+    return { success: true, id: docRef.id };
   } catch (error) {
-
-  console.log('ERRO FIREBASE');
-
-  console.log(error);
-
-  return {
-    success: false,
-    error,
-  };
-
-}
-
+    console.log('ERRO FIREBASE', error);
+    return { success: false, error };
+  }
 }

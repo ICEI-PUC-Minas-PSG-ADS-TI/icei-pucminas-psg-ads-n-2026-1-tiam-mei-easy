@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 import {
   collection,
@@ -16,16 +17,22 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  query,
+  where,
 } from 'firebase/firestore';
 
 import { db } from '../../config/firebase';
+import { useAuth } from '../../context/AuthContext';
+import ScreenHeader from '../../components/ScreenHeader';
+import Colors from '../../constants/colors';
 
 const AZUL_ESCURO = '#1a2a5e';
 const AZUL_MEDIO = '#2d5be3';
 const AZUL_CLARO = '#4fc3f7';
 const BRANCO = '#ffffff';
 
-export default function ListaClientesScreen() {
+export default function ListaClientesScreen({ navigation }) {
+  const { userId } = useAuth();
 
   const [nome, setNome] = useState('');
   const [cpfCnpj, setCpfCnpj] = useState('');
@@ -40,8 +47,14 @@ export default function ListaClientesScreen() {
   const [clienteExpandido, setClienteExpandido] = useState(null);
 
   async function buscarClientes() {
+    if (!userId) return;
+
     try {
-      const querySnapshot = await getDocs(collection(db, 'clientes'));
+      const q = query(
+        collection(db, 'clientes'),
+        where('usuarioId', '==', userId)
+      );
+      const querySnapshot = await getDocs(q);
 
       const lista = [];
 
@@ -60,6 +73,7 @@ export default function ListaClientesScreen() {
   }
 
   async function salvarCliente() {
+    if (!userId) return;
 
     try {
 
@@ -85,6 +99,7 @@ export default function ListaClientesScreen() {
 
         await addDoc(collection(db, 'clientes'), {
           ...dadosCliente,
+          usuarioId: userId,
           criadoEm: new Date(),
         });
 
@@ -141,9 +156,11 @@ export default function ListaClientesScreen() {
 
   }
 
-  useEffect(() => {
-    buscarClientes();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      buscarClientes();
+    }, [userId])
+  );
 
   const clientesFiltrados = clientes.filter((cliente) =>
     cliente.nome?.toLowerCase().includes(pesquisa.toLowerCase())
@@ -153,18 +170,9 @@ export default function ListaClientesScreen() {
 
     <View style={styles.container}>
 
-      {/* HEADER */}
-      <View style={styles.header}>
+      <ScreenHeader />
 
-        <Text style={styles.logo}>
-          MEI <Text style={styles.logoDestaque}>EASY</Text>
-        </Text>
-
-        <Text style={styles.subtitulo}>
-          Gerenciamento de Clientes
-        </Text>
-
-      </View>
+      <Text style={styles.subtitulo}>Gerenciamento de Clientes</Text>
 
       <ScrollView showsVerticalScrollIndicator={false}>
 
@@ -356,28 +364,13 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: AZUL_ESCURO,
+    backgroundColor: Colors.primary,
     paddingHorizontal: 20,
-    paddingTop: 50,
-  },
-
-  header: {
-    marginBottom: 25,
-  },
-
-  logo: {
-    color: BRANCO,
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-
-  logoDestaque: {
-    color: AZUL_CLARO,
   },
 
   subtitulo: {
     color: '#cdd6ff',
-    marginTop: 6,
+    marginBottom: 20,
     fontSize: 15,
   },
 

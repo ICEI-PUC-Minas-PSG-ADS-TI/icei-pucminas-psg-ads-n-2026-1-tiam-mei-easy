@@ -1,13 +1,22 @@
 import { useTheme } from '../../context/ThemeContext';
+import { useAuth } from '../../context/AuthContext';
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from "react-native";
 
 import Header from "../../components/header.js";
 import ButtonNavigation from "../../components/buttonDefault.js";
 
 export default function HomeScreen({ navigation }) {
-  const userName = "Gustavo";
+  const { userName, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+
+  async function handleLogout() {
+    try {
+      await logout();
+    } catch {
+      Alert.alert('Erro', 'Não foi possível sair da conta.');
+    }
+  }
 
   return (
     <View
@@ -17,6 +26,19 @@ export default function HomeScreen({ navigation }) {
       }}
     >
       <Header />
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate("PerfilConta")}
+        style={styles.botaoPerfil}
+      >
+        <Text style={styles.textoBotao}>
+          Meu Perfil
+        </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={handleLogout} style={styles.botaoSair}>
+        <Text style={styles.textoBotao}>Sair</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity
         onPress={toggleTheme}
@@ -76,6 +98,11 @@ export default function HomeScreen({ navigation }) {
         />
 
         <ButtonNavigation
+          title="Contas a Pagar/Receber"
+          onPress={() => navigation.navigate("ListaContas")}
+        />
+
+        <ButtonNavigation
           title="Relatórios"
           onPress={() => navigation.navigate("Relatórios")}
         />
@@ -106,4 +133,26 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 12,
   },
+  botaoPerfil: {
+  backgroundColor: "#222",
+  padding: 12,
+  borderRadius: 8,
+  marginHorizontal: 20,
+  marginTop: 10,
+  alignItems: "center",
+},
+botaoSair: {
+  backgroundColor: "#c0392b",
+  padding: 10,
+  borderRadius: 8,
+  marginHorizontal: 20,
+  marginTop: 8,
+  alignItems: "center",
+},
+
+textoBotao: {
+  color: "#fff",
+  fontWeight: "bold",
+},
 });
+
