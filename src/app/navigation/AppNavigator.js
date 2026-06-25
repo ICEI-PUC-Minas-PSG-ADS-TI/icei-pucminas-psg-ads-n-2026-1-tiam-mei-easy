@@ -25,6 +25,10 @@ import PerfilContaScreen from '../screens/contas/PerfilContaScreen';
 import ListaRecorrenciasScreen from '../screens/recorrencias/ListaRecorrenciasScreen';
 import FormularioRecorrenciaScreen from '../screens/recorrencias/FormularioRecorrenciaScreen';
 
+import ServicosHomeScreen from '../screens/servicos/servicosHub.js';
+import FormularioServicoScreen from '../screens/servicos/formularioServicosScreen.js';
+import ListaServicosScreen from '../screens/servicos/listaServicosScreen.js';
+
 const Stack = createNativeStackNavigator();
 
 const authLinkingScreens = {
@@ -48,6 +52,9 @@ const appLinkingScreens = {
   Relatórios: 'relatorios',
   RelatorioFinanceiro: 'relatorios/financeiro',
   PerfilConta: 'perfil',
+  ServicosHub: 'servicos',
+  FormularioServicoScreen: 'servicos/nova',
+  ListaServicos: 'servicos/lista',
 };
 
 function AuthStack() {
@@ -91,6 +98,9 @@ function AppStack() {
       <Stack.Screen name="PerfilConta" component={PerfilContaScreen} />
       <Stack.Screen name="ListaRecorrencias" component={ListaRecorrenciasScreen} />
       <Stack.Screen name="FormularioRecorrencia" component={FormularioRecorrenciaScreen} />
+      <Stack.Screen name="ServicosHub" component={ServicosHomeScreen} />
+      <Stack.Screen name="FormularioServico" component={FormularioServicoScreen}/>
+      <Stack.Screen name="ListaServicos" component={ListaServicosScreen}/>
     </Stack.Navigator>
   );
 }
