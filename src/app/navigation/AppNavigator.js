@@ -22,6 +22,9 @@ import RelatoriosScreen from '../screens/relatorios/RelatoriosScreen';
 import RelatorioFinanceiroScreen from '../screens/relatorios/RelatorioFinanceiroScreen';
 import PerfilContaScreen from '../screens/contas/PerfilContaScreen';
 
+import ListaRecorrenciasScreen from '../screens/recorrencias/ListaRecorrenciasScreen';
+import FormularioRecorrenciaScreen from '../screens/recorrencias/FormularioRecorrenciaScreen';
+
 const Stack = createNativeStackNavigator();
 
 const authLinkingScreens = {
@@ -35,6 +38,8 @@ const appLinkingScreens = {
   NovaMovimentacao: 'movimentacoes/nova',
   ListaCategorias: 'categorias',
   FormularioCategoria: 'categorias/nova',
+  ListaRecorrencias: 'recorrencias',
+  FormularioRecorrencia: 'recorrencias/nova',
   ListaContas: 'contas',
   FormularioConta: 'contas/nova',
   Clientes: 'clientes',
@@ -84,6 +89,8 @@ function AppStack() {
       <Stack.Screen name="Relatórios" component={RelatoriosScreen} />
       <Stack.Screen name="RelatorioFinanceiro" component={RelatorioFinanceiroScreen} />
       <Stack.Screen name="PerfilConta" component={PerfilContaScreen} />
+      <Stack.Screen name="ListaRecorrencias" component={ListaRecorrenciasScreen} />
+      <Stack.Screen name="FormularioRecorrencia" component={FormularioRecorrenciaScreen} />
     </Stack.Navigator>
   );
 }

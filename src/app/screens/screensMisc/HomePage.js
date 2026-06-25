@@ -72,7 +72,6 @@ export default function HomeScreen({ navigation }) {
       </Text>
 
       <View style={styles.grid}>
-        
         <ButtonNavigation
           title="Clientes"
           onPress={() => navigation.navigate("Clientes")}
@@ -81,6 +80,11 @@ export default function HomeScreen({ navigation }) {
         <ButtonNavigation
           title="Categorias"
           onPress={() => navigation.navigate("ListaCategorias")}
+        />
+
+        <ButtonNavigation
+          title="Recorrências"
+          onPress={() => navigation.navigate("ListaRecorrencias")}
         />
 
         <ButtonNavigation
